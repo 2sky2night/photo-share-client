@@ -1,0 +1,16 @@
+.common {
+  --time-normal: 0.3s;
+}
+[theme="light"] {
+  --primary-color: #cb342a;
+  --primary-color-hover: #be382e;
+  --border-color-1: #eee;
+  --box-shadow-color: #0000009c;
+}
+
+[theme="dark"] {
+  --primary-color: #be382e;
+  --primary-color-hover: #cb342a;
+  --border-color-1: #eee;
+  --box-shadow-color: #0000009c;
+}
