@@ -3,6 +3,12 @@ export default {
   fieldLengthError: 'The length of {title} is between {min} to {max}',
   username: 'Username',
   password: 'Password',
+  rePassword: 'Repeat passwrod',
+  passwordNotEqual: 'Password is not equal!',
   reset: 'Reset',
-  login: 'Login'
+  login: 'Login',
+  iAmVisitor: 'I am visitor',
+  register: 'Register',
+  success: '{title} Successful!',
+  requestError: 'Request failed!',
 }

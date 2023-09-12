@@ -1,15 +1,9 @@
 <template>
-  <n-config-provider :theme="isDark ? darkTheme : null" :theme-overrides="themeOverrides">
-    <router-view></router-view>
-  </n-config-provider>
+  <n-message-provider>
+    <Layout></Layout>
+  </n-message-provider>
 </template>
 
 <script lang='ts' setup>
-import { storeToRefs } from 'pinia';
-import { useConfigStore } from '@/store'
-import { themeOverrides } from '@/config'
-import { darkTheme } from "naive-ui";
-
-// 配置仓库
-const { isDark } = storeToRefs(useConfigStore())
+import Layout from '@/layout/index.vue'
 </script>

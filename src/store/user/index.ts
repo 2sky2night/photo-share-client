@@ -2,7 +2,9 @@ import { defineStore } from 'pinia'
 import { loginAPI } from '@/apis/auth'
 import { userInfoAPI } from '@/apis/user'
 import { reactive } from 'vue'
-import { UserInfo } from '@/types/auth'
+import { Role, Roles, UserInfo } from '@/types/auth'
+import { registerUserRoutes, registerAdminRoutes } from '@/router/auth'
+
 export const useUserStore = defineStore(
   'user',
   () => {
@@ -11,33 +13,61 @@ export const useUserStore = defineStore(
       uid: undefined,
       username: undefined,
       avatar: undefined,
-      token: undefined
+      token: undefined,
+      role:undefined,
     })
-    // 用户登录
+    /**
+     * 登录
+     * @param username 
+     * @param password 
+     */
     const login = async (username: string, password: string) => {
       const res = await loginAPI({ username, password })
       userInfo.token = res.data.access_token
-      getUserInfo()
+      // 获取用户信息（角色）
+      await getUserInfo()
+      // 根据角色注册路由
+      regiterRoutes(userInfo.role)
     }
-    // 获取用户信息
+    /**
+     * 获取用户数据
+     */
     const getUserInfo = async () => {
       const res = await userInfoAPI()
       userInfo.avatar = res.data.avatar
       userInfo.uid = res.data.uid
       userInfo.username = res.data.username
+      userInfo.role=res.data.role
     }
-    // 注销
+    /**
+     * 注销
+     */
     const logout = () => {
       Reflect.ownKeys(userInfo).forEach((ele) => {
         const key = ele as keyof UserInfo
         userInfo[key] = undefined
       })
     }
+    /**
+     * 根据角色注册路由
+     * @param role 
+     */
+    const regiterRoutes = (role?: Role) => {
+      if (role === undefined || role === Roles.User) {
+        registerUserRoutes(role ? false : true)
+      } else {
+        registerAdminRoutes(role)
+      }
+    }
+
+
+
     return {
       userInfo,
       login,
       getUserInfo,
-      logout
+      logout,
+      regiterRoutes
     }
   }
 )

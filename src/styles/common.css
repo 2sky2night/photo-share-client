@@ -3,6 +3,22 @@
   padding: 0;
   outline: none;
   list-style: none;
+  text-decoration: none;
+}
+
+.text-hover{
+  transition: var(--time-normal);
+}
+.text-hover:hover{
+  color:var(--primary-color);
+}
+
+.sub-text{
+  color:var(--text-color-2);
+}
+
+a{
+  color:unset
 }
 .ml-5 {
   margin-left: 5px;

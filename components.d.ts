@@ -7,12 +7,24 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Bg: typeof import('./src/components/public/layout-backgourd/components/bg.vue')['default']
+    DomLess: typeof import('./src/components/public/layout-backgourd/dom-less.vue')['default']
+    DomMore: typeof import('./src/components/public/layout-backgourd/dom-more.vue')['default']
+    ImgLazy: typeof import('./src/components/img-lazy/index.vue')['default']
+    LayoutBackgourd: typeof import('./src/components/public/layout-backgourd/index.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
     NInput: typeof import('naive-ui')['NInput']
+    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
+    NSkeleton: typeof import('naive-ui')['NSkeleton']
+    NTab: typeof import('naive-ui')['NTab']
+    NTabPane: typeof import('naive-ui')['NTabPane']
+    NTabs: typeof import('naive-ui')['NTabs']
+    PicItem: typeof import('./src/components/public/layout-backgourd/components/pic-item.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Skeleton: typeof import('./src/components/skeleton/index.vue')['default']
   }
 }

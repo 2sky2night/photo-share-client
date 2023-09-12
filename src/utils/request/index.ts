@@ -2,6 +2,7 @@ import axios, { type AxiosRequestConfig } from 'axios'
 import { nprogress } from '..'
 import { useUserStore } from '@/store'
 import type { Response } from './types'
+import i18n from '@/config/i18n'
 
 const http = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -30,7 +31,19 @@ http.interceptors.response.use(
     return response.data
   },
   (error) => {
+    nprogress.end()
     // 错误处理
+    if (error.response) {
+      // axios错误
+      if (error.response?.data.msg) {
+        window.$message.error(error.response.data.msg)
+      } else {
+        window.$message.error(i18n.global.t('requestError'))
+      }
+    } else {
+      // 其他错误
+      window.$message.error(i18n.global.t('requestError'))
+    }
     return Promise.reject(error)
   }
 )

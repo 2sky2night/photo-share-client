@@ -20,4 +20,5 @@ export interface UserInfo {
   avatar: string | null | undefined;
   username: string | undefined;
   token: string | undefined;
+  role: Role | undefined
 }
