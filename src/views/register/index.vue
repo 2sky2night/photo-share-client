@@ -187,7 +187,7 @@ defineOptions({
       }
 
       h2 {
-        -webkit-text-stroke:1px #f00;
+        // -webkit-text-stroke:1px #fff;
         align-self: center;
         margin-bottom: 15px;
         font-weight: bolder;

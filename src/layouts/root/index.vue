@@ -15,6 +15,6 @@ const { isDark } = storeToRefs(useConfigStore())
 window.$message=useMessage()
 
 defineOptions({
-  name: 'Layout'
+  name: 'Root'
 })
 </script>

@@ -1,10 +1,12 @@
 .common {
   --time-normal: 0.3s;
   --time-long: 1s;
+  --user-header-height:50px;
 }
 [theme="light"] {
-  --primary-color: #cb342a;
+  --primary-color: #18a058;
   --primary-color-hover: #be382e;
+  --btn-hover-color:#f3f3f5;
   --bg-color-1: #fff;
   --bg-color-2: #eee;
   --text-color-1: #000;
@@ -17,15 +19,16 @@
 }
 
 [theme="dark"] {
-  --primary-color: #be382e;
+  --primary-color: #18a058;
   --primary-color-hover: #cb342a;
-  --bg-color-1: #000;
-  --bg-color-2: #eee;
+  --btn-hover-color:#343438;
+  --bg-color-1: #18181c;
+  --bg-color-2: #515151;
   --text-color-1: #fff;
   --text-color-2: #eee;
   --skeleton-color-1: #1a1a1a;
   --skeleton-color-2: #2e2e2e;
-  --border-color-1: #eee;
+  --border-color-1: #2d2d30;
   --box-shadow-color: #0000009c;
   --mask-color:#00000067;
 }

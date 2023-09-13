@@ -1,1 +1,1 @@
-export {themeOverrides} from './theme'
+export { themeOverrides } from './theme'

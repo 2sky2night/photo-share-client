@@ -53,30 +53,30 @@ export const adminRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Admin',
-    component: () => import('@/views/admin/index.vue'),
+    component: () => import('@/layouts/admin/index.vue'),
     children: [
       {
         path: '/test1',
         name: 'Test1',
-        component: () => import('@/views/user/index.vue'),
+        component: () => import('@/layouts/user/index.vue'),
         children: [
           {
             path: '/test11',
             name: 'Test11',
-            component: () => import('@/views/user/index.vue'),
+            component: () => import('@/layouts/user/index.vue'),
           },
           {
             path: '/test12',
             name: 'Test12',
-            component: () => import('@/views/user/index.vue'),
+            component: () => import('@/layouts/user/index.vue'),
             meta: {
-              roles:[Roles.SuperAdmin]
+              roles: [Roles.SuperAdmin]
             },
             children: [
               {
                 path: '/test121',
                 name: 'Test121',
-                component: () => import('@/views/user/index.vue'),
+                component: () => import('@/layouts/user/index.vue'),
               }
             ]
           }
@@ -84,6 +84,19 @@ export const adminRoutes: RouteRecordRaw[] = [
       }
     ],
   },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('@/views/404/index.vue'),
+    meta: {
+      title: '404'
+    }
+  },
+  {
+    path: '/:pathMatch(.*)',
+    name: 'any',
+    redirect: '/404'
+  }
 ]
 
 /**
@@ -93,22 +106,22 @@ export const userRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'User',
-    component: () => import('@/views/user/index.vue'),
+    component: () => import('@/layouts/user/index.vue'),
     children: [
       {
         path: '/test1',
         name: 'Test1',
-        component: () => import('@/views/user/index.vue'),
+        component: () => import('@/layouts/user/index.vue'),
         children: [
           {
             path: '/test11',
             name: 'Test11',
-            component: () => import('@/views/user/index.vue'),
+            component: () => import('@/layouts/user/index.vue'),
           },
           {
             path: '/test12',
             name: 'Test12',
-            component: () => import('@/views/user/index.vue'),
+            component: () => import('@/layouts/user/index.vue'),
             meta: {
               needAuth: true
             },
@@ -116,7 +129,7 @@ export const userRoutes: RouteRecordRaw[] = [
               {
                 path: '/test121',
                 name: 'Test121',
-                component: () => import('@/views/user/index.vue'),
+                component: () => import('@/layouts/user/index.vue'),
               }
             ]
           }

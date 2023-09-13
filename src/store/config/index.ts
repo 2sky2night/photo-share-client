@@ -11,7 +11,7 @@ export const useConfigStore = defineStore(
     const isDark = ref(false)
 
     // 当前语言
-    const locale = ref<LOCALE_VALUE>(LOCALE_VALUE.ZH)
+    const locale = ref<LOCALE_VALUE>(LOCALE_VALUE.EN)
 
     /**
      * 切换语言
@@ -45,6 +45,7 @@ export const useConfigStore = defineStore(
 
     return {
       isDark,
+      locale,
       toggleTheme,
       toggleLocale
     }

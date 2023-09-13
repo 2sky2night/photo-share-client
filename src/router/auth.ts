@@ -84,15 +84,11 @@ const addVisitorRoutes = (parentName?: string, routes = userRoutes) => {
  * 注册后台路由
  * @param role 用户角色
  */
-export const registerAdminRoutes = (role: Role, parentName?: string, routes = adminRoutes) => {
-  // 1.移除登录和注册
-  router.getRoutes().forEach(route => {
-    if (route.name && route.meta?.noNeedForAuth) {
-      router.removeRoute(route.name)
-    }
-  })
+export const registerAdminRoutes = (role: Role) => {
+  // 1.移除所有路由
+  removeAllRoutes()
   // 2.注册后台路由
-  addAdminRoutes(role,parentName,routes)
+  addAdminRoutes(role)
 }
 
 /**
@@ -110,7 +106,7 @@ export const addAdminRoutes = (role: Role, parentName?: string, routes = adminRo
               router.addRoute(parentName, { ...route, children: [] }) :
               router.addRoute({ ...route, children: [] })
             // 递归注册子孩子
-            registerAdminRoutes(role, route.name as string, route.children)
+            addAdminRoutes(role, route.name as string, route.children)
           } else {
             // 无子孩子
             parentName ?
@@ -126,7 +122,7 @@ export const addAdminRoutes = (role: Role, parentName?: string, routes = adminRo
             router.addRoute(parentName, { ...route, children: [] }) :
             router.addRoute({ ...route, children: [] })
           // 递归注册子孩子
-          registerAdminRoutes(role, route.name as string, route.children)
+          addAdminRoutes(role, route.name as string, route.children)
         } else {
           // 无子孩子
           parentName ?

@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <layout-backgourd></layout-backgourd>
+    <!-- <layout-backgourd></layout-backgourd> -->
     <div class="form-container">
       <h2>PhotoShare</h2>
       <div class="main">
@@ -37,7 +37,7 @@
 </template>
 
 <script lang='ts' setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import { useUserStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import i18n from '@/config/i18n'
@@ -105,6 +105,10 @@ const onHandleReset = () => {
     formIns.value.restoreValidation()
   }
 }
+
+onMounted(() => {
+  onHandleVisitor()
+})
 
 defineOptions({
   name: 'Login'
@@ -179,7 +183,7 @@ defineOptions({
 
 
       h2 {
-        -webkit-text-stroke: 1px #f00;
+        // -webkit-text-stroke: 1px #fff;
         align-self: center;
         margin-bottom: 15px;
         font-size: 40px;
