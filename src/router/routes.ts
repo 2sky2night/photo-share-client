@@ -53,7 +53,7 @@ export const initRoutes: RouteRecordRaw[] = [
         case 0:
           return "/404";
         case 1:
-          // 匹配成功，进入前台项目
+          // 匹配成功，注册并进入前台项目
           registerUserRoutes(!isLogin);
           return to.path;
         case 2:
@@ -148,6 +148,14 @@ export const userRoutes: RouteRecordRaw[] = [
         meta: {
           title: "我的",
           needAuth: true,
+        },
+      },
+      {
+        path: "/user/:uid",
+        name: "UserUser",
+        component: () => import("@User/views/user/index.vue"),
+        meta: {
+          title: "用户",
         },
       },
       {

@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 import { reactive, ref, computed } from "vue";
 import { loginAPI } from "@/apis/auth";
 import { userInfoAPI } from "@/apis/user";
-import { Role, Roles, UserInfo } from "@/types/auth";
+import { type Role, Roles } from "@/types/auth";
+import type { UserInfo } from "./types";
 import {
   registerUserRoutes,
   registerAdminRoutes,
@@ -22,6 +23,8 @@ export const useUserStore = defineStore(
       avatar: undefined,
       token: undefined,
       role: undefined,
+      createdAt: undefined,
+      updatedAt: undefined,
     });
     /**
      * 登录
@@ -46,6 +49,8 @@ export const useUserStore = defineStore(
       userInfo.uid = res.data.uid;
       userInfo.username = res.data.username;
       userInfo.role = res.data.role;
+      userInfo.createdAt = res.data.createdAt;
+      userInfo.updatedAt = res.data.updatedAt;
     };
     /**
      * 注销

@@ -1,5 +1,5 @@
-import { Photo } from "@/apis/photo/types"
-import { UserBase } from "@/apis/user/types";
+import { Photo } from "@/apis/photo/types";
+import { UserInfo } from "../user/types";
 
 /**
  * 评论项
@@ -13,7 +13,7 @@ export interface Comment {
   pid: number;
   uid: number;
   updatedAt: string;
-  user: UserBase;
+  user: UserInfo;
 }
 
 /**
@@ -35,18 +35,18 @@ export type PostViewResponse = null;
 /**
  * 点赞照片后的响应结果
  */
-export type LikePhotoResponse = null
+export type LikePhotoResponse = null;
 
 /**
  * 取消点赞照片的响应结果
  */
-export type CancelLikePhotoResponse = null
+export type CancelLikePhotoResponse = null;
 
 /**
  * 获取照片详情的响应结果
  */
 export interface PhotoDetailResponse extends Photo {
-  comment_count: number
+  comment_count: number;
 }
 
 /**

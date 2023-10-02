@@ -7,43 +7,51 @@
 }
 
 /*flex垂直居中*/
-.flex-v-center{
+.flex-v-center {
   display: flex;
   align-items: center;
 }
 
 /*一般按钮*/
-.p-btn{
+.p-btn {
   transition: var(--time-normal);
   box-sizing: border-box;
-  padding:4px 10px;
+  padding: 4px 10px;
   border-radius: 5px;
   cursor: pointer;
-  color:var(--text-color-1);
+  color: var(--text-color-1);
 }
-.p-btn:hover{
+.p-btn:hover {
   background-color: var(--btn-hover-color);
+}
+/*图标*/
+i {
+  color: var(--text-color-1);
+}
+/*图片*/
+img {
+  -webkit-user-drag: none;
 }
 
 /*文本*/
-.text{
-  color:var(--text-color-1);
+.text {
+  color: var(--text-color-1);
 }
 
 /*悬浮高亮的文本*/
-.text-hover{
+.text-hover {
   transition: var(--time-normal);
 }
-.text-hover:hover{
-  color:var(--primary-color);
+.text-hover:hover {
+  color: var(--primary-color);
 }
 /*二级文本*/
-.sub-text{
-  color:var(--text-color-2);
+.sub-text {
+  color: var(--text-color-2);
 }
 
-a{
-  color:unset
+a {
+  color: unset;
 }
 .ml-5 {
   margin-left: 5px;

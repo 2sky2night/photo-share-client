@@ -3,20 +3,14 @@ import { Role } from "@/types/auth";
 /**
  * 获取用户信息
  */
-export interface UserInfoResponse {
-  username: string;
-  role: Role;
-  avatar: string | null;
-  createdAt: string;
-  updatedAt: string;
-  uid: number;
-}
+export interface UserInfoResponse extends UserBase {}
 
 /**
  * 用户模型
  */
 export interface UserBase {
-  avatar: null;
+  avatar: null | string;
+  role: Role;
   createdAt: string;
   uid: number;
   updatedAt: string;

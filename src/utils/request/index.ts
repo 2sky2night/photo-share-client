@@ -1,70 +1,98 @@
-import axios, { type AxiosRequestConfig } from 'axios'
-import { nprogress } from '..'
-import { useUserStore } from '@/store'
-import type { Response } from './types'
-import i18n from '@/config/i18n'
+import axios, { type AxiosRequestConfig } from "axios";
+import { nprogress } from "..";
+import { useUserStore } from "@/store";
+import type { Response } from "./types";
+import i18n from "@/config/i18n";
+import router from "@/router";
 
 const http = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 5000
-})
+  timeout: 5000,
+});
 
 //  请求拦截器
 http.interceptors.request.use(
   (config) => {
-    const { userInfo: { token } } = useUserStore()
+    const {
+      userInfo: { token },
+    } = useUserStore();
     if (token) {
-      config.headers['Authorization'] = `Bearer ${token}`
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
-    nprogress.start()
-    return config
+    nprogress.start();
+    return config;
   },
   (error) => {
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
 
 // 响应拦截器
 http.interceptors.response.use(
   (response) => {
-    nprogress.end()
-    return response.data
+    nprogress.end();
+    return response.data;
   },
   (error) => {
-    nprogress.end()
+    nprogress.end();
     // 错误处理
     if (error.response) {
-      // axios错误
+      const { status } = error.response;
+      if (status === 401) {
+        // 401 错误
+        const userStore = useUserStore();
+        // 注销用户信息
+        userStore.logout();
+        window.$message.error("401错误");
+        router.push("/login");
+      }
+      // 业务错误
       if (error.response?.data.msg) {
-        window.$message.error(error.response.data.msg)
+        window.$message.error(error.response.data.msg);
       } else {
-        window.$message.error(i18n.global.t('requestError'))
+        window.$message.error(i18n.global.t("requestError"));
       }
     } else {
       // 其他错误
-      window.$message.error(i18n.global.t('requestError'))
+      window.$message.error(i18n.global.t("requestError"));
     }
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-)
+);
 
 export const request = {
-  get<T>(url: string, params = {}, config: AxiosRequestConfig = {}): Promise<Response<T>> {
+  get<T>(
+    url: string,
+    params = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<Response<T>> {
     return http.get(url, {
       ...config,
-      params
-    })
+      params,
+    });
   },
-  post<T>(url: string, data = {}, config: AxiosRequestConfig = {}): Promise<Response<T>> {
-    return http.post(url, data, config)
+  post<T>(
+    url: string,
+    data = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<Response<T>> {
+    return http.post(url, data, config);
   },
-  delete<T>(url: string, params = {}, config: AxiosRequestConfig = {}): Promise<Response<T>> {
+  delete<T>(
+    url: string,
+    params = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<Response<T>> {
     return http.delete(url, {
       ...config,
-      params
-    })
+      params,
+    });
   },
-  put<T>(url: string, data = {}, config: AxiosRequestConfig = {}): Promise<Response<T>> {
-    return http.put(url, data, config)
-  }
-}
+  put<T>(
+    url: string,
+    data = {},
+    config: AxiosRequestConfig = {}
+  ): Promise<Response<T>> {
+    return http.put(url, data, config);
+  },
+};

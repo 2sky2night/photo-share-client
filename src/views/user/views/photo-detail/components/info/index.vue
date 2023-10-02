@@ -4,20 +4,31 @@
       <!--650px下竖着展示图片-->
       <template v-if="isMoblie">
         <div class="img-list">
-          <div v-for="item in info.photos" class="img" :style="{
-            '--c-width': `${innerWidth - 20}`,
-            '--width': `${item.width}`,
-            '--heightPx': `${item.height}px`
-          }">
+          <div
+            v-for="item in info.photos"
+            class="img"
+            :style="{
+              '--c-width': `${innerWidth - 20}`,
+              '--width': `${item.width}`,
+              '--heightPx': `${item.height}px`,
+            }">
             <img-lazy :url="'http://127.0.0.1:3000' + item.url" />
           </div>
         </div>
-        <div class="info-container-pe" @click="onHandleToggleInfo" :class="{ 'active': isShow }">
-          <div class="drag-tips mb-5">
+        <div
+          class="info-container-pe"
+          :class="{ active: isShow }">
+          <div
+            class="drag-tips mb-5"
+            @click="onHandleToggleInfo">
             <div class="tips"></div>
           </div>
           <div class="title mb-5">{{ info.title }}</div>
-          <div :class="{ 'desc-el': !isShow }" class="desc mb-5">{{ info.content }}</div>
+          <div
+            :class="{ 'desc-el': !isShow }"
+            class="desc mb-5">
+            {{ info.content }}
+          </div>
           <div class="user mb-5">
             <avatar
               src="https://sns-avatar-qc.xhscdn.com/avatar/62d0c5698c90547df06c3caa.jpg?imageView2/2/w/60/format/webp|imageMogr2/strip">
@@ -29,18 +40,25 @@
               <n-icon>
                 <HeartOutlined />
               </n-icon>
-              <count-format class="ml-5" :count="info.like_count"></count-format>
+              <count-format
+                class="ml-5"
+                :count="info.like_count"></count-format>
             </div>
             <div class="view">
               <n-icon>
                 <EyeRegular />
               </n-icon>
-              <count-format class="ml-5" :count="info.views"></count-format>
+              <count-format
+                class="ml-5"
+                :count="info.views"></count-format>
             </div>
           </div>
           <time-format :time-str="info.createdAt"></time-format>
           <div class="like-btn">
-            <like-btn :size="30" v-model:like-count="info.like_count" :pid="info.pid"
+            <like-btn
+              :size="30"
+              v-model:like-count="info.like_count"
+              :pid="info.pid"
               v-model:is-liked="info.is_liked"></like-btn>
           </div>
         </div>
@@ -48,7 +66,10 @@
       <!--650px以上通过轮播图的方式展示图片-->
       <template v-else>
         <n-carousel class="mb-10">
-          <img-lazy class="carousel-img" v-for="item in info.photos" :url="'http://127.0.0.1:3000' + item.url" />
+          <img-lazy
+            class="carousel-img"
+            v-for="item in info.photos"
+            :url="'http://127.0.0.1:3000' + item.url" />
         </n-carousel>
         <div class="info_container_pc">
           <div class="title mb-10">{{ info.title }}</div>
@@ -65,18 +86,25 @@
               <n-icon>
                 <HeartOutlined />
               </n-icon>
-              <count-format class="ml-5" :count="info.like_count"></count-format>
+              <count-format
+                class="ml-5"
+                :count="info.like_count"></count-format>
             </div>
             <div class="view">
               <n-icon>
                 <EyeRegular />
               </n-icon>
-              <count-format class="ml-5" :count="info.views"></count-format>
+              <count-format
+                class="ml-5"
+                :count="info.views"></count-format>
             </div>
           </div>
           <time-format :time-str="info.createdAt"></time-format>
           <div class="like-btn">
-            <like-btn :size="30" v-model:like-count="info.like_count" :pid="info.pid"
+            <like-btn
+              :size="30"
+              v-model:like-count="info.like_count"
+              :pid="info.pid"
               v-model:is-liked="info.is_liked"></like-btn>
           </div>
         </div>
@@ -85,66 +113,80 @@
     <template v-else>
       <!--加载中的样式-->
       <template v-if="isMoblie">
-        <skeleton class="mb-5" height="300px"></skeleton>
-        <skeleton class="mb-5" height="300px"></skeleton>
+        <skeleton
+          class="mb-5"
+          height="300px"></skeleton>
+        <skeleton
+          class="mb-5"
+          height="300px"></skeleton>
         <skeleton height="300px"></skeleton>
       </template>
       <template v-else>
-        <skeleton class="mb-10" height="500px"></skeleton>
-        <skeleton class="mb-10" height="20px" width="40%"></skeleton>
-        <skeleton height="20px" width="60%"></skeleton>
+        <skeleton
+          class="mb-10"
+          height="500px"></skeleton>
+        <skeleton
+          class="mb-10"
+          height="20px"
+          width="40%"></skeleton>
+        <skeleton
+          height="20px"
+          width="60%"></skeleton>
       </template>
     </template>
   </div>
 </template>
 
-<script lang='ts' setup>
-import { ref, onBeforeMount, watch } from 'vue'
-import { useMobile } from '@/hooks'
-import LikeBtn from '@User/components/like-photo-btn/index.vue'
-import { EyeRegular } from '@vicons/fa'
-import { HeartOutlined } from '@vicons/antd'
-import avatar from '@/components/public/avatar/index.vue'
-import { getPhotoDetailAPI, postPhotoViewAPI } from '@User/apis/photo'
-import type { Photo } from '@/apis/photo/types';
+<script lang="ts" setup>
+import { ref, onBeforeMount, watch } from "vue";
+import { useMobile } from "@/hooks";
+import LikeBtn from "@User/components/like-photo-btn/index.vue";
+import { EyeRegular } from "@vicons/fa";
+import { HeartOutlined } from "@vicons/antd";
+import avatar from "@/components/public/avatar/index.vue";
+import { getPhotoDetailAPI, postPhotoViewAPI } from "@User/apis/photo";
+import type { Photo } from "@/apis/photo/types";
 
 // props
-const props = defineProps<{ pid: number }>()
+const props = defineProps<{ pid: number }>();
 // 数据
-const info = ref<Photo | null>(null)
+const info = ref<Photo | null>(null);
 // 是否为小屏幕
-const { isMoblie, innerWidth } = useMobile()
+const { isMoblie, innerWidth } = useMobile();
 // pe:是否显示照片详情信息
-const isShow = ref(false)
+const isShow = ref(false);
 
 // pe:查看照片详情信息
 const onHandleToggleInfo = () => {
-  isShow.value = !isShow.value
-}
+  isShow.value = !isShow.value;
+};
 
 // 获取数据
 const onHandleGetData = async () => {
-  postPhotoViewAPI(props.pid)
-  const res = await getPhotoDetailAPI(props.pid)
-  document.title = res.data.title + ' | Photo Share'
-  info.value = res.data
-}
+  postPhotoViewAPI(props.pid);
+  const res = await getPhotoDetailAPI(props.pid);
+  document.title = res.data.title + " | Photo Share";
+  info.value = res.data;
+};
 
 // 加载数据
-onBeforeMount(onHandleGetData)
+onBeforeMount(onHandleGetData);
 
 // 路由更新，重新获取数据
-watch(() => props.pid, () => {
-  info.value = null
-  onHandleGetData()
-})
+watch(
+  () => props.pid,
+  () => {
+    info.value = null;
+    onHandleGetData();
+  }
+);
 
 defineOptions({
-  name: "PhotoInfo"
-})
+  name: "PhotoInfo",
+});
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 // 移动端(650px以下)布局图片竖着
 // 650以上图片以轮播图的形式展示
 .photo-info-container {
@@ -249,12 +291,16 @@ defineOptions({
 
   &::after {
     position: absolute;
-    content: '';
+    content: "";
     bottom: 0;
     left: 0;
     right: 0;
     height: 50px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 35%, var(--mask-color))
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 35%,
+      var(--mask-color)
+    );
   }
 
   .n-carousel__slide {

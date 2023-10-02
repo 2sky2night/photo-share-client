@@ -1,5 +1,5 @@
-import { AuditStatus } from "@/types/photo";
-import { UserBase } from "../user/types";
+import type { AuditStatus } from "@/types/photo";
+import type { UserInfo } from "@/views/user/apis/user/types";
 
 /**
  * 图片数据
@@ -51,9 +51,8 @@ export interface Photo {
   /**
    * 发布人信息
    */
-  user: UserBase;
+  user: UserInfo;
 }
-
 
 /**
  * User获取照片列表的响应结果
