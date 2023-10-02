@@ -14,6 +14,7 @@
     "dayjs": "^1.11.9",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
+    "pinia-plugin-persistedstate": "^3.2.0",
     "sass": "^1.66.1",
     "vue": "^3.3.4",
     "vue-i18n": "^9.3.0",
