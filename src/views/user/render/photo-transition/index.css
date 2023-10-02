@@ -1,0 +1,75 @@
+.photo-transition {
+  position: absolute;
+  animation: move 1 var(--time-normal) ease;
+  pointer-events: none;
+}
+
+/*移动端(650px以下)的样式*/
+.photo-mobile {
+  /*减去两边padding的宽度*/
+  width: calc(100% - 20px);
+  height: unset;
+  /*减去头部导航栏和padding的高度*/
+  top: calc(var(--user-header-height) + 10px);
+  /*居中*/
+  left: 50%;
+  transform: scale(1) translateX(-50%);
+}
+
+/*非移动端(650px以上)的样式*/
+.photo-not-mobile {
+  /*减去两边padding的宽度*/
+  width: calc(100% - 20px);
+  /*轮播图容器高度*/
+  height: 500px;
+  /*减去头部导航栏和padding的高度*/
+  top: calc(var(--user-header-height) + 10px);
+  /*居中*/
+  left: 50%;
+  transform: scale(1) translateX(-50%);
+}
+.photo-not-mobile img{
+  height: 100%;
+  object-fit: contain;
+}
+
+.photo-transition-enter {
+  animation: move 1 var(--time-normal) ease;
+}
+
+.photo-transition-disappear {
+  animation: disappear 1 var(--time-normal) ease;
+}
+
+.photo-transition img {
+  width: 100%;
+}
+
+@keyframes disappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes move {
+  from {
+    width: var(--width);
+    height: var(--height);
+    top: var(--top);
+    left: var(--left);
+    transform: scale(0.5) translateX(-50%);
+  }
+  to {
+    /*减去两边padding的宽度*/
+    /* width: calc(100% - 20px); */
+    /* height: unset; */
+    /*减去头部导航栏和padding的高度*/
+    /* top: calc(var(--user-header-height) + 10px); */
+    /*居中*/
+    /* left: 50%; */
+    /* transform: scale(1) translateX(-50%); */
+  }
+}

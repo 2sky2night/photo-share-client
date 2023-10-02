@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <!-- <layout-backgourd></layout-backgourd> -->
+    <layout-backgourd></layout-backgourd>
     <div class="form-container">
       <h2>PhotoShare</h2>
       <div class="main">
@@ -107,7 +107,8 @@ const onHandleReset = () => {
 }
 
 onMounted(() => {
-  onHandleVisitor()
+  formData.password = '123456789'
+  formData.username='KK'
 })
 
 defineOptions({
@@ -117,13 +118,14 @@ defineOptions({
 
 <style scoped lang='scss'>
 .page {
+  color:var(--text-color-1);
   height: 100vh;
   box-sizing: border-box;
   width: 100vw;
   position: relative;
 
   .form-container {
-    background-color: #fff;
+    background-color: var(--bg-color-1);
     width: 500px;
     position: absolute;
     top: 50%;

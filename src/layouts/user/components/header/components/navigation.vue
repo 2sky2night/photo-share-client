@@ -23,4 +23,10 @@ const navs = computed(() => {
 .navigation-container {
   display: flex;
 }
+
+@media screen and (max-width:650px) {
+  .navigation-container {
+    display: none;
+  }
+}
 </style>

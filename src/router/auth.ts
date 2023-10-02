@@ -31,8 +31,8 @@ export const removeAllRoutes = () => {
 export const registerUserRoutes = (visitor: boolean) => {
   if (visitor) {
     // 游客
-    // 移除重定向login路由
-    router.removeRoute('reToLogin')
+    // 移除重定向login路由 现在 / 为前台首页了
+    // router.removeRoute('ReToLogin')
     // 根据元信息递归注册路由表
     addVisitorRoutes()
   } else {

@@ -9,7 +9,8 @@
     /* Bundler mode */
     "baseUrl": ".",
     "paths": {
-      "@/*":["src/*"]
+      "@/*":["src/*"],
+      "@User/*":["src/views/user/*"]
     },
     "types": [
       "naive-ui/volar"

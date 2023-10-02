@@ -8,5 +8,5 @@ export const beforeGuards: NavigationGuard = (to, from, next) => {
 
 export const afterGuards: NavigationHookAfter = (to, from) => {
   nprogress.end()
-  to.meta?.title?document.title=to.meta.title:document.title='PhotoShare'
+  to.meta?.title?document.title=to.meta.title:document.title='Photo Share'
 }

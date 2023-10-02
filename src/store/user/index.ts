@@ -76,6 +76,9 @@ export const useUserStore = defineStore(
       }
     }
 
+    /**
+     * 是否登录?
+     */
     const isLogin = computed(() => {
       return (
         userInfo.avatar !== undefined &&

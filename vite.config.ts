@@ -29,7 +29,8 @@ export default defineConfig({
   base: './',
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
+      '@User':path.resolve(__dirname,'src/views/user')
     }
   },
   server: {

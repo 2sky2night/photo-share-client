@@ -5,7 +5,7 @@ import type { DropdownOption } from "naive-ui"
 import i18n from "@/config/i18n"
 import { MdPhotos, IosShareAlt } from '@vicons/ionicons4'
 import { UserOutlined, HeartFilled, HistoryOutlined } from '@vicons/antd'
-import { Sunny, Moon, LogInOutline, Language } from '@vicons/ionicons5'
+import { Sunny, Moon, LogInOutline, Language, LogOutOutline } from '@vicons/ionicons5'
 
 /**
  * 渲染图片
@@ -147,7 +147,12 @@ export const UserMenu = computed<DropdownOption[]>(() => [
           ]
       )
     }
-  }
+  },
+  {
+    label: i18n.global.t('logout'),
+    key: 'logout',
+    icon: renderIcon(LogOutOutline)
+  },
 ])
 /**
  * 游客菜单

@@ -126,9 +126,10 @@ defineOptions({
   box-sizing: border-box;
   width: 100vw;
   position: relative;
+  color: var(--text-color-1);
 
   .form-container {
-    background-color: #fff;
+    background-color: var(--bg-color-1);
     width: 500px;
     position: absolute;
     top: 50%;

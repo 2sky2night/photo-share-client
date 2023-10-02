@@ -10,6 +10,11 @@
 <script lang='ts' setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
+// emits
+const emit = defineEmits<{
+  'imgLoad': []
+}>()
+// props
 const props = defineProps<{ url: string }>()
 // 容器
 const container = ref<HTMLDivElement | null>(null)
@@ -26,33 +31,38 @@ const observer = new IntersectionObserver(entries => {
         // 缓存加载完成
         isShow.value = true
         // 加载完成取消静态，释放内存
+        emit('imgLoad')
         onHandleUnObserver()
       } else {
         // 发送请求加载图片
         img.onload = () => {
           isShow.value = true
+          emit('imgLoad')
           onHandleUnObserver()
         }
       }
-      return true
     }
+    return true
   })
 })
 
 // 取消监听
 const onHandleUnObserver = () => {
   const target = container.value as HTMLDivElement
-  observer.unobserve(target)
-  observer.disconnect()
+  if (target) {
+    observer.unobserve(target)
+    observer.disconnect()
+  }
 }
 
 onMounted(() => {
   const target = container.value as HTMLDivElement
-  observer.observe(target)
+  if (target) {
+    observer.observe(target)
+  }
 })
 
 onBeforeUnmount(onHandleUnObserver)
-
 
 defineOptions({
   name: 'ImgLzay'
@@ -63,19 +73,23 @@ defineOptions({
 .img-lazy-container {
   width: 100%;
   height: 100%;
+
   img {
     -webkit-user-drag: none;
     height: 100%;
     width: 100%;
   }
 }
-.img-enter-active{
+
+.img-enter-active {
   transition: var(--time-normal);
 }
-.img-enter-from{
+
+.img-enter-from {
   opacity: 0;
 }
-.img-enter-to{
+
+.img-enter-to {
   opacity: 1;
 }
 </style>

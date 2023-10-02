@@ -24,6 +24,6 @@ declare module 'vue-router' {
      * 哪些角色可以访问?
      * @scope 后台项目
      */
-    roles?: Role[]
+    roles?: Role[];
   }
 }

@@ -8,16 +8,19 @@ import { computed } from 'vue';
 const props = withDefaults(defineProps<{
   width?: string;
   height?: string;
+  round?: string;
 }>(),
   {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    round: '0px'
   })
 
 const style = computed(() => {
   return {
     width: props.width,
-    height: props.height
+    height: props.height,
+    borderRadius: props.round,
   }
 })
 

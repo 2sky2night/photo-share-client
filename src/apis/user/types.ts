@@ -11,3 +11,14 @@ export interface UserInfoResponse {
   updatedAt: string;
   uid: number;
 }
+
+/**
+ * 用户模型
+ */
+export interface UserBase {
+  avatar: null;
+  createdAt: string;
+  uid: number;
+  updatedAt: string;
+  username: string;
+}

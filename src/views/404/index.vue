@@ -10,6 +10,6 @@ defineOptions({
 
 <style scoped lang='scss'>
 .page{
-  
+  height: 100vh;
 }
 </style>
