@@ -1,1 +1,4 @@
-export { themeOverrides } from './theme'
+export { themeOverrides } from "./theme";
+export const config = {
+  IMG_BASE_URL: "http://127.0.0.1:3000",
+};

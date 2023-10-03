@@ -12,7 +12,7 @@
               '--width': `${item.width}`,
               '--heightPx': `${item.height}px`,
             }">
-            <img-lazy :url="'http://127.0.0.1:3000' + item.url" />
+            <img-lazy :url="item.url" />
           </div>
         </div>
         <div
@@ -30,9 +30,7 @@
             {{ info.content }}
           </div>
           <div class="user mb-5">
-            <avatar
-              src="https://sns-avatar-qc.xhscdn.com/avatar/62d0c5698c90547df06c3caa.jpg?imageView2/2/w/60/format/webp|imageMogr2/strip">
-            </avatar>
+            <avatar :src="info.user.avatar"> </avatar>
             <span class="ml-5">{{ info.user.username }}</span>
           </div>
           <div class="data">
@@ -69,15 +67,12 @@
           <img-lazy
             class="carousel-img"
             v-for="item in info.photos"
-            :url="'http://127.0.0.1:3000' + item.url" />
+            :url="item.url" />
         </n-carousel>
         <div class="info_container_pc">
           <div class="title mb-10">{{ info.title }}</div>
           <div class="user mb-10">
-            <!-- <avatar :src="info.user.avatar" :size="35"></avatar> -->
-            <avatar
-              src="https://sns-avatar-qc.xhscdn.com/avatar/62d0c5698c90547df06c3caa.jpg?imageView2/2/w/60/format/webp|imageMogr2/strip">
-            </avatar>
+            <avatar :src="info.user.avatar"> </avatar>
             <span class="ml-5">{{ info.user.username }}</span>
           </div>
           <div class="desc mb-10">{{ info.content }}</div>
@@ -140,10 +135,9 @@
 <script lang="ts" setup>
 import { ref, onBeforeMount, watch } from "vue";
 import { useMobile } from "@/hooks";
-import LikeBtn from "@User/components/like-photo-btn/index.vue";
+import LikeBtn from "@User/components/public/like-photo-btn/index.vue";
 import { EyeRegular } from "@vicons/fa";
 import { HeartOutlined } from "@vicons/antd";
-import avatar from "@/components/public/avatar/index.vue";
 import { getPhotoDetailAPI, postPhotoViewAPI } from "@User/apis/photo";
 import type { Photo } from "@/apis/photo/types";
 

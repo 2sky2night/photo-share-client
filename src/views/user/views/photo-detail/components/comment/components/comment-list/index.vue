@@ -53,7 +53,7 @@
 
 <script lang='ts' setup>
 import { reactive, watch, onBeforeMount } from 'vue'
-import Comment from '@User/components/comment-item/index.vue'
+import Comment from '@User/components/item/comment-item/index.vue'
 import CommentListSkeleton from '@User/components/skeleton/comment-list.vue'
 import { getCommentAPI } from '@User/apis/photo'
 import { Comment as CommentType } from '@User/apis/photo/types'

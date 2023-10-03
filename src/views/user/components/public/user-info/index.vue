@@ -1,5 +1,8 @@
 <template>
-  <div class="user-info-container">
+  <user-info-skeleton v-if="loading || userData === null"></user-info-skeleton>
+  <div
+    class="user-info-container"
+    v-if="!loading && userData !== null">
     <div class="avatar mr-10">
       <n-icon v-if="userData.avatar === null">
         <user></user>
@@ -7,7 +10,7 @@
       <div
         class="avatar-content"
         v-else>
-        <img :src="'http://127.0.0.1:3000' + userData.avatar" />
+        <img :src="config.IMG_BASE_URL + userData.avatar" />
       </div>
     </div>
     <div class="info">
@@ -33,11 +36,21 @@
 
 <script lang="ts" setup>
 import { User } from "@vicons/fa";
+import UserInfoSkeleton from "@User/components/skeleton/user-info.vue";
 import type { UserInfo as InfoType } from "@User/apis/user/types";
 import { getDaysByDateStr } from "@/utils";
+import { config } from "@/config";
+
 // props
 defineProps<{
-  userData: InfoType;
+  /**
+   * 用户信息
+   */
+  userData: InfoType | null;
+  /**
+   * 正在加载
+   */
+  loading: boolean;
 }>();
 
 defineOptions({

@@ -13,7 +13,7 @@
 
 <script lang='ts' setup>
 import { ref } from 'vue'
-import AuthAction from '@User/components/auth-action/index.vue'
+import AuthAction from '@User/components/public/auth-action/index.vue'
 import { postCommentAPI } from '@User/apis/photo'
 import { pubsub } from '@/utils'
 

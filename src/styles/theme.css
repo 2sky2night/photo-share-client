@@ -3,6 +3,7 @@
   --time-long: 1s;
   --user-header-height: 50px;
   --user-main-width: 1300px;
+  --border: 1px solid var(--border-color-1);
 }
 [theme="light"] {
   --primary-color: #18a058;
@@ -28,7 +29,7 @@
   --bg-color-2: #434343;
   --text-color-1: #fff;
   --text-color-2: #818181;
-  --skeleton-color-1: #1a1a1a;
+  --skeleton-color-1: #414141;
   --skeleton-color-2: #2e2e2e;
   --border-color-1: #2d2d30;
   --box-shadow-color: #0000009c;

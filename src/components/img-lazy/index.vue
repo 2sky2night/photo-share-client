@@ -1,75 +1,80 @@
 <template>
-  <div class="img-lazy-container" ref="container">
+  <div
+    class="img-lazy-container"
+    ref="container">
     <Transition name="img">
-      <img v-if="isShow" :src="props.url">
+      <img
+        v-if="isShow"
+        :src="config.IMG_BASE_URL + props.url" />
     </Transition>
     <skeleton v-if="!isShow"></skeleton>
   </div>
 </template>
 
-<script lang='ts' setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+<script lang="ts" setup>
+import { ref, onMounted, onBeforeUnmount } from "vue";
+import { config } from "@/config";
 
 // emits
 const emit = defineEmits<{
-  'imgLoad': []
-}>()
+  imgLoad: [];
+}>();
 // props
-const props = defineProps<{ url: string }>()
+const props = defineProps<{ url: string }>();
 // 容器
-const container = ref<HTMLDivElement | null>(null)
+const container = ref<HTMLDivElement | null>(null);
 // 是否显示
-const isShow = ref(false)
+const isShow = ref(false);
 // 监听者
-const observer = new IntersectionObserver(entries => {
-  entries.some(entry => {
+const observer = new IntersectionObserver((entries) => {
+  entries.some((entry) => {
     if (entry.isIntersecting) {
       // 与视图相交了
-      const img = new Image()
-      img.src = props.url
+      const img = new Image();
+      img.src = config.IMG_BASE_URL + props.url;
       if (img.complete) {
         // 缓存加载完成
-        isShow.value = true
+        isShow.value = true;
         // 加载完成取消静态，释放内存
-        emit('imgLoad')
-        onHandleUnObserver()
+        emit("imgLoad");
+        onHandleUnObserver();
       } else {
         // 发送请求加载图片
         img.onload = () => {
-          isShow.value = true
-          emit('imgLoad')
-          onHandleUnObserver()
-        }
+          isShow.value = true;
+          emit("imgLoad");
+          onHandleUnObserver();
+        };
       }
     }
-    return true
-  })
-})
+    return true;
+  });
+});
 
 // 取消监听
 const onHandleUnObserver = () => {
-  const target = container.value as HTMLDivElement
+  const target = container.value as HTMLDivElement;
   if (target) {
-    observer.unobserve(target)
-    observer.disconnect()
+    observer.unobserve(target);
+    observer.disconnect();
   }
-}
+};
 
 onMounted(() => {
-  const target = container.value as HTMLDivElement
+  const target = container.value as HTMLDivElement;
   if (target) {
-    observer.observe(target)
+    observer.observe(target);
   }
-})
+});
 
-onBeforeUnmount(onHandleUnObserver)
+onBeforeUnmount(onHandleUnObserver);
 
 defineOptions({
-  name: 'ImgLzay'
-})
+  name: "ImgLzay",
+});
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .img-lazy-container {
   width: 100%;
   height: 100%;

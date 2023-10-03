@@ -153,7 +153,9 @@ export const adminHasPermisson = (roles: Role[], role: Role) => {
 
 /**
  * 是否为前台路由表中的路径
+ * @param isVisitor 是游客?
  * @param path 路径
+ * @param routes 路由表
  * @returns 0未命中 1允许访问 2禁止访问
  */
 export const isUserPath = (
@@ -189,6 +191,11 @@ export const isUserPath = (
       }
     }
     if (route.children && route.children.length) {
+      if (route.meta?.needAuth && isVisitor) {
+        // 是游客，并且当前路由需要登陆才能访问
+        // 禁止后续子路由的访问了
+        return 2;
+      }
       const res = isUserPath(isVisitor, path, route.children);
       return res;
     }
@@ -196,7 +203,6 @@ export const isUserPath = (
   // 未命中
   return 0;
 };
-
 
 /**
  * 前台

@@ -26,7 +26,7 @@
 import { reactive, nextTick, onMounted, ref, onBeforeUnmount, onActivated, onDeactivated } from 'vue'
 import { userGetPhotoAPI } from '@/apis/photo'
 import { useMobile } from '@/hooks'
-import PhotoItem from '@User/components/photo-item/index.vue'
+import PhotoItem from '@User/components/item/photo-item/index.vue'
 import PhotoSkeleton from '@User/components/skeleton/photo-list.vue'
 import WaterFallResolve from './waterfall';
 import type { Photo } from '@/apis/photo/types';

@@ -8,7 +8,7 @@
 
 <script lang='ts' setup>
 import { ref } from 'vue'
-import AuthAction from '@User/components/auth-action/index.vue'
+import AuthAction from '../auth-action/index.vue'
 import { Heart, HeartOutline } from '@vicons/ionicons5';
 import { likePhotoAPI, cancelLikePhotoAPI } from '@User/apis/photo'
 

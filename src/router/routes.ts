@@ -49,7 +49,9 @@ export const initRoutes: RouteRecordRaw[] = [
     redirect(to) {
       // 若访问的是用户表中的路由地址
       const { isLogin } = useUserStore();
-      switch (isUserPath(!isLogin, to.path)) {
+      const flag = isUserPath(!isLogin, to.path);
+      console.log(`${isLogin ? "登录用户" : "游客"}---访问结果为：${flag}`);
+      switch (flag) {
         case 0:
           return "/404";
         case 1:
@@ -149,6 +151,27 @@ export const userRoutes: RouteRecordRaw[] = [
           title: "我的",
           needAuth: true,
         },
+        redirect: "/my/published",
+        children: [
+          {
+            path: "/my/published",
+            name: "UserMyPublished",
+            component: () =>
+              import("@User/views/my/children/published-photo/index.vue"),
+            meta: {
+              title: "发布的照片",
+            },
+          },
+          {
+            path: "/my/liked",
+            name: "UserMyLiked",
+            component: () =>
+              import("@User/views/my/children/liked-photo/index.vue"),
+            meta: {
+              title: "喜欢的照片",
+            },
+          },
+        ],
       },
       {
         path: "/user/:uid",

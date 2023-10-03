@@ -1,5 +1,7 @@
 <template>
-  <div class="main-container" ref="mainDOM">
+  <div
+    class="main-container"
+    ref="mainDOM">
     <div class="content">
       <router-view #default="{ Component }">
         <!-- <keep-alive :include="['HomePage']"> -->
@@ -10,45 +12,53 @@
   </div>
 </template>
 
-<script lang='ts' setup>
-import { ref, onMounted, watch } from 'vue'
-import { useRoute } from 'vue-router';
-import { pubsub } from '@/utils';
+<script lang="ts" setup>
+import { ref, onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+import { pubsub } from "@/utils";
 
-const mainDOM = ref<HTMLDivElement | null>(null)
-const threshold = window.innerHeight * .1
-const route = useRoute()
+// 主视图容器
+const mainDOM = ref<HTMLDivElement | null>(null);
+// 阈值
+const threshold = window.innerHeight * 0.05;
+const route = useRoute();
 
-watch(() => route.path, () => {
-  pubsub.emit('user:to-top',false)
-})
+watch(
+  () => route.path,
+  () => {
+    pubsub.emit("user:to-top", false);
+  }
+);
 
 onMounted(() => {
   if (mainDOM.value) {
-    const target = mainDOM.value
+    const target = mainDOM.value;
     // 滚动事件的回调
-    target.addEventListener('scroll', () => {
-      if (target.scrollHeight - threshold <= target.scrollTop + target.clientHeight) {
-        pubsub.emit('user:page-bottom')
+    target.addEventListener("scroll", () => {
+      if (
+        target.scrollHeight - threshold <=
+        target.scrollTop + target.clientHeight
+      ) {
+        pubsub.emit("user:page-bottom");
       }
-    })
+    });
     // 监听发布者，将视图滚动到顶部
-    pubsub.on('user:to-top', (_, flag = true) => {
+    pubsub.on("user:to-top", (_, flag = true) => {
       target.scroll({
         top: 0,
         left: 0,
-        behavior: flag ? 'smooth' : undefined
-      })
-    })
+        behavior: flag ? "smooth" : undefined,
+      });
+    });
   }
-})
+});
 
 defineOptions({
-  name: 'Main'
-})
+  name: "Main",
+});
 </script>
 
-<style scoped lang='scss'>
+<style scoped lang="scss">
 .main-container {
   height: calc(100% - var(--user-header-height));
   overflow-x: hidden;
@@ -72,7 +82,7 @@ defineOptions({
   }
 }
 
-@media screen and (max-width:1300px) {
+@media screen and (max-width: 1300px) {
   .main-container {
     .content {
       margin: 0;

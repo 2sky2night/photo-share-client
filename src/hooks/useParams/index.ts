@@ -16,24 +16,24 @@ export function useParams<R = any>(
   // 校验路由路径参数
   const checkParams = (currteRoute = route) => {
     const params = currteRoute.params;
-    const keys = Object.keys(params);
+    const keyValue = Object.entries(params);
     // 结果
     const result: Record<keyof typeof params, number | string> = {};
     // 错误的参数
     const errorKeys: string[] = [];
     // 遍历每个参数
-    keys.forEach((key) => {
+    keyValue.forEach(([key, value]) => {
       if (paramsOut.includes(key)) {
         // 不需要校验的参数
-        result[key] = params[key] as string;
+        result[key] = value as string;
       } else {
         // 需要校验的参数
-        const value = +params[key];
-        if (isNaN(value)) {
+        const _value = +value;
+        if (isNaN(_value)) {
           // 参数不合法!保存不合法的
           errorKeys.push(key);
         } else {
-          result[key] = value;
+          result[key] = _value;
         }
       }
     });

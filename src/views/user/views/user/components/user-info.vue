@@ -1,7 +1,6 @@
 <template>
-  <template v-if="isLoading">正在加载</template>
   <user-info-comp
-    v-if="!isLoading && data"
+    :loading="isLoading"
     :user-data="data">
     <n-button
       size="small"
@@ -12,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onBeforeMount } from "vue";
-import UserInfoComp from "@User/components/user-info/index.vue";
+import { ref, onBeforeMount, watch } from "vue";
+import UserInfoComp from "@User/components/public/user-info/index.vue";
 import { getUserInfoByParamAPI } from "@User/apis/user";
 import type { UserInfoResponse } from "@User/apis/user/types";
 
@@ -32,7 +31,8 @@ const onHandleGetData = async () => {
   isLoading.value = false;
 };
 
+// 加载数据
 onBeforeMount(onHandleGetData);
+// 监听路由参数更新获取最新数据
+watch(() => props.uid, onHandleGetData);
 </script>
-
-<style scoped lang="scss"></style>

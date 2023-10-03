@@ -43,8 +43,9 @@ http.interceptors.response.use(
         const userStore = useUserStore();
         // 注销用户信息
         userStore.logout();
-        window.$message.error("401错误");
+        window.$message.error(i18n.global.t("authorizationError"));
         router.push("/login");
+        return;
       }
       // 业务错误
       if (error.response?.data.msg) {

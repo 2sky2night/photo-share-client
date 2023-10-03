@@ -1,5 +1,6 @@
 import type { AuditStatus } from "@/types/photo";
 import type { UserInfo } from "@/views/user/apis/user/types";
+import { ListResponse } from "../public/types";
 
 /**
  * 图片数据
@@ -44,7 +45,7 @@ export interface Photo {
   photos: PicData[];
   pid: number;
   publish_uid: number;
-  status: number;
+  status: AuditStatus;
   title: string;
   updatedAt: string;
   views: number;
@@ -57,13 +58,7 @@ export interface Photo {
 /**
  * User获取照片列表的响应结果
  */
-export interface PhotoListResponse {
-  has_more: boolean;
-  limit: number;
-  list: Photo[];
-  offset: number;
-  total: number;
-}
+export type PhotoListResponse = ListResponse<Photo>;
 
 /**
  * 随机获取审核通过的图片数据

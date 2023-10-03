@@ -1,5 +1,6 @@
 import { Photo } from "@/apis/photo/types";
 import { UserInfo } from "../user/types";
+import { ListResponse } from "@/apis/public/types";
 
 /**
  * 评论项
@@ -19,14 +20,7 @@ export interface Comment {
 /**
  * 获取评论列表
  */
-export interface CommentListResponse {
-  has_more: boolean;
-  limit: number;
-  list: Comment[];
-  offset: number;
-  total: number;
-}
-
+export type CommentListResponse = ListResponse<Comment>;
 /**
  * 上报浏览量的响应结果
  */
