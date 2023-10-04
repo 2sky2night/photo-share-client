@@ -1,4 +1,5 @@
 .common {
+  --time-fast: 0.2s;
   --time-normal: 0.3s;
   --time-long: 1s;
   --user-header-height: 50px;
@@ -11,6 +12,7 @@
   --btn-hover-color: #f3f3f5;
   --bg-color-1: #fff;
   --bg-color-2: #eee;
+  --bg-color-3: #ddd;
   --text-color-1: #000;
   --text-color-2: #808080;
   --skeleton-color-1: #ddd;
@@ -27,6 +29,7 @@
   --btn-hover-color: #343438;
   --bg-color-1: #18181c;
   --bg-color-2: #434343;
+  --bg-color-3: #4d4d4d;
   --text-color-1: #fff;
   --text-color-2: #818181;
   --skeleton-color-1: #414141;

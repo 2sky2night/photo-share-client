@@ -31,8 +31,3 @@ const onHandleGetData = async (
 
 defineOptions({ name: "LikedPhoto" });
 </script>
-
-<style scoped lang="scss">
-.liked-photo-container {
-}
-</style>

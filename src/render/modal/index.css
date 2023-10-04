@@ -1,0 +1,61 @@
+.modal-mask-container {
+  position: fixed;
+  inset: 0;
+  z-index: 2025;
+  background-color: var(--mask-color);
+  animation: fade var(--time-fast) 1 ease;
+  color: var(--text-color-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-leave-offset {
+  animation: modalOffset var(--time-normal) 1 ease reverse;
+}
+
+.modal-enter-offset {
+  animation: modalOffset var(--time-normal) 1 ease;
+}
+
+@keyframes modalOffset {
+  from {
+    position: absolute;
+    /*故意拉的偏移量，最好是获取模态框大小/2*/
+    top: calc(var(--top) - calc(var(--height) / 2));
+    left: calc(var(--left) - calc(var(--width) / 2));
+    transform: scale(0.3);
+    opacity: 0.3;
+  }
+  to {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 1;
+  }
+}
+
+.modal-leave {
+  animation: modal var(--time-normal) 1 ease reverse;
+}
+
+.modal-enter {
+  animation: modal var(--time-normal) 1 ease;
+}
+
+@keyframes modal {
+  from {
+    opacity: 0.3;
+    transform: scale(0.3);
+  }
+}
+
+@keyframes fade {
+  from {
+    background-color: #00000000;
+  }
+  to {
+    background-color: var(--mask-color);
+  }
+}

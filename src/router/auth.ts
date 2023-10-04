@@ -152,11 +152,12 @@ export const adminHasPermisson = (roles: Role[], role: Role) => {
 };
 
 /**
- * 是否为前台路由表中的路径
+ * 是否命中前台路由的路径?
  * @param isVisitor 是游客?
  * @param path 路径
  * @param routes 路由表
- * @returns 0未命中 1允许访问 2禁止访问
+ * @param level 递归层级
+ * @returns  0未命中 1允许访问 2禁止访问
  */
 export const isUserPath = (
   isVisitor: boolean,
@@ -193,16 +194,77 @@ export const isUserPath = (
     if (route.children && route.children.length) {
       if (route.meta?.needAuth && isVisitor) {
         // 是游客，并且当前路由需要登陆才能访问
-        // 禁止后续子路由的访问了
-        return 2;
+        // 禁止检查后续子路由了
+      } else {
+        // 当前是无需权限的路由，则需要递归检查
+        const res = isUserPath(isVisitor, path, route.children);
+        if (res === 1 || res === 2) {
+          // 当前子路由都没命中不代表兄弟路由不命中
+          // 若命中了就返回，没命中不着急
+          return res;
+        }
       }
-      const res = isUserPath(isVisitor, path, route.children);
-      return res;
     }
   }
   // 未命中
   return 0;
 };
+
+// 是否命中前台路径?---异步版本
+// export const isUserPath = (
+//   isVisitor: boolean,
+//   path: string
+// ): Promise<0 | 1 | 2> => {
+//   return new Promise((resolve) => {
+//     checkHit(path);
+//     function checkHit(path: string, routes = userRoutes, level = 1): any {
+//       for (let i = 0; i < routes.length; i++) {
+//         const route = routes[i];
+//         if (route.path === path) {
+//           // 正常路径
+//           if (route.meta?.needAuth && isVisitor) {
+//             return resolve(2);
+//           } else {
+//             return resolve(1);
+//           }
+//         } else if (route.path.includes("/:")) {
+//           // 参数路径
+//           // 只能校验有一个路径参数的，若有多个路径参数需要把路径参数都去除掉再做检验
+//           // 截取出真实路径
+//           const route_path = route.path.substring(0, route.path.indexOf("/:"));
+//           // 将路径中的参数路径解析去除
+//           const _path = path.split("/");
+//           // 把末尾的路径参数解析去除
+//           _path.pop();
+
+//           // 校验路径参数和真实路径
+//           if (route_path === _path.join("/")) {
+//             if (route.meta?.needAuth && isVisitor) {
+//               return resolve(2);
+//             } else {
+//               return resolve(1);
+//             }
+//           }
+//         }
+//         if (route.children && route.children.length) {
+//           if (route.meta?.needAuth && isVisitor) {
+//             // 是游客，并且当前路由需要登陆才能访问
+//             // 禁止后续子路由的访问了
+//             return resolve(2);
+//           }
+//           const res = checkHit(path, route.children, level + 1);
+//           if (res === 1 || res === 2) {
+//             return resolve(res);
+//           }
+//         }
+//       }
+//       if (level === 1) {
+//         // 若把全部路由遍历完了，则未命中
+//         return resolve(0);
+//       }
+//     }
+//   });
+// };
 
 /**
  * 前台

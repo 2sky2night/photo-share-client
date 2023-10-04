@@ -38,8 +38,9 @@
 import { ref, onBeforeMount, onBeforeUnmount } from "vue";
 import PhotoItemMini from "@User/components/item/photo-item-mini/index.vue";
 import PhotoListSkeleton from "@User/components/skeleton/photo-list.vue";
-import type { PhotoListResponse, Photo as PhotoType } from "@/apis/photo/types";
 import { pubsub } from "@/utils";
+import type { PhotoListResponse, Photo as PhotoType } from "@/apis/photo/types";
+import type { PhotoListIns } from "./types";
 
 // props
 const props = defineProps<{
@@ -103,22 +104,28 @@ const onHandleBottom = async () => {
 };
 
 // 重置加载
-const handleRest = async () => {
+const handleReset = async () => {
+  list.value.length = 0;
   // 若被取消订阅了，重新订阅频道
   !isSubscribe && subscribeChannel();
+  // 重置页码
+  pagination.value.pageNum = 1;
   pagination.value.isFirstLoading = true;
   await onHandleGetData();
   pagination.value.isFirstLoading = false;
 };
 
 // 加载数据
-onBeforeMount(handleRest);
+onBeforeMount(handleReset);
 
 // 移除监听
 onBeforeUnmount(() => isSubscribe && removeChannel());
 
 // 立即开启滚动监听
 subscribeChannel();
+
+// 暴露出的方法
+defineExpose<PhotoListIns>({ handleReset });
 
 defineOptions({ name: "PhotoList" });
 </script>

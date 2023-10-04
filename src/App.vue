@@ -1,8 +1,10 @@
 <template>
   <div class="root">
-    <n-message-provider>
-      <Layout></Layout>
-    </n-message-provider>
+    <n-dialog-provider>
+      <n-message-provider>
+        <Layout></Layout>
+      </n-message-provider>
+    </n-dialog-provider>
   </div>
 </template>
 

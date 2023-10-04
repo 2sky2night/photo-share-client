@@ -18,18 +18,17 @@
         <div class="username">{{ userData.username }}</div>
         <div class="more-data">
           <div class="data mb-5">
-            <span>关注:1</span>
-            <span class="ml-5">粉丝:2</span>
+            <span>{{ $t("followData") }}</span>
           </div>
           <slot></slot>
         </div>
       </div>
       <div class="desc">
-        <p>这个人很懒，简介都不写~</p>
+        <p>{{ $t("userDescDefault") }}</p>
       </div>
     </div>
     <div class="time sub-text">
-      来到PhotoShare已经{{ getDaysByDateStr(userData.createdAt) }}天了
+      {{ $t("welcomeTip", { num: getDaysByDateStr(userData.createdAt) }) }}
     </div>
   </div>
 </template>

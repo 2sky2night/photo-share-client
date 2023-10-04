@@ -3,14 +3,15 @@
     <n-tabs
       v-model:value="_activeName"
       @update:value="onHandleChangeValue"
+      :size="isMoblie ? 'small' : 'medium'"
       :placement="isMoblie ? 'top' : 'left'"
       type="line">
       <n-tab
         v-for="item in tabList"
         :name="item.name"
-        :key="item.name"
-        >{{ item.label }}</n-tab
-      >
+        :key="item.name">
+        <span class="tab-label">{{ item.label }}</span>
+      </n-tab>
     </n-tabs>
     <div class="content">
       <slot></slot>
@@ -69,6 +70,11 @@ defineOptions({ name: "TabsPanel" });
   .tabs-panel-container {
     flex-direction: column;
     border-top: none;
+    @media screen and (max-width: 400px) {
+      .tab-label {
+        font-size: 13px;
+      }
+    }
   }
 }
 </style>

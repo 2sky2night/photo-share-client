@@ -39,7 +39,7 @@ const list = reactive<Photo[]>([])
 // 分页数据
 const pagination = reactive({
   page: 1,
-  pageSize: 5,
+  pageSize: 20,
   loading: false,
   has_more: false,
   firstLoading: true
@@ -53,9 +53,6 @@ const { isMoblie } = useMobile()
 const onHandleGetData = async () => {
   pagination.loading = true
   const res = await userGetPhotoAPI({ desc: true, status: 1, page: pagination.page, pageSize: pagination.pageSize })
-  res.data.list.forEach(ele => list.push(ele))
-  res.data.list.forEach(ele => list.push(ele))
-  res.data.list.forEach(ele => list.push(ele))
   res.data.list.forEach(ele => list.push(ele))
   pagination.has_more = res.data.has_more
   pagination.loading = false

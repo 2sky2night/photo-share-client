@@ -5,7 +5,7 @@
     <n-button
       type="primary"
       size="small"
-      >修改个人信息</n-button
+      >{{ $t('toUpdateInfo') }}</n-button
     >
   </user-info-comp>
 </template>

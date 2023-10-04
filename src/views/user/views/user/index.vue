@@ -2,7 +2,7 @@
   <div class="user-page">
     <template v-if="uid !== null">
       <user-info :uid="uid"></user-info>
-      <router-view></router-view>
+      <user-tabs :uid="uid"></user-tabs>
     </template>
   </div>
 </template>
@@ -13,7 +13,8 @@ import { useParams } from "@/hooks";
 import { useMessage } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store";
-import UserInfo from "./components/user-info.vue";
+import UserInfo from "./components/user-info/index.vue";
+import UserTabs from './components/user-tabs/index.vue'
 import i18n from "@/config/i18n";
 
 // 用户id

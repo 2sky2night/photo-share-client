@@ -45,6 +45,9 @@ export interface Photo {
   photos: PicData[];
   pid: number;
   publish_uid: number;
+  /**
+   * 审核状态 0未审核 1审核成功 2未通过审核
+   */
   status: AuditStatus;
   title: string;
   updatedAt: string;

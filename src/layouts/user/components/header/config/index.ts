@@ -86,7 +86,7 @@ export const UserMenu = computed<DropdownOption[]>(() => [
         },
         [
           h(Avatar, {
-            src:(userInfo.avatar as any),
+            src: userInfo.avatar as any,
           }),
           h("span", { class: "ml-10 text" }, userInfo.username),
         ]
@@ -141,19 +141,19 @@ export const UserMenu = computed<DropdownOption[]>(() => [
         },
         isDark
           ? [
-              h(NIcon, { size: 15 }, { default: () => h(Moon) }),
-              h(
-                "span",
-                { style: { marginLeft: "8px" } },
-                i18n.global.t("darkTheme")
-              ),
-            ]
-          : [
               h(NIcon, { size: 15 }, { default: () => h(Sunny) }),
               h(
                 "span",
                 { style: { marginLeft: "8px" } },
                 i18n.global.t("lightTheme")
+              ),
+            ]
+          : [
+              h(NIcon, { size: 15 }, { default: () => h(Moon) }),
+              h(
+                "span",
+                { style: { marginLeft: "8px" } },
+                i18n.global.t("darkTheme")
               ),
             ]
       );
@@ -221,19 +221,19 @@ export const VisitorMenu = computed<DropdownOption[]>(() => [
         },
         isDark
           ? [
-              h(NIcon, { size: 15 }, { default: () => h(Moon) }),
-              h(
-                "span",
-                { style: { marginLeft: "8px" } },
-                i18n.global.t("darkTheme")
-              ),
-            ]
-          : [
               h(NIcon, { size: 15 }, { default: () => h(Sunny) }),
               h(
                 "span",
                 { style: { marginLeft: "8px" } },
                 i18n.global.t("lightTheme")
+              ),
+            ]
+          : [
+              h(NIcon, { size: 15 }, { default: () => h(Moon) }),
+              h(
+                "span",
+                { style: { marginLeft: "8px" } },
+                i18n.global.t("darkTheme")
               ),
             ]
       );
