@@ -1,6 +1,6 @@
 import { AuditStatus } from "@/types/photo";
 import { computed } from "vue";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 
 /**
  * 格式化审核状态

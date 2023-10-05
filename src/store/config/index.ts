@@ -1,14 +1,16 @@
 import { LOCALE_VALUE } from "@/config/i18n";
 import { defineStore } from "pinia";
+import { useRoute } from "vue-router";
 import { ref } from "vue";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 
 export const useConfigStore = defineStore(
   "config",
   () => {
     // 主题
     const isDark = ref(false);
-
+    // 路由元信息(为了获得当前激活的路由元信息)
+    const route = useRoute();
     // 当前语言
     const locale = ref<LOCALE_VALUE>(LOCALE_VALUE.EN);
 
@@ -19,6 +21,9 @@ export const useConfigStore = defineStore(
     const toggleLocale = (value: LOCALE_VALUE) => {
       locale.value = value;
       i18n.global.locale = value;
+      route.meta?.title
+        ? (document.title = `${i18n.global.t(route.meta.title)} | Photo Share`)
+        : (document.title = "Photo Share");
     };
 
     /**

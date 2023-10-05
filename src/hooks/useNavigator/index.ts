@@ -10,6 +10,7 @@ export function useNavigator() {
       goMyPhoto: () => router.push("/my/published"),
       goUser: (uid: number) => router.push(`/user/${uid}`),
       goHome: () => router.push("/"),
+      goEdit: () => router.push("/edit"),
     },
     goLogin: () => router.push("/login"),
     goRegister: () => router.push("/register"),

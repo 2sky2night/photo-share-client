@@ -2,7 +2,7 @@ import axios, { type AxiosRequestConfig } from "axios";
 import { nprogress } from "..";
 import { useUserStore } from "@/store";
 import type { Response } from "./types";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 import router from "@/router";
 
 const http = axios.create({

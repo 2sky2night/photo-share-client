@@ -78,7 +78,7 @@ import { useAudit } from "@/hooks";
 import TimeFormat from "@/components/time/index.vue";
 import { NCard, NButton, NCarousel, NEllipsis } from "naive-ui";
 import { Close } from "@vicons/ionicons5";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 import { config } from "@/config";
 import type { Photo } from "@/apis/photo/types";
 
@@ -122,7 +122,7 @@ const onHandleCloseModal = () => emit("close");
         background-color: var(--bg-color-3);
       }
       img {
-        object-fit:cover;
+        object-fit: cover;
         width: 100%;
         height: 100%;
       }

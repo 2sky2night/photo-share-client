@@ -64,3 +64,27 @@ export interface PostCommentResponse {
   uid: number;
   updatedAt: string;
 }
+
+/**
+ * 发布照片的负载
+ */
+export interface PostPhotoBody {
+  content: string;
+  photos: string[];
+  title: string;
+}
+
+/**
+ * 发送照片响应成功的结果
+ */
+export interface PostPhotoResponse {
+  content: string;
+  createdAt: string;
+  photos: string;
+  pid: number;
+  publish_uid: number;
+  status: number;
+  title: string;
+  updatedAt: string;
+  views: number;
+}

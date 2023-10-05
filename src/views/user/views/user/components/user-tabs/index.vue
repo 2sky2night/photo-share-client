@@ -2,19 +2,21 @@
   <div class="user-tabs-container">
     <tabs-panel
       v-model:active-name="activeName"
-      :tab-list="tabList">
+      :tab-list="tabList"
+      @update:active-name="onHandleChange">
       <component :is="comp"></component>
     </tabs-panel>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, watch, ref, h } from "vue";
+import { computed, ref, h } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useQuery } from "@/hooks";
 import LikedPhoto from "./components/liked-photo.vue";
 import PublishedPhoto from "./components/published-photo.vue";
 import TabsPanel from "@User/components/public/tabs-panel/index.vue";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 
 // route
 const route = useRoute();
@@ -50,9 +52,49 @@ const comp = computed(() => {
   return render && render();
 });
 
+// tabs栏更新的回调
+const onHandleChange = () => {
+  const index = tabList.value.findIndex((ele) => ele.name === activeName.value);
+  router.push({
+    name: "UserUser",
+    params: route.params,
+    query: { ...route.query, tabs: index },
+  });
+};
 
-// 未完待续，tabs与路由查询参数绑定
+// 重置tabs栏
+const onHandleErrorTabs = () => {
+  // tabs参数错误，恢复默认参数
+  router.replace({
+    name: "UserUser",
+    params: route.params,
+    query: { ...route.query, tabs: 0 },
+  });
+};
 
+// 解析路由查询参数tabs
+useQuery<{ tabs: number }>(({ tabs }) => {
+  if (tabs >= 0 && tabs < tabList.value.length)
+    activeName.value = tabList.value[tabs].name;
+  else onHandleErrorTabs();
+}, onHandleErrorTabs);
+
+// 根据路由查询参数.tabs初始化选择的tabs
+(() => {
+  const _value = route.query.tabs;
+  if (_value === undefined || _value === null) {
+    // 未携带tabs参数，重置tabs
+    onHandleErrorTabs();
+  } else {
+    const value = +_value;
+    if (isNaN(value) || !(value >= 0 && value < tabList.value.length)) {
+      // 参数错误，重置tabs
+      onHandleErrorTabs();
+    } else {
+      activeName.value = tabList.value[value].name;
+    }
+  }
+})();
 
 defineOptions({
   name: "UserTabs",

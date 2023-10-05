@@ -1,15 +1,17 @@
 import { defineStore } from "pinia";
 import { reactive, ref, computed } from "vue";
 import { loginAPI } from "@/apis/auth";
-import { userInfoAPI } from "@/apis/user";
-import { type Role, Roles } from "@/types/auth";
-import type { UserInfo } from "./types";
+import { userInfoAPI, userEditInfoAPI, userEditPasswordAPI } from "@/apis/user";
 import {
   registerUserRoutes,
   registerAdminRoutes,
   removeAllRoutes,
   registerInitRoutes,
 } from "@/router/auth";
+import { type Role, Roles } from "@/types/auth";
+import type { UserInfo } from "./types";
+
+import type { EditInfoBody, EditPasswordBody } from "@/apis/user/types";
 
 export const useUserStore = defineStore(
   "user",
@@ -85,6 +87,26 @@ export const useUserStore = defineStore(
         registerAdminRoutes(role);
       }
     };
+    /**
+     * 更新用户信息
+     * @param body
+     */
+    const updateUserInfo = async (body: EditInfoBody) => {
+      const {
+        data: { avatar, username },
+      } = await userEditInfoAPI(body);
+      if (avatar) userInfo.avatar = avatar;
+      if (username) userInfo.username = username;
+    };
+    /**
+     * 更新用户的密码
+     * @param body
+     */
+    const updateUserPassword = async (body: EditPasswordBody) => {
+      await userEditPasswordAPI(body);
+      // 注销并重新登录
+      logout();
+    };
 
     /**
      * 是否登录?
@@ -99,13 +121,54 @@ export const useUserStore = defineStore(
       );
     });
 
+    /**
+     * token
+     */
+    const token = computed(() => {
+      if (isLogin.value) {
+        return userInfo.token as string;
+      } else {
+        return null;
+      }
+    });
+
     return {
+      /**
+       * 用户信息
+       */
       userInfo,
+      /**
+       * 登录
+       */
       login,
+      /**
+       * 获取并设置用户信息
+       */
       getUserInfo,
+      /**
+       * 登出
+       */
       logout,
+      /**
+       * 注册路由
+       */
       regiterRoutes,
+      /**
+       * 更新用户信息
+       */
+      updateUserInfo,
+      /**
+       * 更新用户密码
+       */
+      updateUserPassword,
+      /**
+       * 是否登录
+       */
       isLogin,
+      /**
+       * 用户token
+       */
+      token,
     };
   },
   {

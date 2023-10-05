@@ -2,16 +2,16 @@
   <tabs-panel
     :active-name="route.path"
     :tab-list="tabList"
-    @update:active-name="onHandleChangeValue" >
-      <router-view></router-view>
-    </tabs-panel>
+    @update:active-name="onHandleChangeValue">
+    <router-view></router-view>
+  </tabs-panel>
 </template>
 
 <script lang="ts" setup>
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import TabsPanel from "@User/components/public/tabs-panel/index.vue";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 
 // 路由元信息
 const route = useRoute();

@@ -36,7 +36,7 @@ import { useMobile } from "@/hooks";
 import PhotoList from "@User/components/list/photo-list/index.vue";
 import { userGetPhotoAPI } from "@/apis/photo";
 import { AuditStatus } from "@/types/photo";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 import type { PhotoListIns } from "@User/components/list/photo-list/types";
 
 // 用户id

@@ -7,6 +7,8 @@ import {
   PostViewResponse,
   PostCommentResponse,
   LikeCommentResponse,
+  PostPhotoBody,
+  PostPhotoResponse,
 } from "./types";
 import { PhotoListResponse } from "@/apis/photo/types";
 
@@ -99,3 +101,12 @@ export const getUserLikePhotosAPI = (
     offset: (pageNum - 1) * pageSize,
   });
 };
+
+/**
+ * 推送照片
+ * @param body  
+ * @returns 
+ */
+export const postPhotoAPI = (body: PostPhotoBody) => {
+  return request.post<PostPhotoResponse>('/photo/post',body)
+}

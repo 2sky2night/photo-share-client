@@ -2,7 +2,7 @@ import { type Component, h, computed } from "vue";
 import { useConfigStore, useUserStore } from "@/store";
 import { NAvatar, NIcon } from "naive-ui";
 import type { DropdownOption } from "naive-ui";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 import Avatar from "@/components/public/avatar/index.vue";
 import { MdPhotos, IosShareAlt } from "@vicons/ionicons4";
 import { UserOutlined, HeartFilled, HistoryOutlined } from "@vicons/antd";
@@ -109,17 +109,17 @@ export const UserMenu = computed<DropdownOption[]>(() => [
   },
   {
     label: i18n.global.t("myLikePhoto"),
-    key: "/my/like",
+    key: "/my/liked",
     icon: renderIcon(HeartFilled),
   },
   {
     label: i18n.global.t("myPhoto"),
-    key: "/my/photo",
+    key: "/my/published",
     icon: renderIcon(MdPhotos),
   },
   {
     label: i18n.global.t("postPhoto"),
-    key: "/post",
+    key: "/photo/post",
     icon: renderIcon(IosShareAlt),
   },
   {
@@ -169,29 +169,6 @@ export const UserMenu = computed<DropdownOption[]>(() => [
  * 游客菜单
  */
 export const VisitorMenu = computed<DropdownOption[]>(() => [
-  // {
-  //   type: 'render',
-  //   render() {
-  //     return h(
-  //       'div',
-  //       {
-  //         class: 'flex-v-center',
-  //         style: {
-  //           padding:'5px',
-  //           margin: '0 3px'
-  //         }
-  //       },
-  //       [
-  //         h(NIcon, {}, { default: () => h(BeerSharp) }),
-  //         h('span', i18n.global.t('visitorTips'))
-  //       ]
-  //     )
-  //   }
-  // },
-  // {
-  //   key: 'header-divider',
-  //   type: 'divider'
-  // },
   {
     label: i18n.global.t("login"),
     key: "/login",

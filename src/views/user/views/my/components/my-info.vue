@@ -5,13 +5,15 @@
     <n-button
       type="primary"
       size="small"
-      >{{ $t('toUpdateInfo') }}</n-button
-    >
+      @click="goEdit">
+      {{ $t("toUpdateInfo") }}
+    </n-button>
   </user-info-comp>
 </template>
 
 <script lang="ts" setup>
 import { ref, onUnmounted } from "vue";
+import { useNavigator } from "@/hooks";
 import { useUserStore } from "@/store";
 import UserInfoComp from "@User/components/public/user-info/index.vue";
 
@@ -31,6 +33,10 @@ const userData = {
   updatedAt: userInfo.updatedAt,
   username: userInfo.username,
 };
+// 路由跳转
+const {
+  user: { goEdit },
+} = useNavigator();
 // 加载1s的假象
 timer = setTimeout(() => {
   isLoading.value = false;

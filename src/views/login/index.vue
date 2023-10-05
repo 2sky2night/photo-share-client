@@ -74,7 +74,7 @@ import { useUserStore } from "@/store";
 import { useRoute, useRouter } from "vue-router";
 import LayoutBackgourd from "@/components/public/layout-backgourd/dom-less.vue";
 import Setting from "@/components/public/setting/index.vue";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 import type { FormRules, FormInst } from "naive-ui";
 
 // 路由对象
@@ -170,7 +170,7 @@ const onHandleReset = () => {
 };
 
 onMounted(() => {
-  formData.password = "123456789";
+  formData.password = "123456";
   formData.username = "KK";
 });
 
@@ -186,7 +186,7 @@ defineOptions({
   box-sizing: border-box;
   width: 100vw;
   position: relative;
-  .setting{
+  .setting {
     position: absolute;
     bottom: 10px;
     right: 10px;

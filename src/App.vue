@@ -31,8 +31,15 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .root {
   background-color: var(--bg-color-1);
+}
+.n-message-container{
+  z-index: 99999;
+}
+.img-cutter-container {
+  color:var(--text-color-1);
+  background-color: var(--bg-color-1) !important;
 }
 </style>

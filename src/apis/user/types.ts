@@ -16,3 +16,29 @@ export interface UserBase {
   updatedAt: string;
   username: string;
 }
+
+/**
+ * 修改用户密码的响应结果
+ */
+export type EditPasswordResponse = null;
+
+/**
+ * 修改用户基本信息的响应结果
+ */
+export type EditInfoResponse = EditInfoBody;
+
+/**
+ * 更新密码的负载
+ */
+export interface EditPasswordBody {
+  password: string;
+  oldPassword: string;
+}
+
+/**
+ * 更新信息的负载
+ */
+export interface EditInfoBody {
+  username?: string;
+  avatar?: string;
+}

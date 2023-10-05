@@ -75,8 +75,8 @@ import { useRoute, useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
 import LayoutBackgourd from "@/components/public/layout-backgourd/dom-less.vue";
 import Setting from "@/components/public/setting/index.vue";
-import i18n from "@/config/i18n";
 import { reigterAPI } from "@/apis/auth";
+import { i18n } from "@/config";
 import type { FormRules, FormInst } from "naive-ui";
 
 // 路由对象

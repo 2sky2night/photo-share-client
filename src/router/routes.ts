@@ -21,7 +21,7 @@ export const initRoutes: RouteRecordRaw[] = [
     name: "Login",
     component: () => import("@/views/login/index.vue"),
     meta: {
-      title: "登录",
+      title: "signin",
       noNeedForAuth: true,
     },
   },
@@ -30,7 +30,7 @@ export const initRoutes: RouteRecordRaw[] = [
     name: "Regiter",
     component: () => import("@/views/register/index.vue"),
     meta: {
-      title: "注册",
+      title: "signup",
       noNeedForAuth: true,
     },
   },
@@ -132,7 +132,7 @@ export const userRoutes: RouteRecordRaw[] = [
         name: "UserHome",
         component: () => import("@User/views/home/index.vue"),
         meta: {
-          title: "首页",
+          title: "home",
         },
       },
       {
@@ -140,7 +140,7 @@ export const userRoutes: RouteRecordRaw[] = [
         name: "UserPhotoDetail",
         component: () => import("@User/views/photo-detail/index.vue"),
         meta: {
-          title: "详情",
+          title: "photoDetail",
         },
       },
       {
@@ -148,7 +148,7 @@ export const userRoutes: RouteRecordRaw[] = [
         name: "UserMy",
         component: () => import("@User/views/my/index.vue"),
         meta: {
-          title: "我的",
+          title: "my",
           needAuth: true,
         },
         redirect: "/my/published",
@@ -159,7 +159,7 @@ export const userRoutes: RouteRecordRaw[] = [
             component: () =>
               import("@User/views/my/children/published-photo/index.vue"),
             meta: {
-              title: "发布的照片",
+              title: "photoIPost",
             },
           },
           {
@@ -168,7 +168,7 @@ export const userRoutes: RouteRecordRaw[] = [
             component: () =>
               import("@User/views/my/children/liked-photo/index.vue"),
             meta: {
-              title: "喜欢的照片",
+              title: "photoILiked",
             },
           },
         ],
@@ -178,35 +178,61 @@ export const userRoutes: RouteRecordRaw[] = [
         name: "UserUser",
         component: () => import("@User/views/user/index.vue"),
         meta: {
-          title: "用户",
+          title: "user",
         },
       },
       {
-        path: "/test1",
-        name: "Test1",
-        component: () => import("@/layouts/user/index.vue"),
+        path: "/edit",
+        name: "UserEdit",
+        component: () => import("@User/views/edit/index.vue"),
+        meta: {
+          needAuth: true,
+        },
+        redirect: "/edit/info",
         children: [
           {
-            path: "/test11",
-            name: "Test11",
-            component: () => import("@/layouts/user/index.vue"),
+            path: "/edit/info",
+            name: "UserEditInfo",
+            component: () => import("@User/views/edit/children/info/index.vue"),
+            meta: {
+              title: "editPofile",
+            },
           },
           {
-            path: "/test12",
-            name: "Test12",
-            component: () => import("@/layouts/user/index.vue"),
+            path: "/edit/password",
+            name: "UserEditPassword",
+            component: () =>
+              import("@User/views/edit/children/password/index.vue"),
             meta: {
-              needAuth: true,
+              title: "editPassword",
             },
-            children: [
-              {
-                path: "/test121",
-                name: "Test121",
-                component: () => import("@/layouts/user/index.vue"),
-              },
-            ],
           },
         ],
+      },
+      {
+        path: "/history",
+        name: "UserHistory",
+        component: () => import("@User/views/history/index.vue"),
+        meta: {
+          title: "history",
+        },
+      },
+      {
+        path: "/search",
+        name: "UserSearch",
+        component: () => import("@User/views/search/index.vue"),
+        meta: {
+          title: "search",
+        },
+      },
+      {
+        path: "/photo/post",
+        name: "UserPhotoPost",
+        component: () => import("@User/views/photo-post/index.vue"),
+        meta: {
+          needAuth: true,
+          title: "postPhoto",
+        },
       },
     ],
   },

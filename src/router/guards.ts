@@ -1,12 +1,15 @@
-import { nprogress } from '@/utils'
-import type { NavigationHookAfter,NavigationGuard} from 'vue-router'
+import { nprogress } from "@/utils";
+import { i18n } from "@/config";
+import type { NavigationHookAfter, NavigationGuard } from "vue-router";
 
 export const beforeGuards: NavigationGuard = (to, from, next) => {
-  nprogress.start()
-  next()
-}
+  nprogress.start();
+  next();
+};
 
-export const afterGuards: NavigationHookAfter = (to, from) => {
-  nprogress.end()
-  to.meta?.title?document.title=to.meta.title:document.title='Photo Share'
-}
+export const afterGuards: NavigationHookAfter = (to) => {
+  nprogress.end();
+  to.meta?.title
+    ? (document.title = `${i18n.global.t(to.meta.title)} | Photo Share`)
+    : (document.title = "Photo Share");
+};

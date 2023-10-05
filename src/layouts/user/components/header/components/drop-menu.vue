@@ -25,7 +25,7 @@ import avatar from "@/components/public/avatar/index.vue";
 import langModel from "@/components/public/lang-modal/index.vue";
 import { User } from "@vicons/fa";
 import { UserMenu, VisitorMenu } from "../config";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 
 // router
 const router = useRouter();
@@ -60,7 +60,7 @@ const action = {
 const onHandleSelect = (key: string) => {
   if (key.includes("/")) {
     // 路由导航
-    console.log("路由导航");
+    router.push(key);
   } else {
     // 操作
     const cb = Reflect.get(action, key);

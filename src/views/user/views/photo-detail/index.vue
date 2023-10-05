@@ -16,7 +16,7 @@ import { useMessage } from "naive-ui";
 import { useParams } from "@/hooks";
 import PhotoInfo from "./components/info/index.vue";
 import comment from "./components/comment/index.vue";
-import i18n from "@/config/i18n";
+import { i18n } from "@/config";
 
 const router = useRouter();
 const pid = ref<number | null>(null);

@@ -50,9 +50,9 @@ const onHandleReset = () => {
   photoListIns.value && photoListIns.value.handleReset();
 };
 </script>
-<style scoped lang="scss">
+<!-- <style scoped lang="scss">
 .filter {
   display: flex;
   justify-content: end;
 }
-</style>
+</style> -->

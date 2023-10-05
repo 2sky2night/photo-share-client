@@ -7,7 +7,7 @@ export enum LOCALE_VALUE {
   EN = "EN"
 }
 
-const i18n = createI18n({
+export const i18n = createI18n({
   // 当前激活的国家文本 （value必须是messages配置项中的某个key）
   locale: LOCALE_VALUE.EN,
   // 失败激活的国家文本（value必须是messages配置项中的某个key）
@@ -19,5 +19,3 @@ const i18n = createI18n({
     [LOCALE_VALUE.EN]: EN
   }
 });
-
-export default i18n;

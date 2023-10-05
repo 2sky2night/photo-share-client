@@ -14,8 +14,8 @@ import { useMessage } from "naive-ui";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store";
 import UserInfo from "./components/user-info/index.vue";
-import UserTabs from './components/user-tabs/index.vue'
-import i18n from "@/config/i18n";
+import UserTabs from "./components/user-tabs/index.vue";
+import { i18n } from "@/config";
 
 // 用户id
 const uid = ref<number | null>(null);
