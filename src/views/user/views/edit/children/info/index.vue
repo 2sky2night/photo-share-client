@@ -88,7 +88,12 @@ const message = useMessage();
 // 弹出模态框
 const onHandleShowModal = (e: MouseEvent) => {
   const target = e.target as HTMLElement;
-  if (target.tagName.toLocaleLowerCase() === "img") {
+  if (
+    target.tagName.toLocaleLowerCase() === "img" ||
+    target.tagName.toLocaleLowerCase() === "i" ||
+    target.tagName.toLocaleLowerCase() === "svg" ||
+    target.tagName.toLocaleLowerCase() === "path"
+  ) {
     cutterIns.value && cutterIns.value.handleShowModal(e);
   }
 };
@@ -193,6 +198,18 @@ defineOptions({ name: "InfoEdit" });
 .info-edit-container {
   padding: 10px;
   .avatar-form {
+    .n-icon {
+      margin-right: 10px;
+      &.big {
+        font-size: 50px !important;
+      }
+      &.small {
+        font-size: 20px !important;
+      }
+      &.medium {
+        font-size: 40px !important;
+      }
+    }
     .n-avatar {
       margin-right: 30px;
       align-self: end;

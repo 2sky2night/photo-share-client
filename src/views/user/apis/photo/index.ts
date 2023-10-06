@@ -9,6 +9,8 @@ import {
   LikeCommentResponse,
   PostPhotoBody,
   PostPhotoResponse,
+  SubscribeAuditResponse,
+  UnSubscribeAuditResponse,
 } from "./types";
 import { PhotoListResponse } from "@/apis/photo/types";
 
@@ -104,9 +106,23 @@ export const getUserLikePhotosAPI = (
 
 /**
  * 推送照片
- * @param body  
- * @returns 
+ * @param body
+ * @returns
  */
 export const postPhotoAPI = (body: PostPhotoBody) => {
-  return request.post<PostPhotoResponse>('/photo/post',body)
-}
+  return request.post<PostPhotoResponse>("/photo/create", body);
+};
+
+/**
+ * 订阅照片审核结果频道
+ */
+export const subscribeAuditAPI = () => {
+  return request.get<SubscribeAuditResponse>("/photo/events/subscribe");
+};
+
+/**
+ * 取消订阅照片审核结果频道
+ */
+export const unsubscribeAuditAPI = () => {
+  return request.get<UnSubscribeAuditResponse>("/photo/events/unsubscribe");
+};

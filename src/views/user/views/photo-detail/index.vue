@@ -14,6 +14,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
 import { useParams } from "@/hooks";
+import { usePhotoStore } from "@/store";
 import PhotoInfo from "./components/info/index.vue";
 import comment from "./components/comment/index.vue";
 import { i18n } from "@/config";
@@ -21,10 +22,13 @@ import { i18n } from "@/config";
 const router = useRouter();
 const pid = ref<number | null>(null);
 const message = useMessage();
+const photoStore = usePhotoStore();
 
 useParams<{ pid: number }>(
   (result) => {
     pid.value = result.pid;
+    // 保存历史记录
+    photoStore.addPhotoHistory(result.pid);
   },
   ([key]) => {
     message.warning(i18n.global.t("paramsError_", { title: key }));

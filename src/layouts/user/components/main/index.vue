@@ -4,16 +4,14 @@
     ref="mainDOM">
     <div class="content">
       <router-view #default="{ Component }">
-        <!-- <keep-alive :include="['HomePage']"> -->
         <component :is="Component"></component>
-        <!-- </keep-alive> -->
       </router-view>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
 import { pubsub } from "@/utils";
 
@@ -29,6 +27,12 @@ watch(
     pubsub.emit("user:to-top", false);
   }
 );
+
+onBeforeMount(() => {
+  // 提前创建好频道,onBeforeMount比所有子组件都早
+  pubsub.emit("user:page-bottom");
+  pubsub.emit("user:to-top");
+});
 
 onMounted(() => {
   if (mainDOM.value) {

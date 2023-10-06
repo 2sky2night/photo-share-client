@@ -26,6 +26,7 @@ import langModel from "@/components/public/lang-modal/index.vue";
 import { User } from "@vicons/fa";
 import { UserMenu, VisitorMenu } from "../config";
 import { i18n } from "@/config";
+import { endSSE } from "@/utils/events";
 
 // router
 const router = useRouter();
@@ -48,7 +49,9 @@ const action = {
       content: i18n.global.t("logoutTip"),
       positiveText: i18n.global.t("confirm"),
       negativeText: i18n.global.t("cancel"),
-      onPositiveClick: () => {
+      onPositiveClick: async () => {
+        // 关闭连接
+        await endSSE();
         // 关闭弹窗
         userStore.logout();
         router.replace("/login");

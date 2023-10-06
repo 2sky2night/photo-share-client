@@ -1,3 +1,6 @@
+/**
+ * 审核状态
+ */
 export enum AuditStatus {
   /**
    * 未审核
@@ -10,5 +13,15 @@ export enum AuditStatus {
   /**
    * 审核不通过
    */
-  NO_PASS = 2
+  NO_PASS = 2,
+}
+
+/**
+ * 审核结果推送
+ */
+export interface PhotoAuditResult {
+  pid: number;
+  uid: number;
+  status: AuditStatus;
+  desc?: string;
 }

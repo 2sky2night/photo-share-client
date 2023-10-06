@@ -88,3 +88,13 @@ export interface PostPhotoResponse {
   updatedAt: string;
   views: number;
 }
+
+/**
+ * 订阅照片审核结果频道的响应结果
+ */
+export type SubscribeAuditResponse = string;
+
+/**
+ * 取消订阅照片审核结果频道的响应结果
+ */
+export type UnSubscribeAuditResponse = null;

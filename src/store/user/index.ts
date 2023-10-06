@@ -10,7 +10,6 @@ import {
 } from "@/router/auth";
 import { type Role, Roles } from "@/types/auth";
 import type { UserInfo } from "./types";
-
 import type { EditInfoBody, EditPasswordBody } from "@/apis/user/types";
 
 export const useUserStore = defineStore(
@@ -28,6 +27,7 @@ export const useUserStore = defineStore(
       createdAt: undefined,
       updatedAt: undefined,
     });
+
     /**
      * 登录
      * @param username

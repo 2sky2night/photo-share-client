@@ -10,6 +10,7 @@
         path="oldPassword">
         <n-input
           type="password"
+          show-password-toggle
           :placeholder="$t('pleaseEnter', { title: $t('oldPassword') })"
           v-model:value="formData.oldPassword" />
       </n-form-item>
@@ -18,6 +19,7 @@
         path="newPassword">
         <n-input
           type="password"
+          show-password-toggle
           :placeholder="$t('pleaseEnter', { title: $t('newPassword') })"
           v-model:value="formData.newPassword" />
       </n-form-item>
@@ -26,6 +28,7 @@
         path="reNewPassword">
         <n-input
           type="password"
+          show-password-toggle
           :placeholder="$t('pleaseEnter', { title: $t('reNewPassword') })"
           v-model:value="formData.reNewPassword" />
       </n-form-item>
@@ -46,9 +49,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
-import { useMessage, useDialog,useDialogReactiveList } from "naive-ui";
+import { useMessage, useDialog } from "naive-ui";
 import { useUserStore } from "@/store";
 import { i18n } from "@/config";
 import type { FormInst, FormRules } from "naive-ui";
@@ -66,7 +69,7 @@ const formData = ref({
 // 表单实例
 const formIns = ref<FormInst | null>(null);
 // 表单验证
-const rules: FormRules = {
+const rules = computed<FormRules>(() => ({
   oldPassword: [
     {
       required: true,
@@ -133,7 +136,7 @@ const rules: FormRules = {
       },
     },
   ],
-};
+}));
 // message
 const message = useMessage();
 // dialog

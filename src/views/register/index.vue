@@ -70,7 +70,7 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
 import LayoutBackgourd from "@/components/public/layout-backgourd/dom-less.vue";
@@ -92,7 +92,7 @@ const formData = reactive({
 // 表单实例
 const formIns = ref<FormInst | null>(null);
 // 表单验证
-const rules: FormRules = {
+const rules = computed<FormRules>(() => ({
   username: [
     {
       required: true,
@@ -159,7 +159,7 @@ const rules: FormRules = {
       },
     },
   ],
-};
+}));
 //  消息组件
 const message = useMessage();
 

@@ -8,11 +8,12 @@
 import { storeToRefs } from 'pinia';
 import { useConfigStore } from '@/store'
 import { themeOverrides } from '@/config'
-import { darkTheme, useMessage } from "naive-ui";
+import { darkTheme, useMessage,useNotification } from "naive-ui";
 // 配置仓库
 const { isDark } = storeToRefs(useConfigStore())
 // 给全局对象挂载api
 window.$message=useMessage()
+window.$notify=useNotification()
 
 defineOptions({
   name: 'Root'

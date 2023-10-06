@@ -69,13 +69,14 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, onMounted } from "vue";
+import { reactive, ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/store";
 import { useRoute, useRouter } from "vue-router";
 import LayoutBackgourd from "@/components/public/layout-backgourd/dom-less.vue";
 import Setting from "@/components/public/setting/index.vue";
 import { i18n } from "@/config";
 import type { FormRules, FormInst } from "naive-ui";
+import { startSSE } from "@/utils/events";
 
 // 路由对象
 const router = useRouter();
@@ -91,7 +92,7 @@ const formData = reactive({
 // 表单实例
 const formIns = ref<FormInst | null>(null);
 // 表单验证
-const rules: FormRules = {
+const rules = computed<FormRules>(() => ({
   username: [
     {
       required: true,
@@ -130,7 +131,7 @@ const rules: FormRules = {
       }),
     },
   ],
-};
+}));
 
 /**
  * 游客登录
@@ -148,6 +149,7 @@ const onHandleLogin = async () => {
     await formIns.value.validate();
     await userStore.login(formData.username, formData.password);
     router.replace("/");
+    startSSE()
   }
 };
 

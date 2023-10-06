@@ -1,10 +1,12 @@
 <template>
   <div class="root">
-    <n-dialog-provider>
-      <n-message-provider>
-        <Layout></Layout>
-      </n-message-provider>
-    </n-dialog-provider>
+    <n-notification-provider>
+      <n-dialog-provider>
+        <n-message-provider>
+          <Layout></Layout>
+        </n-message-provider>
+      </n-dialog-provider>
+    </n-notification-provider>
   </div>
 </template>
 
@@ -35,11 +37,11 @@ onMounted(() => {
 .root {
   background-color: var(--bg-color-1);
 }
-.n-message-container{
+.n-message-container {
   z-index: 99999;
 }
 .img-cutter-container {
-  color:var(--text-color-1);
+  color: var(--text-color-1);
   background-color: var(--bg-color-1) !important;
 }
 </style>

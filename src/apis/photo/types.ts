@@ -77,3 +77,8 @@ export interface RandomPicResponse {
    */
   limit: number;
 }
+
+/**
+ * 通过pids获取指定照片列表的响应结果
+ */
+export type PidsListResponse = Photo[];
