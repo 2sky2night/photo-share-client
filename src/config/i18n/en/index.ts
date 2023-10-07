@@ -104,4 +104,11 @@ export default {
   photoPass: "You Have A Photo That Audit Does Pass!",
   photoUnPass: "You Have A Photo That Audit Does Not Pass!",
   404: "404",
+  life: "Life",
+  game: "Game",
+  sport: "Sport",
+  food: "Food",
+  love: "Love",
+  workplace: "Workplace",
+  add: 'Add',  
 };

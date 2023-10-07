@@ -104,4 +104,11 @@ export default {
   photoUnPass: "您有照片审核未通过!",
   postPhotoTips: "确定发送照片吗?",
   404: "404",
+  life: "生活",
+  game: "游戏",
+  sport: "运动",
+  food: "美食",
+  love: "感情",
+  workplace: "职场",
+  add: "添加",
 };

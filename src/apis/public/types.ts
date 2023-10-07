@@ -9,3 +9,21 @@ export interface ListResponse<L> {
   offset: number;
   total: number;
 }
+
+/**
+ * 分页参数
+ */
+export interface PageParams {
+  /**
+   * 页码
+   */
+  pageNum: number;
+  /**
+   * 页长度
+   */
+  pageSize: number;
+  /**
+   * 是否降序
+   */
+  desc?: boolean;
+}

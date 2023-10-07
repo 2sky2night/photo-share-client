@@ -83,7 +83,7 @@ const onHandleSelect = (path: string) => {
     position: absolute;
     font-size: 30px;
     font-weight: 600;
-    top: -20px;
+    top: -22px;
     color: var(--primary-color);
   }
 

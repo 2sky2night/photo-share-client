@@ -47,7 +47,7 @@
               size="small"
               @blur="deactivate"
               default-value="life"
-              :options="[{ label: '生活', value: 'life' }]" />
+              :options="[{ label: $t('life'), value: 'life' }]" />
           </template>
           <template #trigger="{ activate, disabled }">
             <n-button
@@ -61,7 +61,7 @@
                   <Add />
                 </n-icon>
               </template>
-              <n-text>添加</n-text>
+              <n-text>{{ $t("add") }}</n-text>
             </n-button>
           </template>
         </n-dynamic-tags>
@@ -166,7 +166,14 @@ const rules = computed<FormRules>(() => ({
 // 正在加载
 const isLoading = ref(false);
 // 标签
-const tags = ref(["运动", "游戏", "情感"]);
+const tags = computed(() => [
+  i18n.global.t("life"),
+  i18n.global.t("game"),
+  i18n.global.t("sport"),
+  i18n.global.t("food"),
+  i18n.global.t("love"),
+  i18n.global.t("workplace"),
+]);
 
 // 在上传文件之前校验文件
 const onHandleBeforeUpload = ({ file: fileInfo }: { file: UploadFileInfo }) => {

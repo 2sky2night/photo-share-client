@@ -8,34 +8,39 @@
         ><photo-skeleton></photo-skeleton
       ></template>
       <template v-else>
-        <div
-          class="container"
-          ref="containerDOM">
-          <photo-item
-            v-for="item in list"
-            :key="item.pid"
-            v-model:like="item.is_liked"
-            v-model:like-count="item.like_count"
-            :photo="item" />
-        </div>
-        <div class="tips">
+        <template v-if="list.length">
           <div
-            class="loading"
-            v-if="pagination.isLoading">
-            <n-spin size="small">
-              <template #description>
-                <span class="sub-text">{{ $t("loading") }}</span>
-              </template>
-            </n-spin>
+            class="container"
+            ref="containerDOM">
+            <photo-item
+              v-for="item in list"
+              :key="item.pid"
+              v-model:like="item.is_liked"
+              v-model:like-count="item.like_count"
+              :photo="item" />
           </div>
-          <div
-            class="end"
-            v-if="
-              pagination.isLoading === false && pagination.has_more === false
-            ">
-            <span class="sub-text">{{ $t("noMore") }}</span>
+          <div class="tips">
+            <div
+              class="loading"
+              v-if="pagination.isLoading">
+              <n-spin size="small">
+                <template #description>
+                  <span class="sub-text">{{ $t("loading") }}</span>
+                </template>
+              </n-spin>
+            </div>
+            <div
+              class="end"
+              v-if="
+                pagination.isLoading === false && pagination.has_more === false
+              ">
+              <span class="sub-text">{{ $t("noMore") }}</span>
+            </div>
           </div>
-        </div>
+        </template>
+        <template v-else>
+          <empty :desc="$t('noData', { title: $t('photo') })"></empty>
+        </template>
       </template>
     </div>
   </div>

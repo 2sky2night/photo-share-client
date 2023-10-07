@@ -21,6 +21,7 @@ const mainDOM = ref<HTMLDivElement | null>(null);
 const threshold = window.innerHeight * 0.05;
 const route = useRoute();
 
+// 监听路由路径变化，让主视图滚动到顶部
 watch(
   () => route.path,
   () => {

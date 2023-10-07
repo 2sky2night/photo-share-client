@@ -9,7 +9,7 @@ import { useRoute, onBeforeRouteUpdate } from "vue-router";
 export function useQuery<R = Record<any, any>>(
   cb: (result: R) => void,
   catchCb: (errorKeys: string[]) => void,
-  excludes: string[] = []
+  excludes: (keyof R)[] = []
 ) {
   // route
   const route = useRoute();
@@ -20,6 +20,7 @@ export function useQuery<R = Record<any, any>>(
     const result: Partial<R> = {};
     const errorKeys: string[] = [];
     keyValues.forEach(([key, _value]) => {
+      // @ts-ignore
       if (excludes.includes(key)) {
         // 不需要校验的参数
         Reflect.set(result, key, _value);
@@ -42,6 +43,8 @@ export function useQuery<R = Record<any, any>>(
       cb(result as R);
     }
   }
+  // 立即校验
+  checkQuery();
 
   onBeforeRouteUpdate((to) => checkQuery(to));
 }
