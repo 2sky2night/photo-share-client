@@ -107,4 +107,5 @@ type Token =
   | "user:page-bottom"
   | "user:post-comment"
   | "user:to-top"
-  | "window.resize";
+  | "window.resize"
+  | "user:search-input-focus";

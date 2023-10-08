@@ -5,7 +5,9 @@
         <avatar :src="comment.user.avatar" />
         <span class="ml-5">{{ comment.user.username }}</span>
       </div>
-      <div class="like-btn">
+      <div
+        class="like-btn"
+        v-if="needLikeBtn">
         <auth-action>
           <n-icon
             @click="onHandleToggleLike"
@@ -34,11 +36,18 @@ import { likeCommentAPI, cancelLikeCommentAPI } from "@User/apis/photo";
 import { Comment as CommentType } from "@User/apis/photo/types";
 
 // props
-const props = defineProps<{
-  comment: CommentType;
-  isLiked: boolean;
-  likeCount: number;
-}>();
+const props = withDefaults(
+  defineProps<{
+    comment: CommentType;
+    isLiked: boolean;
+    likeCount: number;
+    /**
+     * 是否需要点赞按钮?
+     */
+    needLikeBtn?: boolean;
+  }>(),
+  { needLikeBtn: true }
+);
 // emits
 const emit = defineEmits<{
   "update:isLiked": [value: boolean];

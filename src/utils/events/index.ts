@@ -13,8 +13,10 @@ let sessionId = "";
 
 // 创建频道推送
 const toSubscribe = async () => {
-  const result = await subscribeAuditAPI();
-  sessionId = result.data;
+  try {
+    const result = await subscribeAuditAPI();
+    sessionId = result.data;
+  } catch (error) {}
 };
 
 // 连接频道推送

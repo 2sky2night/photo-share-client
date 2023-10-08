@@ -1,6 +1,7 @@
 import type { AuditStatus } from "@/types/photo";
 import type { UserInfo } from "@/views/user/apis/user/types";
-import { ListResponse } from "../public/types";
+import type { Comment } from "@User/apis/photo/types";
+import type { ListResponse, PageParams } from "../public/types";
 
 /**
  * 图片数据
@@ -82,3 +83,18 @@ export interface RandomPicResponse {
  * 通过pids获取指定照片列表的响应结果
  */
 export type PidsListResponse = Photo[];
+
+/**
+ * 搜索评论的查询参数
+ */
+export type SearchCommentQuery = PageParams & {
+  /**
+   * 搜索关键字
+   */
+  keywords: string;
+};
+
+/**
+ * 搜索评论的响应结果
+ */
+export type SearchCommentResponse = ListResponse<Comment>;

@@ -110,5 +110,8 @@ export default {
   food: "Food",
   love: "Love",
   workplace: "Workplace",
-  add: 'Add',  
+  add: "Add",
+  searchTips: "Enter something in input to search.",
+  toSearch: "To Search",
+  searchInputTips: "Find something you like",
 };

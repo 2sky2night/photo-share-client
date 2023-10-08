@@ -5,16 +5,14 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    
+
     /* Bundler mode */
     "baseUrl": ".",
     "paths": {
-      "@/*":["src/*"],
-      "@User/*":["src/views/user/*"]
+      "@/*": ["src/*"],
+      "@User/*": ["src/views/user/*"]
     },
-    "types": [
-      "naive-ui/volar"
-    ],
+    "types": ["naive-ui/volar"],
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,

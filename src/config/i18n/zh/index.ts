@@ -111,4 +111,7 @@ export default {
   love: "感情",
   workplace: "职场",
   add: "添加",
+  searchTips: "想要得到搜索结果？不妨先输入内容摁下回车。",
+  toSearch: "我要搜索!",
+  searchInputTips:"搜索你喜欢的"
 };

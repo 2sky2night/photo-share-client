@@ -2,7 +2,7 @@
   <div class="search-bar-container">
     <div class="input-container">
       <n-input
-        :placeholder="$t('searchTip')"
+        :placeholder="$t('searchInputTips')"
         :value="keywords"
         @keydown.enter="onHandleSearch"
         @update:value="onHandleUpdate" />

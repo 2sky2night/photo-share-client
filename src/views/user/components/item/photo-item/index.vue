@@ -87,6 +87,7 @@ defineOptions({
     cursor: pointer;
     border-radius: 10px;
     overflow: hidden;
+    width: 100%;
 
     :deep(img) {
       display: block;

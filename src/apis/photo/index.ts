@@ -4,6 +4,8 @@ import {
   RandomPicResponse,
   UserGetPhotoParams,
   PidsListResponse,
+  SearchCommentQuery,
+  SearchCommentResponse,
 } from "./types";
 
 /**
@@ -44,5 +46,19 @@ export const userGetPhotoAPI = (param: UserGetPhotoParams) => {
 export const getPhotoByPidsAPI = (pids: number[]) => {
   return request.get<PidsListResponse>("/photo/pids/list", {
     pids: pids.join(","),
+  });
+};
+
+/**
+ * 搜索评论
+ * @param query 查询参数
+ * @returns 
+ */
+export const searchCommentAPI = (query: SearchCommentQuery) => {
+  return request.get<SearchCommentResponse>("/search/comment", {
+    limit: query.pageSize,
+    offset: (query.pageNum - 1) * query.pageSize,
+    desc: true,
+    keywords: query.keywords,
   });
 };

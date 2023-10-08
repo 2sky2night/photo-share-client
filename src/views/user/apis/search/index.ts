@@ -1,5 +1,5 @@
 import { request } from "@/utils";
-import type { SearchPhotoQuery, SearchPhotoResponse } from "./types";
+import type { SearchPhotoQuery, SearchPhotoResponse, SearchUserQuery } from "./types";
 
 /**
  * 用户搜索照片
@@ -14,3 +14,15 @@ export const searchPhotoAPI = (query: SearchPhotoQuery) => {
     desc: query.desc,
   });
 };
+
+/**
+ * 搜索用户
+ */
+export const searchUserAPI = (query: SearchUserQuery) => {
+  return request.get<SearchUserQuery>("/search/account/user", {
+    offset: (query.pageNum - 1) * query.pageSize,
+    keywords: query.keywords,
+    limit: query.pageSize,
+    desc: query.desc,
+  });
+}

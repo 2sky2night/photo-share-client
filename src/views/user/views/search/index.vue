@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useQuery, useNavigator } from "@/hooks";
 import SearchBar from "./components/search-bar/index.vue";
@@ -38,11 +38,11 @@ const {
 
 // 查询参数更新的回调
 const onHandleUpdate = () => {
-  if (searchParam.value.keywords)
-    router.push({
-      path: "/search",
-      query: searchParam.value,
-    });
+  // 若未输入关键词，重置搜索分页数据
+  router.push({
+    path: "/search",
+    query: searchParam.value.keywords ? searchParam.value : {},
+  });
 };
 
 // 校验查询参数
@@ -72,6 +72,7 @@ useQuery<SearchParam>(
     if (flag) {
       // 若出现了参数错误的情况
       if (searchParam.value.keywords)
+        // 未输入关键词不做跳转
         router.replace({
           path: "/search",
           query: searchParam.value,
@@ -82,6 +83,21 @@ useQuery<SearchParam>(
   ["keywords"]
 );
 
+// 监听参数更新，重置页码
+watch(
+  () => [
+    searchParam.value.keywords,
+    searchParam.value.pageSize,
+    searchParam.value.type,
+  ],
+  () => {
+    searchParam.value.pageNum = 1;
+    router.push({
+      path: "/search",
+      query: searchParam.value.keywords ? searchParam.value : {},
+    });
+  }
+);
 defineOptions({ name: "SearchPhotoPage" });
 </script>
 

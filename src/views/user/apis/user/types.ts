@@ -9,3 +9,4 @@ export interface UserInfoResponse extends UserInfo {}
  * 用户基本信息(无role字段)
  */
 export type UserInfo = Omit<UserBase, "role">;
+

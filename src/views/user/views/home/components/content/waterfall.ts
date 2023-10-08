@@ -56,13 +56,17 @@ class WaterFallResolve {
     );
     this.rootDOM = rootDOM;
     this.gap = gap;
-    // 计算出每列的宽度
-    this.columnWidth =
-      (rootDOM.clientWidth - this.gap * (this.column - 1)) / this.column;
     this.observer = null;
     // @ts-ignore
     this.childDOM = this.rootDOM.getElementsByClassName("photo-item");
-    this.init();
+    this.columnWidth = 0;
+    // 等渲染进程渲染完毕后再执行相关DOM操作，否则无法正确的获取容器的尺寸大小
+    setTimeout(() => {
+      // 计算出每列的宽度
+      this.columnWidth =
+        (rootDOM.clientWidth - this.gap * (this.column - 1)) / this.column;
+      this.init();
+    });
   }
   init() {
     this.rootDOM.style.position = "relative";
@@ -72,8 +76,8 @@ class WaterFallResolve {
       if (window.innerWidth <= 500) {
         // 500 每列两个
         this.updateColumn(2);
-      } else if (window.innerWidth <= 800) {
-        // 800 每列3个
+      } else if (window.innerWidth <= 950) {
+        // 950 每列3个
         this.updateColumn(3);
       } else {
         // 每列4个
@@ -135,6 +139,7 @@ class WaterFallResolve {
    */
   resolve() {
     this.resetHeight();
+    if (!this.list.length) return;
     // 遍历每一个元素
     out: for (let index = 0; index < this.childDOM.length; ) {
       /**
@@ -155,6 +160,8 @@ class WaterFallResolve {
         const item = columnList[j];
         // 获取当前图片项
         const photo = this.list[index];
+        // 若当前遍历的元素为undefined
+        if (!photo) break;
         if (target) {
           // 设置绝对定位
           target.style.position = "absolute";
