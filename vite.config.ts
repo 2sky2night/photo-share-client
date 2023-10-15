@@ -11,34 +11,35 @@ export default defineConfig({
     vue(),
     AutoImport({
       imports: [
-        'vue',
+        "vue",
         {
-          'naive-ui': [
-            'useDialog',
-            'useMessage',
-            'useNotification',
-            'useLoadingBar'
-          ]
-        }
-      ]
+          "naive-ui": [
+            "useDialog",
+            "useMessage",
+            "useNotification",
+            "useLoadingBar",
+          ],
+        },
+      ],
     }),
     Components({
-      resolvers: [NaiveUiResolver()]
-    })
+      resolvers: [NaiveUiResolver()],
+    }),
   ],
-  base: './',
+  base: "./",
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src'),
-      '@User':path.resolve(__dirname,'src/views/user')
-    }
+      "@": path.resolve(__dirname, "src"),
+      "@User": path.resolve(__dirname, "src/views/user"),
+      "@Admin": path.resolve(__dirname, "src/views/admin"),
+    },
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'http://127.0.0.1:3000',
-        changeOrigin: true
-      }
-    }
-  }
-})
+      "/api": {
+        target: "http://127.0.0.1:3000",
+        changeOrigin: true,
+      },
+    },
+  },
+});

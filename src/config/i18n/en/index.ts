@@ -114,4 +114,9 @@ export default {
   searchTips: "Enter something in input to search.",
   toSearch: "To Search",
   searchInputTips: "Find something you like",
+  follow: "Follow",
+  title404: "404 Not Found",
+  subTitile404: "There Is No Corresponding Resource For The Request Path",
+  tips404: "Look others?",
+  audit: "Audit",
 };

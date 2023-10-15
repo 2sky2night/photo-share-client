@@ -3,7 +3,9 @@
     <div
       class="img-content"
       @click="onHandleToPhotoDetail">
-      <img-lazy :url="photo.photos[0].url" />
+      <img-lazy
+        :url="photo.photos[0].url"
+        :q="config.IMG_QUALITY" />
       <div class="mask">
         <avatar
           :size="40"
@@ -42,6 +44,7 @@ import { renderModal } from "@/render";
 import MoreInfo from "./more-info.vue";
 import LikePhotoBtn from "@User/components/public/like-photo-btn/index.vue";
 import type { Photo } from "@/apis/photo/types";
+import { config } from "@/config";
 
 // props
 const props = defineProps<{ photo: Photo }>();

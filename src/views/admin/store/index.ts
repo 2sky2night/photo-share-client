@@ -1,0 +1,1 @@
+export { useSettingStore } from "./setting";

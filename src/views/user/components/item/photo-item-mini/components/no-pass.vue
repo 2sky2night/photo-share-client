@@ -3,7 +3,7 @@
     <div
       class="img-content"
       @click="onHandleShowModal">
-      <img-lazy :url="photo.photos[0].url" />
+      <img-lazy :url="photo.photos[0].url"  :q="config.IMG_QUALITY" />
     </div>
     <div class="footer">
       <n-ellipsis :tooltip="false">{{ photo.title }}</n-ellipsis>
@@ -21,6 +21,7 @@
 import MoreInfo from "./more-info.vue";
 import { renderModal } from "@/render";
 import type { Photo } from "@/apis/photo/types";
+import { config } from "@/config";
 
 // props
 const props = defineProps<{ photo: Photo }>();

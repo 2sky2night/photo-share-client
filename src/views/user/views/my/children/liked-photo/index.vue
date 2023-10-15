@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 import { useUserStore } from "@/store";
-import PhotoList from "@User/components/list/photo-list/index.vue";
+import PhotoList from "@User/components/list/load/photo-list/index.vue";
 import { getUserLikePhotosAPI } from "@/views/user/apis/photo";
 
 // 用户id

@@ -9,18 +9,17 @@
 import { useUserStore } from "@/store";
 import PMain from "./components/main/index.vue";
 import PHeader from "./components/header/index.vue";
-import { startSSE } from "@/utils/events";
-
+import { startSSE, es } from "@/utils/events";
 
 // 用户信息
 const { isLogin } = useUserStore();
 if (isLogin) {
   // 若用户登录了，开启SSE审核推送服务
-  startSSE();
+  if (es === null) startSSE();
 }
 
 defineOptions({
-  name: "PhotoShare",
+  name: "User:PhotoShare",
 });
 </script>
 

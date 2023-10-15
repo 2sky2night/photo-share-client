@@ -5,7 +5,7 @@
     <n-button
       size="small"
       type="primary"
-      >关注</n-button
+      >{{ $t("follow") }}</n-button
     >
   </user-info-comp>
 </template>

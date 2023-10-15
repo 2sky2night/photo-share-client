@@ -76,7 +76,6 @@ import LayoutBackgourd from "@/components/public/layout-backgourd/dom-less.vue";
 import Setting from "@/components/public/setting/index.vue";
 import { i18n } from "@/config";
 import type { FormRules, FormInst } from "naive-ui";
-import { startSSE } from "@/utils/events";
 
 // 路由对象
 const router = useRouter();
@@ -149,7 +148,6 @@ const onHandleLogin = async () => {
     await formIns.value.validate();
     await userStore.login(formData.username, formData.password);
     router.replace("/");
-    startSSE()
   }
 };
 
@@ -173,7 +171,7 @@ const onHandleReset = () => {
 
 onMounted(() => {
   formData.password = "123456";
-  formData.username = "KK";
+  formData.username = "Jack";
 });
 
 defineOptions({
@@ -190,8 +188,8 @@ defineOptions({
   position: relative;
   .setting {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
   }
   .form-container {
     background-color: var(--bg-color-1);

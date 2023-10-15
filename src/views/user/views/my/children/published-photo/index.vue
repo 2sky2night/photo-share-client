@@ -14,6 +14,7 @@
         </n-radio>
       </n-radio-group>
       <n-switch
+        v-if="hasData"
         :size="isMoblie ? 'small' : 'medium'"
         v-model:value="descOrder"
         @update:value="onHandleReset"
@@ -33,11 +34,11 @@
 import { ref, computed } from "vue";
 import { useUserStore } from "@/store";
 import { useMobile } from "@/hooks";
-import PhotoList from "@User/components/list/photo-list/index.vue";
+import PhotoList from "@User/components/list/load/photo-list/index.vue";
 import { userGetPhotoAPI } from "@/apis/photo";
 import { AuditStatus } from "@/types/photo";
 import { i18n } from "@/config";
-import type { PhotoListIns } from "@User/components/list/photo-list/types";
+import type { PhotoListIns } from "@User/components/list/load/photo-list/types";
 
 // 用户id
 const {
@@ -72,6 +73,8 @@ const photoListIns = ref<PhotoListIns | null>(null);
 const isLoading = ref(false);
 // 升序降序
 const descOrder = ref(true);
+// 是否有数据
+const hasData = ref(true);
 
 // 获取用户自己的照片
 const onHandleGetData = async (pageNum: number, pageSize: number) => {
@@ -83,6 +86,7 @@ const onHandleGetData = async (pageNum: number, pageSize: number) => {
     uid,
     desc: descOrder.value,
   });
+  hasData.value = result.data.total === 0 ? false : true;
   isLoading.value = false;
   return result.data;
 };

@@ -1,6 +1,6 @@
 import type { Photo } from "@/apis/photo/types";
 import type { ListResponse, PageParams } from "@/apis/public/types";
-import type { UserInfo } from "../user/types";
+import { UserListResponse_ER } from "@/apis/search/types";
 
 /**
  * 搜索照片的查询参数
@@ -15,7 +15,7 @@ export type SearchPhotoResponse = ListResponse<Photo>;
 /**
  * 搜索用户的响应结果
  */
-export type SeachUserResponse = ListResponse<UserInfo>;
+export type SearchUserResponse = UserListResponse_ER;
 
 /**
  * 搜索用户的查询参数

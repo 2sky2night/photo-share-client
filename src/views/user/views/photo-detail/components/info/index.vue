@@ -140,6 +140,7 @@ import { EyeRegular } from "@vicons/fa";
 import { HeartOutlined } from "@vicons/antd";
 import { getPhotoDetailAPI, postPhotoViewAPI } from "@User/apis/photo";
 import type { Photo } from "@/apis/photo/types";
+import { config } from "@/config";
 
 // props
 const props = defineProps<{ pid: number }>();

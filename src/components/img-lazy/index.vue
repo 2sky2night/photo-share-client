@@ -5,7 +5,7 @@
     <Transition name="img">
       <img
         v-if="isShow"
-        :src="config.IMG_BASE_URL + props.url" />
+        :src="src" />
     </Transition>
     <skeleton v-if="!isShow"></skeleton>
   </div>
@@ -20,18 +20,31 @@ const emit = defineEmits<{
   imgLoad: [];
 }>();
 // props
-const props = defineProps<{ url: string }>();
+const props = defineProps<{
+  /**
+   * 图片地址
+   */
+  url: string;
+  /**
+   * 图片质量(设置了会作为查询参数携带上)
+   */
+  q?: number;
+}>();
 // 容器
 const container = ref<HTMLDivElement | null>(null);
 // 是否显示
 const isShow = ref(false);
+// 图片的src
+const src = `${config.IMG_BASE_URL}${
+  props.q === undefined ? props.url : props.url + `?q=${props.q}`
+}`;
 // 监听者
 const observer = new IntersectionObserver((entries) => {
   entries.some((entry) => {
     if (entry.isIntersecting) {
       // 与视图相交了
       const img = new Image();
-      img.src = config.IMG_BASE_URL + props.url;
+      img.src = src;
       if (img.complete) {
         // 缓存加载完成
         isShow.value = true;

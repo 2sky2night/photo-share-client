@@ -213,8 +213,8 @@ defineOptions({
   color: var(--text-color-1);
   .setting {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 15px;
+    right: 15px;
   }
   .form-container {
     background-color: var(--bg-color-1);

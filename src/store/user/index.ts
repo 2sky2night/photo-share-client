@@ -11,6 +11,7 @@ import {
 import { type Role, Roles } from "@/types/auth";
 import type { UserInfo } from "./types";
 import type { EditInfoBody, EditPasswordBody } from "@/apis/user/types";
+import { startSSE, endSSE, es } from "@/utils/events";
 
 export const useUserStore = defineStore(
   "user",
@@ -39,8 +40,15 @@ export const useUserStore = defineStore(
       userInfo.token = res.data.access_token;
       // 获取用户信息（角色）
       await getUserInfo();
+      // 卸载所有路由
+      removeAllRoutes();
+      // 重新注册初始路由
+      registerInitRoutes();
       // 根据角色注册路由
       regiterRoutes(userInfo.role);
+      if (userInfo.role === Roles.User) {
+        if (es === null) startSSE();
+      }
     };
     /**
      * 获取用户数据
@@ -57,7 +65,10 @@ export const useUserStore = defineStore(
     /**
      * 注销
      */
-    const logout = () => {
+    const logout = async () => {
+      if (userInfo.role === Roles.User) {
+        await endSSE();
+      }
       Reflect.ownKeys(userInfo).forEach((ele) => {
         const key = ele as keyof UserInfo;
         userInfo[key] = undefined;

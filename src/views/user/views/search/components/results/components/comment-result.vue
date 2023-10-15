@@ -32,7 +32,9 @@
         </div>
       </template>
       <template v-else>
-        <empty :desc="$t('noData', { title: $t('comment') })"></empty>
+        <div class="empty">
+          <empty :desc="$t('noData', { title: $t('comment') })"></empty>
+        </div>
       </template>
     </template>
   </div>
@@ -103,12 +105,16 @@ watch(props, onHandleGetData);
 
 <style scoped lang="scss">
 .comment-result-container {
+  .empty {
+    padding: 20px 0;
+  }
   .pagination {
     display: flex;
     justify-content: center;
     padding: 10px 0;
   }
   .list {
+    min-height: 450px;
     :deep(.comment-item) {
       cursor: pointer;
     }

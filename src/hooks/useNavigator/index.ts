@@ -14,6 +14,7 @@ export function useNavigator() {
       goSearch: (keywords: string) =>
         router.push({ path: "/search", query: keywords ? { keywords } : {} }),
     },
+    goHome: () => router.push("/"),
     goLogin: () => router.push("/login"),
     goRegister: () => router.push("/register"),
   };

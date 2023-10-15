@@ -5,7 +5,7 @@
     <div
       class="img-container"
       @click="onHandleImg">
-      <img-lazy :url="photo.photos[0].url"></img-lazy>
+      <img-lazy :url="photo.photos[0].url" :q="config.IMG_QUALITY"></img-lazy>
     </div>
     <div class="desc">
       <div class="title">
@@ -44,6 +44,7 @@ import avatar from "@/components/public/avatar/index.vue";
 import LikePhotoBtn from "@User/components/public/like-photo-btn/index.vue";
 import { photoTransition } from "@User/render";
 import type { Photo } from "@/apis/photo/types";
+import { config } from "@/config";
 
 const router = useRouter();
 const props = defineProps<{ photo: Photo; like: boolean; likeCount: number }>();

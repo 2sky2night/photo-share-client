@@ -2,7 +2,8 @@
   <div class="post-comment">
     <n-input
       type="textarea"
-      v-model:value="content"
+      :value="content"
+      @update:value="onHandleUpdate"
       maxlength="255"
       :resizable="false"
       :placeholder="$t('pleaseEnter', { title: $t('comment') })"></n-input>
@@ -12,6 +13,7 @@
         <n-button
           @click="onHandlePost"
           :loading="isLoading"
+          :disabled="!content.length"
           class="ml-5"
           type="primary"
           >{{ $t("send") }}</n-button
@@ -29,12 +31,18 @@ import { pubsub } from "@/utils";
 
 const props = defineProps<{ pid: number }>();
 const isLoading = ref(false);
+
 // 评论内容
 const content = ref("");
 
 // 重置
 const onHandleReset = () => {
   content.value = "";
+};
+
+// 表单域输入的回调
+const onHandleUpdate = (value: string) => {
+  content.value = value.trim();
 };
 
 // 发送评论

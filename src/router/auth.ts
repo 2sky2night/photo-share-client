@@ -1,4 +1,4 @@
-import { Role } from "@/types/auth";
+import { Role, Roles } from "@/types/auth";
 import router from ".";
 import { adminRoutes, initRoutes, userRoutes } from "./routes";
 
@@ -86,8 +86,8 @@ const addVisitorRoutes = (parentName?: string, routes = userRoutes) => {
  * @param role 用户角色
  */
 export const registerAdminRoutes = (role: Role) => {
-  // 1.移除所有路由
-  removeAllRoutes();
+  // // 1.移除所有路由
+  // removeAllRoutes();
   // 2.注册后台路由
   addAdminRoutes(role);
 };
@@ -207,6 +207,65 @@ export const isUserPath = (
     }
   }
   // 未命中
+  return 0;
+};
+
+/**
+ * 是否命中后台路由的路径
+ * @param path 路径
+ * @param routes 当前路由表
+ * @param role 当前用户的角色
+ * @returns  0未命中 1允许访问 2禁止访问
+ */
+export const isAdminPath = (
+  path: string,
+  role: Roles.Admin | Roles.SuperAdmin,
+  routes = adminRoutes
+): 0 | 1 | 2 => {
+  for (let i = 0; i < routes.length; i++) {
+    const route = routes[i];
+    // 1.本层命中
+    if (route.path === path) {
+      return checkHit(route);
+    } else if (route.path.includes("/:")) {
+      // 包含路径参数
+      const index = route.path.indexOf("/:");
+      if (route.path.substring(0, index) === path.substring(0, index)) {
+        return checkHit(route);
+      }
+    }
+    // 2.下一层命中
+    if (route.children && route.children.length) {
+      if (route.meta?.roles) {
+        if (adminHasPermisson(route.meta.roles, role)) {
+          const result = isAdminPath(path, role, route.children);
+          if (result !== 0) {
+            // 若无权限或命中了直接结束递归
+            return result;
+          }
+        }
+      } else {
+        const result = isAdminPath(path, role, route.children);
+        if (result !== 0) {
+          // 若无权限或命中了直接结束递归
+          return result;
+        }
+      }
+    }
+  }
+
+  function checkHit(route: (typeof routes)[0]) {
+    if (route.meta?.roles) {
+      if (adminHasPermisson(route.meta.roles, role)) {
+        return 1;
+      } else {
+        return 2;
+      }
+    } else {
+      return 1;
+    }
+  }
+
   return 0;
 };
 

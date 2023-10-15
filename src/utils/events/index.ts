@@ -6,7 +6,7 @@ import type { Response } from "@/utils/request/types";
 import { i18n } from "@/config";
 
 // 事件流实例
-let es: EventSource | null = null;
+export let es: EventSource | null = null;
 
 // 会话id
 let sessionId = "";

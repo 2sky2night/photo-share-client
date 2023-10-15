@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts" setup>
-import PhotoList from "@User/components/list/photo-list/index.vue";
+import PhotoList from "@User/components/list/load/photo-list/index.vue";
 import { getUserLikePhotosAPI } from "@User/apis/photo";
 
 // props

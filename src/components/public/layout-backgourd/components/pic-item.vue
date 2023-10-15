@@ -1,10 +1,13 @@
 <template>
   <div class="pic-item-container">
-    <img-lazy :url="url"></img-lazy>
+    <img-lazy
+      :url="url"
+      :q="config.IMG_QUALITY"></img-lazy>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { config } from "@/config";
 defineProps<{ url: string }>();
 </script>
 

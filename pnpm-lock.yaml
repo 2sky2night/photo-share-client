@@ -45,6 +45,9 @@ devDependencies:
   '@vicons/fa':
     specifier: ^0.12.0
     version: registry.npmmirror.com/@vicons/fa@0.12.0
+  '@vicons/fluent':
+    specifier: ^0.12.0
+    version: registry.npmmirror.com/@vicons/fluent@0.12.0
   '@vicons/ionicons4':
     specifier: ^0.12.0
     version: registry.npmmirror.com/@vicons/ionicons4@0.12.0
@@ -554,6 +557,12 @@ packages:
   registry.npmmirror.com/@vicons/fa@0.12.0:
     resolution: {integrity: sha512-g2PIeJLsTHUjt6bK63LxqC0uYQB7iu+xViJOxvp1s8b9/akpXVPVWjDTTsP980/0KYyMMe4U7F/aUo7wY+MsXA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vicons/fa/-/fa-0.12.0.tgz}
     name: '@vicons/fa'
+    version: 0.12.0
+    dev: true
+
+  registry.npmmirror.com/@vicons/fluent@0.12.0:
+    resolution: {integrity: sha512-ATCiqPuiJ6RI5GBlD3BIpZ9Xw4MsCA4RpI5oR6MCti4quS4mX1Gp6N74FCzw7lgOj+80rV4HMKhZTVInwimpVQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vicons/fluent/-/fluent-0.12.0.tgz}
+    name: '@vicons/fluent'
     version: 0.12.0
     dev: true
 

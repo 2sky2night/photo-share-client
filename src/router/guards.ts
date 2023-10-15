@@ -2,7 +2,7 @@ import { nprogress } from "@/utils";
 import { i18n } from "@/config";
 import type { NavigationHookAfter, NavigationGuard } from "vue-router";
 
-export const beforeGuards: NavigationGuard = (to, from, next) => {
+export const beforeGuards: NavigationGuard = (_to, _from, next) => {
   nprogress.start();
   next();
 };

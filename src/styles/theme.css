@@ -4,7 +4,11 @@
   --time-long: 1s;
   --user-header-height: 50px;
   --user-main-width: 1300px;
+  --admin-header-height:60px;
+  --admin-sider-width:200px;
+  --sider-color:#001529;
   --border: 1px solid var(--border-color-1);
+  user-select: none;
 }
 [theme="light"] {
   --primary-color: #18a058;

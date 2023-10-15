@@ -1,6 +1,8 @@
 <template>
   <div class="published-photo-container">
-    <div class="filter mb-10">
+    <div
+      v-if="hasData"
+      class="filter mb-10">
       <n-switch
         v-model:value="descOrder"
         @update:value="onHandleReset"
@@ -17,10 +19,10 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import PhotoList from "@User/components/list/photo-list/index.vue";
+import PhotoList from "@User/components/list/load/photo-list/index.vue";
 import { userGetPhotoAPI } from "@/apis/photo";
 import { AuditStatus } from "@/types/photo";
-import type { PhotoListIns } from "@/views/user/components/list/photo-list/types";
+import type { PhotoListIns } from "@/views/user/components/list/load/photo-list/types";
 
 // props
 const props = defineProps<{ uid: number }>();
@@ -30,6 +32,8 @@ const descOrder = ref(true);
 const photoListIns = ref<PhotoListIns | null>(null);
 // 正在加载
 const isLoading = ref(false);
+// 是否有数据？
+const hasData = ref(true);
 
 // 获取数据
 const onHandleGetData = async (pageNum: number, pageSize: number) => {
@@ -41,6 +45,7 @@ const onHandleGetData = async (pageNum: number, pageSize: number) => {
     pageSize: pageSize,
     desc: descOrder.value,
   });
+  hasData.value = result.data.total === 0 ? false : true;
   isLoading.value = false;
   return result.data;
 };
@@ -50,9 +55,3 @@ const onHandleReset = () => {
   photoListIns.value && photoListIns.value.handleReset();
 };
 </script>
-<!-- <style scoped lang="scss">
-.filter {
-  display: flex;
-  justify-content: end;
-}
-</style> -->

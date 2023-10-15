@@ -10,7 +10,8 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
-      "@User/*": ["src/views/user/*"]
+      "@User/*": ["src/views/user/*"],
+      "@Admin/*": ["src/views/admin/*"],
     },
     "types": ["naive-ui/volar"],
     "moduleResolution": "bundler",

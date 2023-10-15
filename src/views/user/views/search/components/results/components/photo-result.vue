@@ -136,7 +136,7 @@ watch(props, onHandleReset);
     padding: 10px 0;
   }
   .empty {
-    padding-top: 30px;
+    padding: 20px 0;
   }
 }
 </style>

@@ -18,6 +18,11 @@ export interface UserBase {
 }
 
 /**
+ * 用户基本信息 不包含role字段
+ */
+export type UserInfo = Omit<UserBase, "role">;
+
+/**
  * 修改用户密码的响应结果
  */
 export type EditPasswordResponse = null;
