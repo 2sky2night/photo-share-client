@@ -26,6 +26,7 @@ defineOptions({
   .content {
     flex-grow: 1;
     height: 100%;
+    transition: width var(--time-normal);
   }
 }
 </style>

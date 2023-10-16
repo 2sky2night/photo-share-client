@@ -119,4 +119,5 @@ export default {
   subTitile404: "There Is No Corresponding Resource For The Request Path",
   tips404: "Look others?",
   audit: "Audit",
+  account: "Account",
 };

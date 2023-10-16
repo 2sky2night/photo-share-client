@@ -10,9 +10,9 @@ export const useSettingStore = defineStore(
     // 设置相关数据
     const settingData = ref({
       /**
-       * 是否展开侧边栏
+       * 是否展开侧边栏,真展开，假不展开
        */
-      isExpand: false,
+      isExpand: true,
       /**
        * 是否全屏?
        */
@@ -22,6 +22,11 @@ export const useSettingStore = defineStore(
     // 侧边栏展开切换
     const toggleSider = () => {
       settingData.value.isExpand = !settingData.value.isExpand;
+      // 通过修改css变量实现侧边栏的展开和缩放
+      document.body.style.setProperty(
+        "--admin-sider-width",
+        settingData.value.isExpand ? "200px" : "65px"
+      );
     };
 
     // 全屏切换
@@ -35,6 +40,14 @@ export const useSettingStore = defineStore(
           : null;
       }
     };
+
+    // 同步css侧边栏宽度初始值
+    onMounted(() => {
+      document.body.style.setProperty(
+        "--admin-sider-width",
+        settingData.value.isExpand ? "200px" : "65px"
+      );
+    });
 
     return {
       /**

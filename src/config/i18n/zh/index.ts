@@ -119,4 +119,5 @@ export default {
   subTitile404: "该请求路径没有对应资源",
   tips404: "看看其他的?",
   audit: "审核",
+  account: "账户",
 };

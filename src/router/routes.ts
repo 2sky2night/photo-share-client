@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from "vue-router";
-import { Role, Roles } from "@/types/auth";
+import { Roles } from "@/types/auth";
 import { useUserStore } from "@/store";
 import {
   addAdminRoutes,
@@ -115,34 +115,84 @@ export const adminRoutes: RouteRecordRaw[] = [
     component: () => import("@/layouts/admin/index.vue"),
     children: [
       {
+        path: "/",
+        name: "Home",
+        component: () => import("@Admin/views/home/index.vue"),
+        meta: {
+          title: "home",
+          icon: "HomeIcon",
+        },
+      },
+      {
+        path: "/audit",
+        name: "audit",
+        component: () => import("@Admin/views/audit/index.vue"),
+        meta: {
+          title: "audit",
+          icon: "AuditIcon",
+        },
+      },
+      {
+        path: "/account",
+        name: "account",
+        component: () => import("@Admin/views/account/index.vue"),
+        meta: {
+          title: "account",
+          icon: "UserIcon",
+        },
+      },
+      {
+        path: "/edit",
+        name: "Edit",
+        component: () => import("@Admin/views/edit/index.vue"),
+        meta: {
+          title: "editPofile",
+          icon: "EditIcon",
+        },
+      },
+      {
         path: "/test1",
         name: "Test1",
-        component: () => import("@/layouts/user/index.vue"),
+        component: () => import("@/layouts/admin/index.vue"),
+        meta: {
+          title: "test1",
+          icon: "BookIcon",
+        },
         children: [
           {
             path: "/test11",
             name: "Test11",
-            component: () => import("@/layouts/user/index.vue"),
+            component: () => import("@/layouts/admin/index.vue"),
+            meta: {
+              title: "test11",
+              icon: "BookIcon",
+            },
           },
           {
             path: "/test12",
             name: "Test12",
-            component: () => import("@/layouts/user/index.vue"),
+            component: () => import("@/layouts/admin/index.vue"),
             meta: {
               roles: [Roles.SuperAdmin],
+              title: "test12",
+              icon: "BookIcon",
             },
             children: [
               {
                 path: "/test121",
                 name: "Test121",
-                component: () => import("@/layouts/user/index.vue"),
+                component: () => import("@/layouts/admin/index.vue"),
+                meta: {
+                  title: "test11",
+                  icon: "BookIcon",
+                },
               },
             ],
           },
         ],
       },
     ],
-  }
+  },
 ];
 
 /**
