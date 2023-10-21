@@ -1,5 +1,5 @@
 export default {
-  pleaseEnter: "Please enter {title}",
+  pleaseEnter: "Please Enter {title}",
   fieldLengthError: "The length of {title} is between {min} to {max}",
   username: "Username",
   password: "Password",
@@ -120,4 +120,10 @@ export default {
   tips404: "Look others?",
   audit: "Audit",
   account: "Account",
+  RHistoryDelAll: "Delete All History",
+  RHistoryDelAllKeepCur: "Delete Other History",
+  titleAuditPhoto: "Audit Photos",
+  titleAuditComment: "Audit Comment",
+  auditSuccess: "Audit Photo Successful!",
+  noDataD: "Null",
 };

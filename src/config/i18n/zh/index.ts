@@ -120,4 +120,10 @@ export default {
   tips404: "看看其他的?",
   audit: "审核",
   account: "账户",
+  RHistoryDelAll: "删除所有历史记录",
+  RHistoryDelAllKeepCur: "删除其他历史记录",
+  titleAuditPhoto: "审核照片",
+  titleAuditComment: "审核评论",
+  auditSuccess: "审核成功!",
+  noDataD: "无",
 };

@@ -11,7 +11,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted, watch, onBeforeMount } from "vue";
+import { ref, onMounted, watch, onBeforeMount, onBeforeUnmount } from "vue";
 import { useRoute } from "vue-router";
 import { pubsub } from "@/utils";
 
@@ -20,6 +20,18 @@ const mainDOM = ref<HTMLDivElement | null>(null);
 // 阈值
 const threshold = window.innerHeight * 0.05;
 const route = useRoute();
+
+// 滚动到顶部事件的监听
+const onHandleToTop = (_: string, flag = true) => {
+  if (mainDOM.value) {
+    const target = mainDOM.value;
+    target.scroll({
+      top: 0,
+      left: 0,
+      behavior: flag ? "smooth" : undefined,
+    });
+  }
+};
 
 // 监听路由路径变化，让主视图滚动到顶部
 watch(
@@ -48,14 +60,13 @@ onMounted(() => {
       }
     });
     // 监听发布者，将视图滚动到顶部
-    pubsub.on("user:to-top", (_, flag = true) => {
-      target.scroll({
-        top: 0,
-        left: 0,
-        behavior: flag ? "smooth" : undefined,
-      });
-    });
+    pubsub.on("user:to-top", onHandleToTop);
   }
+});
+
+// 页面卸载，移除监听
+onBeforeUnmount(() => {
+  pubsub.removeOn("user:to-top", onHandleToTop);
 });
 
 defineOptions({

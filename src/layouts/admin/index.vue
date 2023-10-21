@@ -25,6 +25,7 @@ defineOptions({
   color: var(--text-color-1);
   .content {
     flex-grow: 1;
+    max-width: calc(100% - var(--admin-sider-width));
     height: 100%;
     transition: width var(--time-normal);
   }

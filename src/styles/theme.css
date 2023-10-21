@@ -4,9 +4,8 @@
   --time-long: 1s;
   --user-header-height: 50px;
   --user-main-width: 1300px;
-  --admin-header-height:60px;
-  --admin-sider-width:200px;
-  --sider-color:#001529;
+  --admin-header-height: 60px;
+  --admin-sider-width: 200px;
   --border: 1px solid var(--border-color-1);
   user-select: none;
 }
@@ -15,7 +14,7 @@
   --primary-color-hover: #be382e;
   --btn-hover-color: #f3f3f5;
   --bg-color-1: #fff;
-  --bg-color-2: #eee;
+  --bg-color-2: #f2f2f2;
   --bg-color-3: #ddd;
   --text-color-1: #000;
   --text-color-2: #808080;
@@ -25,6 +24,7 @@
   --box-shadow-color: #0000009c;
   --mask-color: #00000067;
   --scroll-thumb-color: #8787876b;
+  --sider-color: #011e3a;
 }
 
 [theme="dark"] {
@@ -42,4 +42,5 @@
   --box-shadow-color: #0000009c;
   --mask-color: #00000067;
   --scroll-thumb-color: #7f7f7f4d;
+  --sider-color: #001529;
 }

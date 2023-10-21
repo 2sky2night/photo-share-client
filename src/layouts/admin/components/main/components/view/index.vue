@@ -7,9 +7,3 @@
 <script lang="ts" setup>
 defineOptions({ name: "ViewEnter" });
 </script>
-
-<style lang="scss" scoped>
-.main-content{
-  
-}
-</style>

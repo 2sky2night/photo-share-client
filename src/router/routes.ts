@@ -126,11 +126,33 @@ export const adminRoutes: RouteRecordRaw[] = [
       {
         path: "/audit",
         name: "audit",
-        component: () => import("@Admin/views/audit/index.vue"),
+        redirect: "/audit/photo",
         meta: {
           title: "audit",
           icon: "AuditIcon",
         },
+        children: [
+          {
+            path: "/audit/photo",
+            name: "AuditPhoto",
+            component: () =>
+              import("@Admin/views/audit/children/photo/index.vue"),
+            meta: {
+              title: "titleAuditPhoto",
+              icon: "PhotoIcon",
+            },
+          },
+          {
+            path: "/audit/comment",
+            name: "AuditComment",
+            component: () =>
+              import("@Admin/views/audit/children/comment/index.vue"),
+            meta: {
+              title: "titleAuditComment",
+              icon: "CommentIcon",
+            },
+          },
+        ],
       },
       {
         path: "/account",

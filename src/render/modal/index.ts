@@ -4,12 +4,12 @@ import "./index.css";
 
 /**
  * 渲染模态框
- * @param content 模态框内容组件
+ * @param content 模态框内容组件,该组件可以分发emit('close')来卸载模态框
  * @param props 模态框内容组件的props
  * @param offset 动画开始时模态框的偏移量
  */
 export function renderModal(
-  content: Component,
+  content: Component & { emits?: ("close" | string)[] },
   props: Record<any, any>,
   offset?: {
     x: number;
@@ -64,6 +64,7 @@ export function renderModal(
       default: () =>
         h(content, {
           ...props,
+          // 监听自定义事件，组件触发close事件可以卸载遮罩层
           onClose: handleUnload,
         }),
     }

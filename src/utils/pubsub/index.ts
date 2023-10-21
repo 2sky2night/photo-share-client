@@ -104,8 +104,31 @@ export const pubsub = new Pubsub<Token>();
  * 本次项目所用的token（频道名称）
  */
 type Token =
+  /**
+   * 前台项目：视口滚动到底部的事件
+   */
   | "user:page-bottom"
+  /**
+   * 前台项目：发送评论的事件
+   */
   | "user:post-comment"
+  /**
+   * 前台项目：需要滚动到顶部
+   */
   | "user:to-top"
+  /**
+   * 全局：窗口尺寸变化的事件
+   */
   | "window.resize"
-  | "user:search-input-focus";
+  /**
+   * 前台项目：搜索框需要聚焦的事件
+   */
+  | "user:search-input-focus"
+  /**
+   * 后台项目：页面滚动到底部的事件
+   */
+  | "admin:page-bottom"
+  /**
+   * 后台项目：页面需要滚动到顶部
+   */
+  | "admin:to-top";

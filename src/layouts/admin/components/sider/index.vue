@@ -22,6 +22,6 @@ defineOptions({
   padding: 5px 0;
   box-sizing: border-box;
   transition: width var(--time-normal);
-  // background-color: var(--sider-color);
+  background-color: var(--sider-color);
 }
 </style>

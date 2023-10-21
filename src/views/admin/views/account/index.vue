@@ -1,5 +1,5 @@
 <template>
-  <div class="account-page page">用户管理页</div>
+  <div class="account-page admin-page">用户管理页</div>
 </template>
 
 <script lang="ts" setup>

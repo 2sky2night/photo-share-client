@@ -44,4 +44,7 @@ onMounted(() => {
   color: var(--text-color-1);
   background-color: var(--bg-color-1) !important;
 }
+.admin-page{
+  padding:10px ;
+}
 </style>

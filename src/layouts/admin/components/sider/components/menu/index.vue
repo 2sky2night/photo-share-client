@@ -7,6 +7,7 @@
     :collapsed="!settingData.isExpand"
     :collapsed-width="65"
     :collapsed-icon-size="22"
+    :inverted="true"
     @update:value="onHandleNavi" />
 </template>
 
@@ -20,12 +21,14 @@ import { adminRoutes } from "@/router/routes";
 import { useRoute, useRouter } from "vue-router";
 import type { MenuOption } from "naive-ui";
 import type { RouteRecordRaw } from "vue-router";
+import { MdPhotos as PhotoIcon } from "@vicons/ionicons4";
 import { BookOutline as BookIcon } from "@vicons/ionicons5";
 import { UserOutlined as UserIcon } from "@vicons/antd";
 import {
   Home24Regular as HomeIcon,
   ApprovalsApp24Regular as AuditIcon,
   CalendarEdit24Regular as EditIcon,
+  Comment28Filled as CommentIcon,
 } from "@vicons/fluent";
 import { Roles } from "@/types/auth";
 import { i18n } from "@/config";
@@ -47,6 +50,8 @@ const icons = {
   AuditIcon: () => h(AuditIcon),
   UserIcon: () => h(UserIcon),
   EditIcon: () => h(EditIcon),
+  PhotoIcon: () => h(PhotoIcon),
+  CommentIcon: () => h(CommentIcon),
 };
 // 菜单栏
 const menuOption = ref<MenuOption[]>(
@@ -97,7 +102,11 @@ function generateMenuOptions(routes: RouteRecordRaw[]) {
 function renderIcon(icon: string) {
   const iconRender = Reflect.get(icons, icon);
   return () =>
-    h(NIcon, null, { default: iconRender ? iconRender : icons.BookIcon });
+    h(
+      NIcon,
+      { color: "#fff" },
+      { default: iconRender ? iconRender : icons.BookIcon }
+    );
 }
 
 // 监听语言变化,重新渲染菜单栏
