@@ -1,14 +1,13 @@
 import type { Photo } from "@/apis/photo/types";
 import type { PageParams, ListResponse } from "@/apis/public/types";
 import { AuditStatus } from "@/types/photo";
-import { status } from "nprogress";
 
 /**
  * 获取照片的查询参数
  */
 export type ListPhotoParams = PageParams & {
-  uid?: number;
-  status?: AuditStatus;
+  uid?: number | null;
+  status?: AuditStatus | null;
 };
 
 /**

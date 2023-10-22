@@ -32,7 +32,9 @@ if (comp === undefined) {
   // 查看非通过审核的照片时
   if (props.photo.publish_uid !== userStore.userInfo.uid) {
     // 当非作者查看时
-    throw new Error("只有作者才能查看的自己非通过的照片");
+    throw new Error(
+      "只有作者才能查看的自己非通过的照片! pid:" + props.photo.pid
+    );
   }
 }
 

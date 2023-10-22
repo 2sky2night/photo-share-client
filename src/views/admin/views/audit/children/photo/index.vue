@@ -1,6 +1,13 @@
 <template>
   <div class="audit-photo admin-page">
-    <div class="filter">过滤器，过滤某个用户，某种状态</div>
+    <photo-filter
+      v-model:desc="filterData.desc"
+      :loading="isLoading"
+      v-model:uid="filterData.uid"
+      v-model:status="filterData.status"
+      @update:status="onHandleReset"
+      @update:uid="onHandleReset"
+      @update:desc="onHandleReset" />
     <div class="table-container">
       <div class="table">
         <n-data-table
@@ -9,7 +16,6 @@
           :data="list"
           :columns="(colums as any)"
           :bordered="false"
-          :min-height="300"
           :scroll-x="1800"
           :pagination="pagination"
           :loading="isLoading"
@@ -21,36 +27,52 @@
 </template>
 
 <script lang="ts" setup>
-import { h, ref, onBeforeMount } from "vue";
+import { h, ref, onBeforeMount, computed } from "vue";
 import { getPhotoListAPI } from "@Admin/apis/photo";
-import { NButton, NEllipsis } from "naive-ui";
+import { NButton, NEllipsis, useDialog, NText } from "naive-ui";
 import Time from "@/components/time/index.vue";
-import { auditPhotoModal } from "@Admin/render";
+import PhotoFilter from "./components/photo-filter/index.vue";
+import { auditPhotoModal, photosPreviews } from "@Admin/render";
 import { i18n } from "@/config";
-import type { Photo } from "@/apis/photo/types";
 import { AuditStatus } from "@/types/photo";
+import type { Photo } from "@/apis/photo/types";
 
+// dialog
+const dialog = useDialog();
 // 列表
 const list = ref<Photo[]>([]);
 // 分页数据
 const pagination = ref({
-  page: 10,
+  page: 1,
   pageSize: 5,
   showSizePicker: true,
   pageSizes: [5, 10, 20],
-  itemCount: 15,
+  itemCount: 0,
+  prefix({ itemCount }: { itemCount: number } & any) {
+    return i18n.global.t("totalIs", { num: itemCount });
+  },
+});
+// 正在加载
+const isLoading = ref(false);
+// 筛选条件
+const filterData = ref<{
+  uid: number | null;
+  status: AuditStatus | null;
+  desc: boolean;
+}>({
+  uid: null,
+  status: null,
+  desc: false,
 });
 // 审核状态映射
 const statusTable = {
-  [AuditStatus.PASS]: "passAudit",
-  [AuditStatus.NO_PASS]: "unpassAudit",
-  [AuditStatus.NO_AUDIT]: "notAudit",
+  [AuditStatus.PASS]: { message: "passAudit", type: "primary" },
+  [AuditStatus.NO_PASS]: { message: "unpassAudit", type: "error" },
+  [AuditStatus.NO_AUDIT]: { message: "notAudit", type: "default" },
 };
-// 正在加载
-const isLoading = ref(false);
 // 渲染表头
 const renderColums = () => {
-  return [
+  return computed(() => [
     {
       title: "PID",
       key: "pid",
@@ -58,12 +80,12 @@ const renderColums = () => {
       width: 100,
     },
     {
-      title: "TITLE",
+      title: i18n.global.t("title"),
       width: 150,
       key: "title",
     },
     {
-      title: "CONTENT",
+      title: i18n.global.t("photoDes"),
       key: "content",
       width: 150,
       render(row: Photo) {
@@ -78,9 +100,14 @@ const renderColums = () => {
               h(
                 "span",
                 {
+                  style: "cursor: pointer;position:relative;top:5px",
                   onClick() {
                     // 点击查看简介
-                    console.log(row.content);
+                    dialog.info({
+                      title: i18n.global.t("photoDes"),
+                      positiveText: i18n.global.t("confirm"),
+                      content: row.content,
+                    });
                   },
                 },
                 row.content
@@ -90,11 +117,11 @@ const renderColums = () => {
       },
     },
     {
-      title: "PUBLISH_UID",
+      title: i18n.global.t("publishUid"),
       key: "publish_uid",
     },
     {
-      title: "CREATE_TIME",
+      title: i18n.global.t("createdTime"),
       key: "createdAt",
       width: 150,
       render(row: Photo) {
@@ -102,11 +129,11 @@ const renderColums = () => {
       },
     },
     {
-      title: "VIEWS",
+      title: i18n.global.t("views"),
       key: "views",
     },
     {
-      title: "AUDIT_UID",
+      title: i18n.global.t("auditUid"),
       key: "audit_uid",
       render(row: Photo) {
         return h(
@@ -116,7 +143,7 @@ const renderColums = () => {
       },
     },
     {
-      title: "AUDIT_DESC",
+      title: i18n.global.t("auditDesc"),
       key: "audit_desc",
       render(row: Photo) {
         return h(
@@ -129,12 +156,19 @@ const renderColums = () => {
             default: () =>
               h(
                 "span",
-                {
-                  onClick() {
-                    // 点击查看简介
-                    console.log(row.audit_desc);
-                  },
-                },
+                row.audit_desc
+                  ? {
+                      style: "cursor: pointer;position:relative;top:5px",
+                      onClick() {
+                        // 点击查看简介
+                        dialog.info({
+                          title: i18n.global.t("auditDesc"),
+                          positiveText: i18n.global.t("confirm"),
+                          content: row.audit_desc as string,
+                        });
+                      },
+                    }
+                  : null,
                 row.audit_desc ? row.audit_desc : i18n.global.t("noDataD")
               ),
           }
@@ -142,7 +176,7 @@ const renderColums = () => {
       },
     },
     {
-      title: "AUDIT_TIME",
+      title: i18n.global.t("auditTime"),
       key: "audit_time",
       width: 150,
       render(row: Photo) {
@@ -153,23 +187,35 @@ const renderColums = () => {
       },
     },
     {
-      title: "STATUS",
+      title: i18n.global.t("status"),
       key: "status",
       fixed: "right",
       width: 100,
       render(row: Photo) {
-        return h("span", i18n.global.t(statusTable[row.status]));
+        return h(
+          NText,
+          { style: "font-weight:600", type: statusTable[row.status].type },
+          () => i18n.global.t(statusTable[row.status].message)
+        );
       },
     },
     {
-      title: "ACTION",
+      title: i18n.global.t("action"),
       key: "action",
       width: 200,
       fixed: "right",
       render(row: Photo) {
         return [
-          h(NButton, { size: "tiny", type: "info" }, () =>
-            h("span", "查看图片")
+          h(
+            NButton,
+            {
+              size: "tiny",
+              type: "info",
+              onClick() {
+                photosPreviews(row.photos.map((item) => item.url));
+              },
+            },
+            () => h("span", "查看图片")
           ),
           h(
             NButton,
@@ -177,13 +223,12 @@ const renderColums = () => {
               size: "tiny",
               type: "primary",
               class: "ml-5",
-              async onClick(e: MouseEvent) {
-                try {
-                  // 操作成功，重新加载此页面
-                  await auditPhotoModal(row, { x: e.pageX, y: e.pageY });
-                } finally {
-                  onHandleData();
-                }
+              onClick(e: MouseEvent) {
+                // 操作成功，重新加载此页面
+                auditPhotoModal(row, { x: e.pageX, y: e.pageY }).then(
+                  onHandleData,
+                  () => {}
+                );
               },
             },
             () => h("span", "审核")
@@ -194,8 +239,9 @@ const renderColums = () => {
         ];
       },
     },
-  ];
+  ]);
 };
+
 // 一行元组
 const colums = renderColums();
 
@@ -206,10 +252,17 @@ const onHandleData = async () => {
   const res = await getPhotoListAPI({
     pageNum: pagination.value.page,
     pageSize: pagination.value.pageSize,
+    ...filterData.value,
   });
   res.data.list.forEach((item) => list.value.push(item));
   pagination.value.itemCount = res.data.total;
   isLoading.value = false;
+};
+
+// 重置加载
+const onHandleReset = () => {
+  pagination.value.page = 1;
+  onHandleData();
 };
 
 // 页码更新的回调
@@ -221,8 +274,7 @@ const onHandlePageUpdate = (page: number) => {
 // 页长度更新的回调
 const onHandlePageSizeUpdate = (pageSize: number) => {
   pagination.value.pageSize = pageSize;
-  pagination.value.page = 1;
-  onHandleData();
+  onHandleReset();
 };
 
 onBeforeMount(onHandleData);

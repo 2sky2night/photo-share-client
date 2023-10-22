@@ -52,6 +52,7 @@
       primary-dis-color="#4ec887"
       modal-class="cutter-modal"
       ref="cutterIns"
+      :is-dark="configStore.isDark"
       :need-trigger="false"
       :other-error="onHandleCutError"
       :file-type-catch="onHandleUpload"
@@ -62,15 +63,17 @@
 <script lang="ts" setup>
 import { ref, computed } from "vue";
 import { storeToRefs } from "pinia";
-import { useUserStore } from "@/store";
+import { useUserStore, useConfigStore } from "@/store";
 import { useMessage, useDialog } from "naive-ui";
 import ImgCutter from "@/components/img-cutter/src/index.vue";
 import { uploadAvatarAPI } from "@/apis/file";
 import type { ImgCutterIns } from "@/components/img-cutter/src/types";
 import { i18n } from "@/config";
 
-// 仓库
+// 用户仓库
 const userStore = useUserStore();
+// 配置仓库
+const configStore = useConfigStore();
 // 源用户信息
 const { userInfo: _userInfo } = storeToRefs(userStore);
 // 待修改的用户信息

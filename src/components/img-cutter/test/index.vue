@@ -1,7 +1,7 @@
 <template>
   <ImgCutter
     ref="ins"
-    @cut-down="handleCutDown"></ImgCutter>
+    @cut-down="handleCutDown" is-dark></ImgCutter>
   <button @click="handleClick">点我弹出模态框</button>
 </template>
 

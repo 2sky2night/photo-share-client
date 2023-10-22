@@ -10,6 +10,7 @@
   justify-content: center;
 }
 
+/*有偏移量且缩放的模态框动画*/
 .modal-leave-offset {
   animation: modalOffset var(--time-normal) 1 ease reverse;
 }
@@ -36,6 +37,7 @@
   }
 }
 
+/*无偏移量，有缩放的模态框动画*/
 .modal-leave {
   animation: modal var(--time-normal) 1 ease reverse;
 }
@@ -51,6 +53,25 @@
   }
 }
 
+/*平凡的模态框动画*/
+.modal-enter-fade {
+  animation: modalFade var(--time-normal) 1 ease;
+}
+
+.modal-leave-fade {
+  animation: modalFade var(--time-normal) 1 ease reverse;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/*遮罩层的动画*/
 @keyframes fade {
   from {
     background-color: #00000000;

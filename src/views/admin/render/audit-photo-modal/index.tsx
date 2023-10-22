@@ -27,6 +27,7 @@ export function auditPhotoModal(
   return new Promise<void>((resolve, reject) => {
     renderModal(
       {
+        name: "AuditPhoto",
         emits: ["close"],
         setup(_, context) {
           // 当前选择的审核值
@@ -72,7 +73,7 @@ export function auditPhotoModal(
             <NConfigProvider theme={isDark ? darkTheme : undefined}>
               <NCard
                 style="width: 600px;background-color:var(--bg-color-1);color:var(--text-color-1);"
-                title="模态框"
+                title={i18n.global.t("titleAuditPhoto")}
                 bordered={false}
                 size="huge"
                 role="dialog"
@@ -139,6 +140,9 @@ export function auditPhotoModal(
               </NCard>
             </NConfigProvider>
           );
+        },
+        beforeUnmount() {
+          reject();
         },
       },
       {},

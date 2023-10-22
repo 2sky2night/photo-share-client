@@ -126,4 +126,13 @@ export default {
   titleAuditComment: "审核评论",
   auditSuccess: "审核成功!",
   noDataD: "无",
+  totalIs: "共 {num} 项",
+  publishUid: "发布人id",
+  createdTime: "创建时间",
+  views: "浏览量",
+  auditUid: "审核员id",
+  action: "操作",
+  status: "状态",
+  pleaseSelect: "请选择",
+  titleEdit:'编辑'
 };

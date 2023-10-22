@@ -192,7 +192,7 @@ onMounted(() => {
   .cutter-box {
     background-color: transparent;
     position: absolute;
-    border: 2px solid #fff;
+    border: 3px solid #fff;
     resize: both;
     cursor: ew-resize;
     overflow: hidden;

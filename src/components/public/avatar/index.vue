@@ -6,6 +6,7 @@
   </n-icon>
   <n-avatar
     v-else
+    :round="round"
     :src="config.IMG_BASE_URL + src"
     lazy></n-avatar>
 </template>
@@ -13,9 +14,13 @@
 <script lang="ts" setup>
 import { UserCircle } from "@vicons/fa";
 import { config } from "@/config";
-withDefaults(defineProps<{ src: null | string; size?: number }>(), {
-  size: 20,
-});
+withDefaults(
+  defineProps<{ src: null | string; size?: number; round?: boolean }>(),
+  {
+    size: 20,
+    round: false,
+  }
+);
 defineOptions({
   name: "avatar",
 });

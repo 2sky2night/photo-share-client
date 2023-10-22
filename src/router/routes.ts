@@ -168,7 +168,7 @@ export const adminRoutes: RouteRecordRaw[] = [
         name: "Edit",
         component: () => import("@Admin/views/edit/index.vue"),
         meta: {
-          title: "editPofile",
+          title: "titleEdit",
           icon: "EditIcon",
         },
       },

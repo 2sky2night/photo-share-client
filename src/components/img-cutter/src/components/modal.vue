@@ -313,7 +313,7 @@ onBeforeUnmount(() => timer !== null && clearTimeout(timer));
   width: 80vw;
   height: 65vh;
   max-width: 800px;
-  background-color: #fff;
+  background-color: var(--cutter-modal-bg);
   border-radius: 10px;
   padding: 0 10px;
   display: flex;
@@ -418,7 +418,9 @@ onBeforeUnmount(() => timer !== null && clearTimeout(timer));
     align-items: center;
 
     button {
+      color: var(--cutter-text-color);
       &:first-child {
+        background-color: inherit;
         margin-right: 5px;
       }
 

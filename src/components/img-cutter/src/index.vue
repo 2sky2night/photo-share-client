@@ -1,7 +1,9 @@
 <template>
   <div
+    :class="isDark ? 'dark-theme' : 'light-theme'"
     class="img-cutter-trigger"
-    @click="handleShowModal" v-if="needTrigger">
+    @click="handleShowModal"
+    v-if="needTrigger">
     <slot name="default">
       <button>裁剪图片</button>
     </slot>
@@ -9,6 +11,7 @@
   <teleport to="body">
     <div
       class="img-cutter-mask"
+      :class="isDark ? 'dark-theme' : 'light-theme'"
       @click="handleUnShowModal"
       v-show="isShowModal">
       <cutter-modal
@@ -56,6 +59,10 @@ withDefaults(
      * 需要默认触发器?
      */
     needTrigger?: boolean;
+    /**
+     * 深色模式?
+     */
+    isDark?: boolean;
   }>(),
   {
     fileTypeCatch: (data: File) => {
@@ -72,7 +79,8 @@ withDefaults(
     primaryColor: "#409eff",
     primaryDisColor: "#6ba9e7",
     modalClass: "",
-    needTrigger:true
+    needTrigger: true,
+    isDark: false,
   }
 );
 // emit
@@ -99,7 +107,7 @@ const handleShowModal = (e?: MouseEvent) => {
     isShowModal.value = true;
     modalIns.value && modalIns.value.handleModalAnima(true);
     emit("update:showModal", true);
-  })
+  });
 };
 
 // 关闭模态框
@@ -139,19 +147,30 @@ export default {
   display: inline-block;
   --cutter-primary-color: v-bind($props.primaryColor);
   --cutter-primary-disable: v-bind($props.primaryDisColor);
+  color: var(--cutter-text-color);
   button {
+    color: var(--cutter-text-color);
     height: 33px;
     box-sizing: border-box;
     padding: 5px 15px;
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    color: #fff;
     background-color: var(--cutter-primary-color);
   }
 }
 
+.dark-theme {
+  --cutter-modal-bg: #000;
+  --cutter-text-color: #fff;
+}
+.light-theme {
+  --cutter-modal-bg: #fff;
+  --cutter-text-color: #000;
+}
+
 .img-cutter-mask {
+  color: var(--cutter-text-color);
   --cutter-primary-color: v-bind($props.primaryColor);
   --cutter-primary-disable: v-bind($props.primaryDisColor);
   position: fixed;

@@ -103,10 +103,10 @@ const rules = computed<FormRules>(() => ({
     },
     {
       min: 1,
-      max: 10,
+      max: 13,
       trigger: ["blur", "input"],
       message: i18n.global.t("fieldLengthError", {
-        max: 10,
+        max: 13,
         min: 1,
         title: i18n.global.t("username"),
       }),
