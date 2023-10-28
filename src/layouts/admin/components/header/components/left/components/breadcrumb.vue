@@ -3,7 +3,7 @@
     <n-breadcrumb-item
       v-if="route.path !== '/'"
       @click="() => onHandleNavi('/')">
-      <n-icon :component="icons.HomeIcon" />
+      <n-icon :component="icons.HomeIcon()" />
       <span class="ml-5">{{ $t("home") }}</span>
     </n-breadcrumb-item>
     <n-breadcrumb-item
@@ -53,16 +53,16 @@ const breadList = computed(() => {
   const list = [...route.matched];
   list.shift();
   return list.map((item) => {
-    let icon: (() => VNode) | null = null;
+    let icon: (VNode) | null = null;
     if (item.meta && item.meta.icon) {
       const render = icons[item.meta.icon as keyof typeof icons];
       if (render) {
-        icon = render;
+        icon = render();
       } else {
-        icon = icons.BookIcon;
+        icon = icons.BookIcon();
       }
     } else {
-      icon = icons.BookIcon;
+      icon = icons.BookIcon();
     }
     return {
       title: item.meta?.title ? item.meta.title : "unkown title",

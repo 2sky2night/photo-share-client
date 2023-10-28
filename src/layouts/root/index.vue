@@ -1,21 +1,15 @@
 <template>
-  <n-config-provider :theme="isDark ? darkTheme : null" :theme-overrides="themeOverrides">
-    <router-view></router-view>
-  </n-config-provider>
+  <router-view></router-view>
 </template>
 
-<script lang='ts' setup>
-import { storeToRefs } from 'pinia';
-import { useConfigStore } from '@/store'
-import { themeOverrides } from '@/config'
-import { darkTheme, useMessage,useNotification } from "naive-ui";
-// 配置仓库
-const { isDark } = storeToRefs(useConfigStore())
+<script lang="ts" setup>
+import { useMessage, useNotification } from "naive-ui";
+
 // 给全局对象挂载api
-window.$message=useMessage()
-window.$notify=useNotification()
+window.$message = useMessage();
+window.$notify = useNotification();
 
 defineOptions({
-  name: 'Root'
-})
+  name: "Root",
+});
 </script>

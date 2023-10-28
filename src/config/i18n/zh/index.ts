@@ -148,4 +148,11 @@ export default {
   editUser: "编辑用户",
   pleaseReLogin: "请重新登录!",
   manage: "管理",
+  deleted: "已删除",
+  restore: "恢复",
+  deletedAt: "删除时间",
+  s_delete: "删除成功!",
+  s_restore: "恢复成功!",
+  deleteCommentTips: "确认删除该评论?",
+  restoreCommentTips: "确认恢复该评论?",
 };

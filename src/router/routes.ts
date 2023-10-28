@@ -156,7 +156,8 @@ export const adminRoutes: RouteRecordRaw[] = [
           {
             path: "/manage/comment",
             name: "ManageComment",
-            component: () => import("@Admin/views/manage/comment/index.vue"),
+            component: () =>
+              import("@Admin/views/manage/children/comment/index.vue"),
             meta: {
               title: "comment",
               icon: "CommentIcon",
@@ -165,7 +166,8 @@ export const adminRoutes: RouteRecordRaw[] = [
           {
             path: "/manage/tags",
             name: "ManageTags",
-            component: () => import("@Admin/views/manage/tags/index.vue"),
+            component: () =>
+              import("@Admin/views/manage/children/tags/index.vue"),
             meta: {
               title: "tags",
               icon: "TagsIcon",

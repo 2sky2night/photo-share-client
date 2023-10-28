@@ -148,4 +148,11 @@ export default {
   editUser: "Edit User",
   pleaseReLogin: "Please Log In Again!",
   manage: "Manage",
+  deleted: "Deleted",
+  restore: "Restore",
+  deletedAt: "Deleted At",
+  s_delete: "Delete Successfule!",
+  s_restore: "Restore Successfule!",
+  deleteCommentTips: "Are you sure to remove this comment?",
+  restoreCommentTips: "Are you sure to restore this comment?",
 };
