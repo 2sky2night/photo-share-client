@@ -25,10 +25,12 @@ import { MdPhotos as PhotoIcon } from "@vicons/ionicons4";
 import { BookOutline as BookIcon } from "@vicons/ionicons5";
 import { UserOutlined as UserIcon } from "@vicons/antd";
 import {
-  Home24Regular as HomeIcon,
+  Home32Filled as HomeIcon,
   ApprovalsApp24Regular as AuditIcon,
   CalendarEdit24Regular as EditIcon,
   Comment28Filled as CommentIcon,
+  Settings32Filled as ManageIcon,
+  TagMultiple24Filled as TagsIcon,
 } from "@vicons/fluent";
 import { Roles } from "@/types/auth";
 import { i18n } from "@/config";
@@ -52,6 +54,8 @@ const icons = {
   EditIcon: () => h(EditIcon),
   PhotoIcon: () => h(PhotoIcon),
   CommentIcon: () => h(CommentIcon),
+  ManageIcon: () => h(ManageIcon),
+  TagsIcon: () => h(TagsIcon),
 };
 // 菜单栏
 const menuOption = ref<MenuOption[]>(
@@ -63,36 +67,34 @@ const onHandleNavi = (value: string) => {
   router.push(value);
 };
 
+// 添加路由
+function addOption(route: RouteRecordRaw) {
+  const item: MenuOption = {
+    label: i18n.global.t(route.meta?.title ? route.meta.title : "unkown tilte"),
+    key: route.path,
+    icon: renderIcon(route.meta?.icon as string),
+  };
+  if (route.children && route.children.length) {
+    //  有子孩子
+    item.children = generateMenuOptions(route.children);
+  }
+  return item;
+}
+
 // 将路由表生成为导航菜单
 function generateMenuOptions(routes: RouteRecordRaw[]) {
   const menuList: MenuOption[] = [];
-
-  function addOption(route: RouteRecordRaw) {
-    const item: MenuOption = {
-      label: i18n.global.t(
-        route.meta?.title ? route.meta.title : "unkown tilte"
-      ),
-      key: route.path,
-      icon: renderIcon(route.meta?.icon as string),
-    };
-    if (route.children && route.children.length) {
-      //  有子孩子
-      item.children = generateMenuOptions(route.children);
-    }
-    menuList.push(item);
-  }
-
   // 遍历当前层级的路由
   routes.forEach((route) => {
     if (route.meta?.roles) {
       // 对角色访问有限制的路由
       if (route.meta.roles.includes(userInfo.value.role as Roles)) {
         // 有权限
-        addOption(route);
+        menuList.push(addOption(route));
       }
     } else {
       // 对角色访问无限制的路由
-      addOption(route);
+      menuList.push(addOption(route));
     }
   });
   return menuList;

@@ -38,6 +38,11 @@ img {
   color: var(--text-color-1);
 }
 
+/*悬浮指针*/
+.pointer:hover{
+  cursor: pointer;
+}
+
 /*悬浮高亮的文本*/
 .text-hover {
   transition: var(--time-normal);

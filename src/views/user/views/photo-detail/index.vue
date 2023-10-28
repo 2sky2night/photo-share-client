@@ -14,7 +14,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useMessage } from "naive-ui";
 import { useParams } from "@/hooks";
-import { usePhotoStore } from "@/store";
+import { usePhotoStore } from "@User/store";
 import PhotoInfo from "./components/info/index.vue";
 import comment from "./components/comment/index.vue";
 import { i18n } from "@/config";

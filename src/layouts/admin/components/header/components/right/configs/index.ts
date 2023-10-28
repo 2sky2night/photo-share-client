@@ -45,7 +45,7 @@ function renderHeader() {
             fontSize: "13px",
           } as StyleValue,
         },
-        "晚上好,管理员 🙂!"
+        `晚上好,${userInfo.role} 🙂!`
       ),
     ]
   );

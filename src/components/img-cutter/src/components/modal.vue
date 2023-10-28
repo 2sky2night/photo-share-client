@@ -214,6 +214,12 @@ const handleToCutter = (data: File) => {
     imgUrl = URL.createObjectURL(imgBlob);
     // 显示裁剪图片
     isCutter.value = true;
+  } else {
+    // 文件上传类型检测出现错误，清空文件域
+    if (fileInputDOM.value) {
+      // @ts-ignore
+      fileInputDOM.value.value = null;
+    }
   }
 };
 
@@ -263,6 +269,7 @@ const modalAnimaNotCenter = (v: boolean, target: HTMLElement) => {
     }, ANIMA_TIME);
   }
 };
+
 // 模态框居中显隐出场动画
 const modalAnimaCenter = (v: boolean, target: HTMLElement) => {
   if (v) {

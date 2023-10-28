@@ -6,6 +6,7 @@
   </n-icon>
   <n-avatar
     v-else
+    :size="imgSize"
     :round="round"
     :src="config.IMG_BASE_URL + src"
     lazy></n-avatar>
@@ -15,10 +16,16 @@
 import { UserCircle } from "@vicons/fa";
 import { config } from "@/config";
 withDefaults(
-  defineProps<{ src: null | string; size?: number; round?: boolean }>(),
+  defineProps<{
+    src: null | string;
+    size?: number;
+    round?: boolean;
+    imgSize?: "medium" | "large" | "small";
+  }>(),
   {
     size: 20,
     round: false,
+    imgSize: "medium",
   }
 );
 defineOptions({

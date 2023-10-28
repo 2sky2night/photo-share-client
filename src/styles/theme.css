@@ -11,6 +11,7 @@
 }
 [theme="light"] {
   --primary-color: #18a058;
+  --info-color: #2080f0;
   --primary-color-hover: #be382e;
   --btn-hover-color: #f3f3f5;
   --bg-color-1: #fff;
@@ -29,6 +30,7 @@
 
 [theme="dark"] {
   --primary-color: #63e2b7;
+  --info-color: #70c0e8;
   --primary-color-hover: #cb342a;
   --btn-hover-color: #343438;
   --bg-color-1: #18181c;

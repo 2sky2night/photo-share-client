@@ -1,4 +1,5 @@
 import { Role } from "@/types/auth";
+import { ListResponse } from "../public/types";
 
 /**
  * 获取用户信息
@@ -47,3 +48,8 @@ export interface EditInfoBody {
   username?: string;
   avatar?: string;
 }
+
+/**
+ * 获取用户列表的响应结果
+ */
+export type UserListResponse = ListResponse<UserBase>;

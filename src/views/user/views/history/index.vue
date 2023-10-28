@@ -48,7 +48,7 @@
 
 <script lang="ts" setup>
 import { ref, reactive, onMounted, onBeforeUnmount } from "vue";
-import { usePhotoStore } from "@/store";
+import { usePhotoStore } from "@User/store";
 import PhotoItem from "@User/components/item/photo-item/index.vue";
 import { useMobile } from "@/hooks";
 import PhotoSkeleton from "@User/components/skeleton/photo-list.vue";

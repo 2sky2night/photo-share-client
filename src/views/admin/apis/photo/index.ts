@@ -12,16 +12,16 @@ import {
  * @returns
  */
 export const getPhotoListAPI = (params: ListPhotoParams) => {
-  const _params = {
+  const _params: Record<string, any> = {
     offset: (params.pageNum - 1) * params.pageSize,
     limit: params.pageSize,
     desc: params.desc,
   };
   if (params.status !== undefined || params.status !== null) {
-    Reflect.set(_params, "status", params.status);
+    _params.status = params.status;
   }
   if (params.uid !== undefined || params.uid !== null) {
-    Reflect.set(_params, "uid", params.uid);
+    _params.uid = params.uid;
   }
   return request.get<ListPhotoResponse>("/photo/admin/list", _params);
 };

@@ -22,7 +22,7 @@ export function renderModal<
   M extends MethodOptions = any,
   C extends ComputedOptions = any
 >(
-  content: Component<Props, any, D, C, M> & { emits?: ("close" | string)[] },
+  content: Component<Props, any, D, C, M> & { emits?: ["close"] },
   props: Record<any, any>,
   offset?: {
     x: number;

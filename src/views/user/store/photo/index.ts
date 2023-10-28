@@ -2,7 +2,7 @@ import { ref } from "vue";
 import { defineStore } from "pinia";
 
 export const usePhotoStore = defineStore(
-  "photo",
+  "user:photo",
   () => {
     const historyPids = ref<number[]>([]);
 
@@ -29,6 +29,11 @@ export const usePhotoStore = defineStore(
       return historyPids.value.findIndex((id) => id === pid);
     };
 
+    // 删除所有历史记录
+    const removeAll = () => {
+      historyPids.value.length = 0;
+    };
+
     return {
       /**
        *浏览过的照片列表
@@ -42,6 +47,10 @@ export const usePhotoStore = defineStore(
        * 移除照片历史记录
        */
       removePhotoHistory,
+      /**
+       * 移除所有历史记录
+       */
+      removeAll,
     };
   },
   { persist: true }

@@ -138,18 +138,37 @@ export const adminRoutes: RouteRecordRaw[] = [
             component: () =>
               import("@Admin/views/audit/children/photo/index.vue"),
             meta: {
-              title: "titleAuditPhoto",
+              title: "photo",
               icon: "PhotoIcon",
             },
           },
+        ],
+      },
+      {
+        path: "/manage",
+        name: "Manage",
+        redirect: "/manage/comment",
+        meta: {
+          title: "manage",
+          icon: "ManageIcon",
+        },
+        children: [
           {
-            path: "/audit/comment",
-            name: "AuditComment",
-            component: () =>
-              import("@Admin/views/audit/children/comment/index.vue"),
+            path: "/manage/comment",
+            name: "ManageComment",
+            component: () => import("@Admin/views/manage/comment/index.vue"),
             meta: {
-              title: "titleAuditComment",
+              title: "comment",
               icon: "CommentIcon",
+            },
+          },
+          {
+            path: "/manage/tags",
+            name: "ManageTags",
+            component: () => import("@Admin/views/manage/tags/index.vue"),
+            meta: {
+              title: "tags",
+              icon: "TagsIcon",
             },
           },
         ],
@@ -159,6 +178,7 @@ export const adminRoutes: RouteRecordRaw[] = [
         name: "account",
         component: () => import("@Admin/views/account/index.vue"),
         meta: {
+          roles: [Roles.SuperAdmin],
           title: "account",
           icon: "UserIcon",
         },
@@ -172,47 +192,47 @@ export const adminRoutes: RouteRecordRaw[] = [
           icon: "EditIcon",
         },
       },
-      {
-        path: "/test1",
-        name: "Test1",
-        component: () => import("@/layouts/admin/index.vue"),
-        meta: {
-          title: "test1",
-          icon: "BookIcon",
-        },
-        children: [
-          {
-            path: "/test11",
-            name: "Test11",
-            component: () => import("@/layouts/admin/index.vue"),
-            meta: {
-              title: "test11",
-              icon: "BookIcon",
-            },
-          },
-          {
-            path: "/test12",
-            name: "Test12",
-            component: () => import("@/layouts/admin/index.vue"),
-            meta: {
-              roles: [Roles.SuperAdmin],
-              title: "test12",
-              icon: "BookIcon",
-            },
-            children: [
-              {
-                path: "/test121",
-                name: "Test121",
-                component: () => import("@/layouts/admin/index.vue"),
-                meta: {
-                  title: "test11",
-                  icon: "BookIcon",
-                },
-              },
-            ],
-          },
-        ],
-      },
+      // {
+      //   path: "/test1",
+      //   name: "Test1",
+      //   component: () => import("@/layouts/admin/index.vue"),
+      //   meta: {
+      //     title: "test1",
+      //     icon: "BookIcon",
+      //   },
+      //   children: [
+      //     {
+      //       path: "/test11",
+      //       name: "Test11",
+      //       component: () => import("@/layouts/admin/index.vue"),
+      //       meta: {
+      //         title: "test11",
+      //         icon: "BookIcon",
+      //       },
+      //     },
+      //     {
+      //       path: "/test12",
+      //       name: "Test12",
+      //       component: () => import("@/layouts/admin/index.vue"),
+      //       meta: {
+      //         roles: [Roles.SuperAdmin],
+      //         title: "test12",
+      //         icon: "BookIcon",
+      //       },
+      //       children: [
+      //         {
+      //           path: "/test121",
+      //           name: "Test121",
+      //           component: () => import("@/layouts/admin/index.vue"),
+      //           meta: {
+      //             title: "test11",
+      //             icon: "BookIcon",
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   ],
+      // },
     ],
   },
 ];

@@ -3,8 +3,7 @@
     <n-icon
       class="mr-10"
       size="25"
-      @click="onHandleFullScreen"
-      >
+      @click="onHandleFullScreen">
       <component
         :is="
           settingStore.settingData.isFullScreen
@@ -16,11 +15,10 @@
     <n-dropdown
       :options="options"
       @select="onHandleSelect">
-      <n-icon
-        size="25"
-        class="ml-10">
-        <UserCircle></UserCircle>
-      </n-icon>
+      <avatar
+        class="ml-10"
+        round
+        :src="(userStore.userInfo.avatar as any)"></avatar>
     </n-dropdown>
   </div>
 </template>
@@ -34,7 +32,6 @@ import {
   FullScreenMaximize24Filled as FullScreenIcon,
   FullScreenMinimize24Filled as NufullScreenIcon,
 } from "@vicons/fluent";
-import { UserCircle } from "@vicons/fa";
 import Setting from "@/components/public/setting/index.vue";
 import { options } from "./configs";
 import { i18n } from "@/config";
@@ -77,8 +74,8 @@ const onHandleSelect = (value: string) => {
 
 // 点击切换全屏的回调
 const onHandleFullScreen = () => {
-  settingStore.toggleFullScreen()
-}
+  settingStore.toggleFullScreen();
+};
 
 defineOptions({
   name: "Right",

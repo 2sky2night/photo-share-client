@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { reactive, ref, computed } from "vue";
+import { usePhotoStore } from "@User/store";
+import { useRouteHistoryStore } from "@Admin/store";
 import { loginAPI } from "@/apis/auth";
 import { userInfoAPI, userEditInfoAPI, userEditPasswordAPI } from "@/apis/user";
 import {
@@ -28,6 +30,10 @@ export const useUserStore = defineStore(
       createdAt: undefined,
       updatedAt: undefined,
     });
+    // 照片历史记录仓库
+    const photoStore = usePhotoStore();
+    // 后台项目浏览的页面历史记录仓库
+    const routeHistoryStore = useRouteHistoryStore();
 
     /**
      * 登录
@@ -67,7 +73,14 @@ export const useUserStore = defineStore(
      */
     const logout = async () => {
       if (userInfo.role === Roles.User) {
+        // 删除所有历史记录
+        photoStore.removeAll();
+        // 断开SSE连接
         await endSSE();
+      } else {
+        // 管理员
+        // 删除所有浏览的历史记录
+        routeHistoryStore.deleteAllHistroy();
       }
       Reflect.ownKeys(userInfo).forEach((ele) => {
         const key = ele as keyof UserInfo;

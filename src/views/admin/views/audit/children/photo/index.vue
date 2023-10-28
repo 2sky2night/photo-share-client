@@ -29,7 +29,7 @@
 <script lang="ts" setup>
 import { h, ref, onBeforeMount, computed } from "vue";
 import { getPhotoListAPI } from "@Admin/apis/photo";
-import { NButton, NEllipsis, useDialog, NText } from "naive-ui";
+import { NButton, NEllipsis, useDialog, NText, useMessage } from "naive-ui";
 import Time from "@/components/time/index.vue";
 import PhotoFilter from "./components/photo-filter/index.vue";
 import { auditPhotoModal, photosPreviews } from "@Admin/render";
@@ -215,7 +215,7 @@ const renderColums = () => {
                 photosPreviews(row.photos.map((item) => item.url));
               },
             },
-            () => h("span", "查看图片")
+            () => h("span", i18n.global.t("lookPhotos"))
           ),
           h(
             NButton,
@@ -231,19 +231,32 @@ const renderColums = () => {
                 );
               },
             },
-            () => h("span", "审核")
+            () => h("span", i18n.global.t("audit"))
           ),
-          h(NButton, { size: "tiny", type: "error", class: "ml-5" }, () =>
-            h("span", "删除")
+          h(
+            NButton,
+            {
+              onClick: onHandleDelete,
+              size: "tiny",
+              type: "error",
+              class: "ml-5",
+            },
+            () => h("span", i18n.global.t("delete"))
           ),
         ];
       },
     },
   ]);
 };
-
+// message
+const message = useMessage();
 // 一行元组
 const colums = renderColums();
+
+// 删除的回调
+const onHandleDelete = () => {
+  message.info(i18n.global.t("willBe"));
+};
 
 // 获取数据
 const onHandleData = async () => {
