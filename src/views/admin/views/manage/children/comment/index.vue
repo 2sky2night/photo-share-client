@@ -1,5 +1,11 @@
 <template>
-  <div class="manage-comment page">
+  <div class="manage-comment admin-page">
+    <comment-filter
+      v-model:is-dele="filterData.isDele"
+      v-model:keywords="filterData.keywords"
+      v-model:uid="filterData.uid"
+      v-model:pid="filterData.pid"
+      @filter="onHanldeReset" />
     <div class="table-container">
       <n-data-table
         remote
@@ -19,22 +25,29 @@
 
 <script lang="tsx" setup>
 import { ref, onBeforeMount, computed } from "vue";
+import { useMessage, NButton, NPopconfirm } from "naive-ui";
+import CommentFilter from "./components/comment-filter/index.vue";
+import Time from "@/components/time/index.vue";
 import {
   getAllCommentsAPI,
   restoreCommentAPI,
   removeCommentAPI,
 } from "@Admin/apis/comment";
-import { useMessage, NButton, NPopconfirm } from "naive-ui";
-import Time from "@/components/time/index.vue";
-import type { DataTableSortState } from "naive-ui";
-import type { CommentBase } from "@Admin/apis/comment/types";
 import { i18n } from "@/config";
-
-// TO-DO
-// 过滤器功能
+import { commentMoreModal } from "@/views/admin/render";
+import type { DataTableSortState } from "naive-ui";
+import type { CommentBase, AllCommentQuery } from "@Admin/apis/comment/types";
+import type { CommentFilterProps } from "./components/comment-filter/types";
 
 // 评论项
 const list = ref<CommentBase[]>([]);
+// 过滤器数据
+const filterData = ref<CommentFilterProps>({
+  isDele: null,
+  keywords: "",
+  uid: null,
+  pid: null,
+});
 // 正在加载
 const isLoading = ref(false);
 // 是否降序
@@ -91,6 +104,13 @@ const columns = computed(() => [
     },
   },
   {
+    title: i18n.global.t("updatedAt"),
+    key: "updatedAt",
+    render(row: CommentBase) {
+      return <Time timeStr={row.updatedAt}></Time>;
+    },
+  },
+  {
     title: i18n.global.t("deletedAt"),
     key: "deletedAt",
     render(row: CommentBase) {
@@ -105,11 +125,16 @@ const columns = computed(() => [
     title: i18n.global.t("action"),
     key: "action",
     fixed: "right",
+    width: 200,
     render(row: CommentBase) {
+      const handleCheckMore = (e: MouseEvent) =>
+        onHandleGetInfo(row.cid, { x: e.x, y: e.y });
+      const handleDelete = () => onHandleDelete(row.cid);
+      const handleRestore = () => onHandleRestore(row.cid);
       return (
         <>
           {row.deletedAt ? (
-            <NPopconfirm onPositiveClick={() => onHandleRestore(row.cid)}>
+            <NPopconfirm onPositiveClick={handleRestore}>
               {{
                 trigger: () => (
                   <NButton
@@ -124,7 +149,7 @@ const columns = computed(() => [
               }}
             </NPopconfirm>
           ) : (
-            <NPopconfirm onPositiveClick={() => onHandleDelete(row.cid)}>
+            <NPopconfirm onPositiveClick={handleDelete}>
               {{
                 trigger: () => (
                   <NButton
@@ -142,7 +167,8 @@ const columns = computed(() => [
           <NButton
             class="ml-5"
             size="tiny"
-            type="info">
+            type="info"
+            onClick={handleCheckMore}>
             {i18n.global.t("moreInfo")}
           </NButton>
         </>
@@ -156,11 +182,25 @@ const onHandleGetData = async () => {
   isLoading.value = true;
   list.value.length = 0;
   const { page, pageSize } = pagination.value;
-  const { data } = await getAllCommentsAPI({
+  const { keywords, uid, pid, isDele } = filterData.value;
+  const query: AllCommentQuery = {
     pageNum: page,
     pageSize: pageSize,
     desc: isDesc.value,
-  });
+  };
+  if (keywords) {
+    query.keywords = keywords;
+  }
+  if (uid !== null) {
+    query.uid = uid;
+  }
+  if (pid !== null) {
+    query.pid = pid;
+  }
+  if (isDele !== null) {
+    query.isDele = isDele;
+  }
+  const { data } = await getAllCommentsAPI(query);
   pagination.value.itemCount = data.total;
   data.list.forEach((item) => list.value.push(item));
   isLoading.value = false;
@@ -220,16 +260,13 @@ const onHandleRestore = async (cid: number) => {
   );
 };
 
+// 点击查看某个评论的详情信息的回调
+const onHandleGetInfo = (cid: number, offset: { x: number; y: number }) => {
+  commentMoreModal(cid, offset);
+};
+
 // 加载数据
 onBeforeMount(onHandleGetData);
 
 defineOptions({ name: "ManageComment" });
 </script>
-
-<style scoped lang="scss">
-.manage-comment {
-  .table-container {
-    padding: 15px;
-  }
-}
-</style>

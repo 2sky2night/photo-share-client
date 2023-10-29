@@ -69,7 +69,9 @@ export const postPhotoViewAPI = (pid: number) =>
  * 发送评论
  */
 export const postCommentAPI = (pid: number, content: string) =>
-  request.post<PostCommentResponse>(`/photo/comment/${pid}`, { content });
+  request.post<PostCommentResponse>(`/photo/comment/create/${pid}`, {
+    content,
+  });
 
 /**
  * 点赞评论

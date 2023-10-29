@@ -1,4 +1,4 @@
-import type { Photo } from "@/apis/photo/types";
+import type { Photo, PhotoBase } from "@/apis/photo/types";
 import type { PageParams, ListResponse } from "@/apis/public/types";
 import { AuditStatus } from "@/types/photo";
 
@@ -27,3 +27,8 @@ export type ListPhotoResponse = ListResponse<Photo>;
  * 审核照片成功的结果
  */
 export type AuditPhotoResponse = null;
+
+/**
+ * 获取照片简要信息列表的响应结果
+ */
+export type ListPhotoBrieflyResponse = ListResponse<PhotoBase>

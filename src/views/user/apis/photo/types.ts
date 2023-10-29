@@ -15,6 +15,7 @@ export interface Comment {
   uid: number;
   updatedAt: string;
   user: UserInfo;
+  deletedAt: string;
 }
 
 /**

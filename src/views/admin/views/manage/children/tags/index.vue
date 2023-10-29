@@ -1,5 +1,5 @@
 <template>
-  <div>管理标签</div>
+  <div class="admin-page">管理标签</div>
 </template>
 
 <script lang='ts' setup>

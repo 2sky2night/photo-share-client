@@ -10,9 +10,3 @@ import EditPassword from "./components/password/index.vue";
 import InfoPassword from "./components/info/index.vue";
 defineOptions({ name: "EditPage" });
 </script>
-
-<style scoped lang="scss">
-.edit-page {
-  padding: 20px;
-}
-</style>

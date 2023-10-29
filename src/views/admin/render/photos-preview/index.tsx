@@ -47,6 +47,7 @@ export function photosPreviews(photos: string[]) {
     left: "10px",
     transform: "translateY(-50%)",
     cursor: "pointer",
+    zIndex: "1",
     i: {
       color: "#fff",
       transition: "color var(--time-normal)",
@@ -67,6 +68,7 @@ export function photosPreviews(photos: string[]) {
     right: "10px",
     transform: "translateY(-50%)",
     cursor: "pointer",
+    zIndex: "1",
     i: {
       color: "#fff",
       transition: "color var(--time-normal)",

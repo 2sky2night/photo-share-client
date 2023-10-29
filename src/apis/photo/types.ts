@@ -33,16 +33,14 @@ export interface UserGetPhotoParams {
 }
 
 /**
- * 照片信息
+ * 照片的基本信息
  */
-export interface Photo {
+export interface PhotoBase {
   audit_desc: string | null;
   audit_time: string | null;
   audit_uid: number | null;
   content: string;
   createdAt: string;
-  is_liked: boolean;
-  like_count: number;
   photos: PicData[];
   pid: number;
   publish_uid: number;
@@ -53,6 +51,14 @@ export interface Photo {
   title: string;
   updatedAt: string;
   views: number;
+}
+
+/**
+ * 照片信息
+ */
+export interface Photo extends PhotoBase {
+  is_liked: boolean;
+  like_count: number;
   /**
    * 发布人信息
    */

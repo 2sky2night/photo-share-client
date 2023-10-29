@@ -4,6 +4,7 @@ import {
   ListPhotoParams,
   AuditPhotoBody,
   AuditPhotoResponse,
+  ListPhotoBrieflyResponse,
 } from "./types";
 
 /**
@@ -35,4 +36,23 @@ export const getPhotoListAPI = (params: ListPhotoParams) => {
  */
 export const auditPhotoAPI = (pid: number, body: AuditPhotoBody) => {
   return request.post<AuditPhotoResponse>(`/photo/audit/${pid}`, body);
+};
+
+/**
+ * 获取照片列表简要信息
+ * @param pageNum 页码
+ * @param pageSize 长度
+ * @param desc 降序
+ * @returns
+ */
+export const getPhotosBriefly = (
+  pageNum: number,
+  pageSize: number,
+  desc: boolean
+) => {
+  return request.get<ListPhotoBrieflyResponse>("/photo/all/briefly", {
+    limit: pageSize,
+    offset: (pageNum - 1) * pageSize,
+    desc,
+  });
 };

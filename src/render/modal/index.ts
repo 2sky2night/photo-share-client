@@ -13,7 +13,7 @@ import "./index.css";
  * 渲染模态框
  * @param content 模态框内容组件,该组件可以分发emit('close')来卸载模态框，支持生命周期钩子函数的使用
  * @param props 模态框内容组件的props
- * @param offset 动画开始时模态框的偏移量
+ * @param offset 动画开始时模态框的偏移量，传入该参数开启良好得过渡效果
  * @param ordinary 平凡的入场方式fade
  */
 export function renderModal<

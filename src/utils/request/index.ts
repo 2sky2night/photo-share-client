@@ -1,9 +1,9 @@
-import axios, { type AxiosRequestConfig } from "axios";
+import axios, { AxiosError, type AxiosRequestConfig } from "axios";
 import { nprogress } from "..";
 import { useUserStore } from "@/store";
-import type { Response } from "./types";
+import type { BaseResponse, Response } from "./types";
 import { i18n } from "@/config";
-import router from "@/router";
+import { handle401, handle500, handle404 } from "./error-actions";
 
 const http = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
@@ -33,22 +33,24 @@ http.interceptors.response.use(
     nprogress.end();
     return response.data;
   },
-  (error) => {
+  (error: AxiosError<BaseResponse>) => {
     nprogress.end();
     // 错误处理
     if (error.response) {
+      // 可以获取服务端的错误信息
       const { status } = error.response;
       if (status === 401) {
-        // 401 错误
-        const userStore = useUserStore();
-        // 注销用户信息
-        userStore.logout();
-        window.$message.error(i18n.global.t("authorizationError"));
-        router.push("/login");
+        handle401();
+        return;
+      } else if (status === 500) {
+        handle500();
+        return;
+      } else if (status === 404) {
+        handle404();
         return;
       }
       // 业务错误
-      if (error.response?.data.msg) {
+      if (error.response.data.msg) {
         window.$message.error(error.response.data.msg);
       } else {
         window.$message.error(i18n.global.t("requestError"));

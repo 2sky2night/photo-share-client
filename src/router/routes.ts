@@ -48,6 +48,30 @@ export const initRoutes: RouteRecordRaw[] = [
     },
   },
   {
+    path: "/403",
+    name: "403",
+    component: () => import("@/views/403/index.vue"),
+    meta: {
+      title: "403",
+    },
+  },
+  {
+    path: "/500",
+    name: "500",
+    component: () => import("@/views/500/index.vue"),
+    meta: {
+      title: "500",
+    },
+  },
+  {
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/404/index.vue"),
+    meta: {
+      title: "404",
+    },
+  },
+  {
     path: "/:pathMatch(.*)",
     name: "Any",
     // redirect:'/404'
@@ -83,7 +107,7 @@ export const initRoutes: RouteRecordRaw[] = [
             registerUserRoutes(!isLogin);
             return to.path;
           case 2:
-            return "/404";
+            return "/403";
         }
       }
 
@@ -98,7 +122,7 @@ export const initRoutes: RouteRecordRaw[] = [
             addAdminRoutes(userInfo.role as any);
             return to.path;
           case 2:
-            return "/404";
+            return "/403";
         }
       }
     },
