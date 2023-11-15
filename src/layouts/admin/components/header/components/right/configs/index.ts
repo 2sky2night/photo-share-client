@@ -6,13 +6,27 @@ import { LogInOutline } from "@vicons/ionicons5";
 import { ApprovalsApp32Filled } from "@vicons/fluent";
 import { UserEdit } from "@vicons/fa";
 import { i18n } from "@/config";
+import {
+  Comment28Filled as CommentIcon,
+  TagMultiple24Filled as TagsIcon,
+} from "@vicons/fluent";
+import { getWelcome } from "@/utils";
 import type { Component, StyleValue } from "vue";
 import type { DropdownOption } from "naive-ui";
 
+/**
+ * 渲染图标
+ * @param icon
+ * @returns
+ */
 function renderIcon(icon: Component) {
   return () => h(NIcon, { size: 20 }, { default: () => h(icon) });
 }
 
+/**
+ * 渲染下拉菜单顶部的信息
+ * @returns
+ */
 function renderHeader() {
   const { userInfo } = useUserStore();
   return h(
@@ -45,12 +59,15 @@ function renderHeader() {
             fontSize: "13px",
           } as StyleValue,
         },
-        `晚上好,${userInfo.role} 🙂!`
+        `${getWelcome()}好,${userInfo.role} 🙂!`
       ),
     ]
   );
 }
 
+/**
+ * 下拉菜单项目
+ */
 export const options = computed<DropdownOption[]>(() => [
   {
     key: "header",
@@ -67,7 +84,17 @@ export const options = computed<DropdownOption[]>(() => [
     icon: renderIcon(ApprovalsApp32Filled),
   },
   {
-    label: "修改个人信息",
+    label: i18n.global.t("comment"),
+    key: "/manage/comment",
+    icon: renderIcon(CommentIcon),
+  },
+  {
+    label: i18n.global.t("tags"),
+    key: "/manage/tags",
+    icon: renderIcon(TagsIcon),
+  },
+  {
+    label: i18n.global.t("editPofile"),
     key: "/edit",
     icon: renderIcon(UserEdit),
   },

@@ -104,3 +104,41 @@ export type SearchCommentQuery = PageParams & {
  * 搜索评论的响应结果
  */
 export type SearchCommentResponse = ListResponse<Comment>;
+
+/**
+ * 标签项
+ */
+export interface TagsBase {
+  /**
+   * 创建时间
+   */
+  createdAt: string;
+  /**
+   * 创建人
+   */
+  creator_uid: number;
+  /**
+   * 英文描述
+   */
+  description_en: null | string;
+  /**
+   * 中文描述
+   */
+  description_zh: null | string;
+  /**
+   * 英文名称
+   */
+  name_en: string;
+  /**
+   * 中文名称
+   */
+  name_zh: string;
+  /**
+   * id
+   */
+  tid: number;
+  /**
+   * 更新时间
+   */
+  updatedAt: string;
+}

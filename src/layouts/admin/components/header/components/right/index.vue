@@ -65,6 +65,7 @@ const tabs = {
 const onHandleSelect = (value: string) => {
   if (value.includes("/")) {
     // 路由跳转
+    router.push(value);
   } else {
     // 操作
     const handle = Reflect.get(tabs, value);

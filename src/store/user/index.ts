@@ -25,10 +25,11 @@ export const useUserStore = defineStore(
       uid: undefined,
       username: undefined,
       avatar: undefined,
-      token: undefined,
+      accessToken: undefined,
       role: undefined,
       createdAt: undefined,
       updatedAt: undefined,
+      refreshToken: undefined,
     });
     // 照片历史记录仓库
     const photoStore = usePhotoStore();
@@ -37,13 +38,16 @@ export const useUserStore = defineStore(
 
     /**
      * 登录
-     * @param username
-     * @param password
+     * @param username 用户名
+     * @param password 密码
      */
     const login = async (username: string, password: string) => {
       isVisitor.value = false;
       const res = await loginAPI({ username, password });
-      userInfo.token = res.data.access_token;
+      // 获取用户的at
+      userInfo.accessToken = res.data.access_token;
+      // 获取用户的rt
+      userInfo.refreshToken = res.data.refresh_token;
       // 获取用户信息（角色）
       await getUserInfo();
       // 卸载所有路由
@@ -139,7 +143,7 @@ export const useUserStore = defineStore(
       return (
         userInfo.avatar !== undefined &&
         userInfo.uid !== undefined &&
-        userInfo.token !== undefined &&
+        userInfo.accessToken !== undefined &&
         userInfo.role !== undefined &&
         userInfo.username !== undefined
       );
@@ -150,7 +154,7 @@ export const useUserStore = defineStore(
      */
     const token = computed(() => {
       if (isLogin.value) {
-        return userInfo.token as string;
+        return userInfo.accessToken as string;
       } else {
         return null;
       }

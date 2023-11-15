@@ -5,6 +5,9 @@ import { Roles } from "@/types/auth";
  * 获取账户列表的查询参数
  */
 export interface AccountsParams extends PageParams {
+  /**
+   * 查询某个角色，null为全部角色
+   */
   role: Roles | null;
   desc: boolean;
 }
@@ -40,4 +43,4 @@ export type CreateAccountResponse = null;
 /**
  * 编辑账户成功的响应体
  */
-export type EditAccountResponse = null
+export type EditAccountResponse = null;

@@ -9,14 +9,14 @@ export interface LoginBody {
 /**
  * 注册的请求体
  */
-export interface RegisterBody extends LoginBody {
-}
+export interface RegisterBody extends LoginBody {}
 
 /**
  * 登录成功的响应结果
  */
 export interface LoginResponse {
   access_token: string;
+  refresh_token: string;
 }
 
 /**

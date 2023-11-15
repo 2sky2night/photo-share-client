@@ -82,3 +82,23 @@ export function getDaysByDateStr(dateStr: string) {
   const dest = nowTime - oldTime;
   return Math.floor(dest / 1000 / 60 / 60 / 24);
 }
+
+/**
+ * 根据当前时间返回早上好，上午好，中午好，下午好，晚上好，凌晨好
+ */
+export function getWelcome() {
+  const hours = new Date().getHours();
+  if (hours >= 0 && hours <= 5) {
+    return "凌晨";
+  } else if (hours <= 9) {
+    return "早上";
+  } else if (hours <= 11) {
+    return "上午";
+  } else if (hours <= 13) {
+    return "中午";
+  } else if (hours <= 18) {
+    return "下午";
+  } else {
+    return "晚上";
+  }
+}

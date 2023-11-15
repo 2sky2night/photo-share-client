@@ -5,6 +5,11 @@ import {
   AuditPhotoBody,
   AuditPhotoResponse,
   ListPhotoBrieflyResponse,
+  ListTagsResponse,
+  RemoveTagsResponse,
+  EditTagsBody,
+  EditTagsResponse,
+  CreateTagsBody,
 } from "./types";
 
 /**
@@ -55,4 +60,56 @@ export const getPhotosBriefly = (
     offset: (pageNum - 1) * pageSize,
     desc,
   });
+};
+
+/**
+ * 获取标签列表
+ * @param pageNum 页码
+ * @param pageSize 页长度
+ * @param desc 是否降序
+ * @param creator_uid 创建者
+ * @returns
+ */
+export const getTagsListAPI = (
+  pageNum: number,
+  pageSize: number,
+  desc: boolean,
+  creator_uid?: number
+) => {
+  const query: Record<string, any> = {
+    offset: (pageNum - 1) * pageSize,
+    limit: pageSize,
+    desc,
+  };
+  if (typeof creator_uid === "number") {
+    query.creator_uid = creator_uid;
+  }
+  return request.get<ListTagsResponse>("/photo/tags/list", query);
+};
+
+/**
+ * 移除标签
+ * @param tid 标签id
+ * @returns
+ */
+export const removeTagsAPI = (tid: number) => {
+  return request.delete<RemoveTagsResponse>(`/photo/tags/${tid}`);
+};
+
+/**
+ * 编辑标签
+ * @param tid 标签id
+ * @param body 信息
+ */
+export const editTagsAPI = (tid: number, body: EditTagsBody) => {
+  return request.put<EditTagsResponse>(`/photo/tags/${tid}`, body);
+};
+
+/**
+ * 创建标签
+ * @param body 信息
+ * @returns
+ */
+export const createTagsAPI = (body: CreateTagsBody) => {
+  return request.post("/photo/tags/create", body);
 };

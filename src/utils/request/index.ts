@@ -4,17 +4,20 @@ import { useUserStore } from "@/store";
 import type { BaseResponse, Response } from "./types";
 import { i18n } from "@/config";
 import { handle401, handle500, handle404 } from "./error-actions";
+import { AxiosConfig } from "./config";
 
-const http = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
-  timeout: 5000,
-});
+// 基础axios实例
+export const http = axios.create(AxiosConfig);
+
+// 外置axios实例
+export const axiosIns = axios.create(AxiosConfig);
 
 //  请求拦截器
 http.interceptors.request.use(
   (config) => {
     const {
-      userInfo: { token },
+      // 获取短期token
+      userInfo: { accessToken: token },
     } = useUserStore();
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
@@ -40,14 +43,14 @@ http.interceptors.response.use(
       // 可以获取服务端的错误信息
       const { status } = error.response;
       if (status === 401) {
-        handle401();
-        return;
+        // 处理401错误
+        return handle401(error.config);
       } else if (status === 500) {
         handle500();
-        return;
+        return Promise.reject(error);
       } else if (status === 404) {
         handle404();
-        return;
+        return Promise.reject(error);
       }
       // 业务错误
       if (error.response.data.msg) {
@@ -63,6 +66,7 @@ http.interceptors.response.use(
   }
 );
 
+// 公共请求
 export const request = {
   get<T>(
     url: string,

@@ -6,8 +6,9 @@ export interface UserInfo {
   uid: number | undefined;
   avatar: string | null | undefined;
   username: string | undefined;
-  token: string | undefined;
+  accessToken: string | undefined;
   role: Role | undefined;
   createdAt: string | undefined;
   updatedAt: string | undefined;
+  refreshToken: string | undefined;
 }

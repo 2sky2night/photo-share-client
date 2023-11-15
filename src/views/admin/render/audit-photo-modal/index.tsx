@@ -85,7 +85,9 @@ export function auditPhotoModal(
                         <NRadioGroup
                           value={currentAudit.value}
                           onUpdate:value={handleUpdateAudit}>
-                          <NRadio value={AuditStatus.NO_AUDIT}>
+                          <NRadio
+                            value={AuditStatus.NO_AUDIT}
+                            disabled>
                             {i18n.global.t("notAudit")}
                           </NRadio>
                           <NRadio value={AuditStatus.NO_PASS}>
@@ -129,7 +131,7 @@ export function auditPhotoModal(
                         {i18n.global.t("cancel")}
                       </NButton>
                       <NButton
-                        disabled={photo.status !== AuditStatus.NO_AUDIT}
+                        disabled={currentAudit.value === AuditStatus.NO_AUDIT}
                         type="primary"
                         onClick={handleSubmit}>
                         {i18n.global.t("confirm")}
