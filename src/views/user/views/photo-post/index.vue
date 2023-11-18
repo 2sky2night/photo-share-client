@@ -2,7 +2,6 @@
   <div class="post-photo-page">
     <n-form
       ref="formIns"
-      :show-require-mark="false"
       :rules="rules"
       :model="body">
       <n-form-item
@@ -38,33 +37,10 @@
           <n-text>{{ $t("uploadTips") }}</n-text>
         </n-upload>
       </n-form-item>
-      <n-form-item :label="$t('tags')">
-        <n-dynamic-tags
-          v-model:value="tags"
-          :max="5">
-          <template #input="{ submit, deactivate }">
-            <n-select
-              size="small"
-              @blur="deactivate"
-              default-value="life"
-              :options="[{ label: $t('life'), value: 'life' }]" />
-          </template>
-          <template #trigger="{ activate, disabled }">
-            <n-button
-              size="small"
-              type="primary"
-              dashed
-              :disabled="disabled"
-              @click="activate()">
-              <template #icon>
-                <n-icon>
-                  <Add />
-                </n-icon>
-              </template>
-              <n-text>{{ $t("add") }}</n-text>
-            </n-button>
-          </template>
-        </n-dynamic-tags>
+      <n-form-item
+        :label="$t('tags')"
+        path="tids">
+        <tags-selector v-model:tids="(body.tids as number[])"></tags-selector>
       </n-form-item>
       <div class="actions">
         <n-button
@@ -87,7 +63,7 @@ import { ref, computed } from "vue";
 import { useMessage, useDialog } from "naive-ui";
 import { storeToRefs } from "pinia";
 import { useUserStore } from "@/store";
-import { Add } from "@vicons/ionicons5";
+import TagsSelector from "@User/components/public/tags-selector/index.vue";
 import { postPhotoAPI } from "@User/apis/photo";
 import { i18n } from "@/config";
 import type { FormInst, UploadFileInfo, FormRules, UploadInst } from "naive-ui";
@@ -98,7 +74,12 @@ import type { Response } from "@/utils/request/types";
 // 用户的token
 const { token } = storeToRefs(useUserStore());
 // 照片的数据
-const body = ref<PostPhotoBody>({ title: "", content: "", photos: [] });
+const body = ref<PostPhotoBody>({
+  title: "",
+  content: "",
+  photos: [],
+  tids: [],
+});
 // 表单实例
 const formIns = ref<FormInst | null>(null);
 // 上传照片的实例
@@ -112,6 +93,7 @@ const dialog = useDialog();
 // 上传的文件以及文件列表的url
 const fileInfoList: { fileId: string; url: string }[] = [];
 // 表单规则
+// @ts-ignore
 const rules = computed<FormRules>(() => ({
   title: [
     {
@@ -153,6 +135,7 @@ const rules = computed<FormRules>(() => ({
   ],
   photos: [
     {
+      required: true,
       validator(_, list: Array<string>) {
         if (list.length > 0 && list.length <= 10) {
           return true;
@@ -162,18 +145,21 @@ const rules = computed<FormRules>(() => ({
       },
     },
   ],
+  tids: [
+    {
+      required: false,
+      validator(_, list: Array<number>) {
+        if (list.length > 10) {
+          return new Error(i18n.global.t("tagsLengthTips"));
+        } else {
+          return true;
+        }
+      },
+    },
+  ],
 }));
 // 正在加载
 const isLoading = ref(false);
-// 标签
-const tags = computed(() => [
-  i18n.global.t("life"),
-  i18n.global.t("game"),
-  i18n.global.t("sport"),
-  i18n.global.t("food"),
-  i18n.global.t("love"),
-  i18n.global.t("workplace"),
-]);
 
 // 在上传文件之前校验文件
 const onHandleBeforeUpload = ({ file: fileInfo }: { file: UploadFileInfo }) => {
@@ -227,17 +213,21 @@ const onHandleFinish = ({
 };
 
 // 确认提交?
-const onHandleSubmit = async () => {
-  try {
-    formIns.value && (await formIns.value.validate());
-    dialog.info({
-      content: i18n.global.t("postPhotoTips"),
-      positiveText: i18n.global.t("confirm"),
-      negativeText: i18n.global.t("cancel"),
-      title: i18n.global.t("tips"),
-      onPositiveClick: submit,
-    });
-  } catch (error) {}
+const onHandleSubmit = () => {
+  if (formIns.value) {
+    formIns.value.validate().then(
+      () => {
+        dialog.info({
+          content: i18n.global.t("postPhotoTips"),
+          positiveText: i18n.global.t("confirm"),
+          negativeText: i18n.global.t("cancel"),
+          title: i18n.global.t("tips"),
+          onPositiveClick: submit,
+        });
+      },
+      () => {}
+    );
+  }
 };
 
 // 重置表单域
@@ -247,6 +237,7 @@ const onHandleReset = () => {
   body.value.content = "";
   body.value.title = "";
   body.value.photos.length = 0;
+  body.value.tids!.length = 0;
   fileInfoList.length = 0;
   fileList.value.length = 0;
 };

@@ -1,6 +1,7 @@
 <template>
   <div class="home-page">
-    <search-bar></search-bar>
+    <search-bar style="margin-bottom: 10px"></search-bar>
+    <tags></tags>
     <content></content>
   </div>
 </template>
@@ -8,6 +9,7 @@
 <script lang="ts" setup>
 import SearchBar from "./components/search-bar/index.vue";
 import Content from "./components/content/index.vue";
+import Tags from "./components/tags/index.vue";
 defineOptions({
   name: "HomePage",
 });

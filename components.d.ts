@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    About: typeof import('./src/components/public/about/index.vue')['default']
     AuthAction: typeof import('./src/components/public/auth-action/index.vue')['default']
     Avatar: typeof import('./src/components/public/avatar/index.vue')['default']
     Bg: typeof import('./src/components/public/layout-backgourd/components/bg.vue')['default']
@@ -29,6 +30,8 @@ declare module 'vue' {
     NButton: typeof import('naive-ui')['NButton']
     NCard: typeof import('naive-ui')['NCard']
     NCarousel: typeof import('naive-ui')['NCarousel']
+    NCollapse: typeof import('naive-ui')['NCollapse']
+    NCollapseItem: typeof import('naive-ui')['NCollapseItem']
     NConfigProvider: typeof import('naive-ui')['NConfigProvider']
     NDataTable: typeof import('naive-ui')['NDataTable']
     NDialogProvider: typeof import('naive-ui')['NDialogProvider']
@@ -64,6 +67,7 @@ declare module 'vue' {
     NTab: typeof import('naive-ui')['NTab']
     NTabPane: typeof import('naive-ui')['NTabPane']
     NTabs: typeof import('naive-ui')['NTabs']
+    NTag: typeof import('naive-ui')['NTag']
     NText: typeof import('naive-ui')['NText']
     NTextare: typeof import('naive-ui')['NTextare']
     NTextarea: typeof import('naive-ui')['NTextarea']

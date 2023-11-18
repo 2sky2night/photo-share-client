@@ -44,8 +44,8 @@ const userNav = computed<DropdownOption[]>(() => [
     key: "/",
   },
   {
-    label: i18n.global.t("search"),
-    key: "/search",
+    label: i18n.global.t("discover"),
+    key: "/discover",
   },
   {
     label: i18n.global.t("my"),

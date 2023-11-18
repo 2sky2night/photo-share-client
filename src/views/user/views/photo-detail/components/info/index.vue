@@ -59,6 +59,12 @@
               :pid="info.pid"
               v-model:is-liked="info.is_liked"></like-btn>
           </div>
+          <n-space class="mb-5 mt-5">
+            <tags-item
+              v-for="item in info.tags"
+              :item="item"
+              random />
+          </n-space>
         </div>
       </template>
       <!--650px以上通过轮播图的方式展示图片-->
@@ -102,6 +108,14 @@
               :pid="info.pid"
               v-model:is-liked="info.is_liked"></like-btn>
           </div>
+          <template v-if="info.tags.length">
+            <n-space class="mb-5 mt-5">
+              <tags-item
+                v-for="item in info.tags"
+                :item="item"
+                random />
+            </n-space>
+          </template>
         </div>
       </template>
     </template>
@@ -138,9 +152,9 @@ import { useMobile } from "@/hooks";
 import LikeBtn from "@User/components/public/like-photo-btn/index.vue";
 import { EyeRegular } from "@vicons/fa";
 import { HeartOutlined } from "@vicons/antd";
+import TagsItem from "@User/components/item/tags-item/index.vue";
 import { getPhotoDetailAPI, postPhotoViewAPI } from "@User/apis/photo";
 import type { Photo } from "@/apis/photo/types";
-import { config } from "@/config";
 
 // props
 const props = defineProps<{ pid: number }>();
@@ -208,7 +222,7 @@ defineOptions({
   transition: var(--time-normal) all;
   background-color: var(--bg-color-1);
   position: fixed;
-  bottom: -100px;
+  bottom: -130px;
   z-index: 999;
   max-height: 100vh;
   left: 0;
@@ -249,7 +263,7 @@ defineOptions({
   .like-btn {
     position: absolute;
     right: 10px;
-    bottom: 30px;
+    bottom: 10px;
   }
 
   .desc {

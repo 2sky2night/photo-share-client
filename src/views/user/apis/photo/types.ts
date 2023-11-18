@@ -1,6 +1,6 @@
-import { Photo } from "@/apis/photo/types";
+import { Photo, TagsBase } from "@/apis/photo/types";
 import { UserInfo } from "../user/types";
-import { ListResponse } from "@/apis/public/types";
+import { ListResponse, PageParams } from "@/apis/public/types";
 
 /**
  * 评论项
@@ -70,9 +70,24 @@ export interface PostCommentResponse {
  * 发布照片的负载
  */
 export interface PostPhotoBody {
+  /**
+   * 照片的描述
+   */
   content: string;
+  /**
+   * 照片的url
+   * @length 1-10
+   */
   photos: string[];
+  /**
+   * 照片的标题
+   */
   title: string;
+  /**
+   * 照片的标签
+   * @length 1-10
+   */
+  tids?: number[];
 }
 
 /**
@@ -99,3 +114,18 @@ export type SubscribeAuditResponse = string;
  * 取消订阅照片审核结果频道的响应结果
  */
 export type UnSubscribeAuditResponse = null;
+
+/**
+ * 获取照片标签列表的响应结果
+ */
+export type PhotoTagsListResponse = ListResponse<TagsBase>;
+
+/**
+ * 根据照片标签获取照片的查询参数
+ */
+export type GetPhotosByTagsParmas = PageParams & {
+  /**
+   * 标签id
+   */
+  tid: number;
+};

@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import { i18n } from "@/config";
+
 /**
  * 防抖
  * @param cb 回调
@@ -89,16 +91,16 @@ export function getDaysByDateStr(dateStr: string) {
 export function getWelcome() {
   const hours = new Date().getHours();
   if (hours >= 0 && hours <= 5) {
-    return "凌晨";
+    return i18n.global.t("welcome01");
   } else if (hours <= 9) {
-    return "早上";
+    return i18n.global.t("welcome02");
   } else if (hours <= 11) {
-    return "上午";
+    return i18n.global.t("welcome03");
   } else if (hours <= 13) {
-    return "中午";
+    return i18n.global.t("welcome04");
   } else if (hours <= 18) {
-    return "下午";
+    return i18n.global.t("welcome05");
   } else {
-    return "晚上";
+    return i18n.global.t("welcome06");
   }
 }

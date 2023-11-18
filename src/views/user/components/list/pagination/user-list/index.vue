@@ -11,11 +11,13 @@
     </template>
     <template v-else>
       <template v-if="pagination.total">
-        <div class="list">
-          <user-item
-            v-for="item in list"
-            :key="item.uid"
-            :user="item" />
+        <div class="container">
+          <div class="list">
+            <user-item
+              v-for="item in list"
+              :key="item.uid"
+              :user="item" />
+          </div>
         </div>
         <div class="pagination">
           <n-pagination
@@ -127,16 +129,18 @@ defineOptions({
   .empty {
     padding: 20px 0;
   }
-  .list {
+  .container {
     min-height: 450px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    @media screen and (max-width: 650px) {
-      display: flex;
-      flex-direction: column;
-      > div {
-        margin-bottom: 10px;
+    .list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      @media screen and (max-width: 650px) {
+        display: flex;
+        flex-direction: column;
+        > div {
+          margin-bottom: 10px;
+        }
       }
     }
   }

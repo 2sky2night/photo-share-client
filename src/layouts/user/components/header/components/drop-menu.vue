@@ -17,11 +17,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref, h } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/store";
 import { useDialog } from "naive-ui";
 import avatar from "@/components/public/avatar/index.vue";
+import about from "@/components/public/about/index.vue";
 import langModel from "@/components/public/lang-modal/index.vue";
 import { User } from "@vicons/fa";
 import { UserMenu, VisitorMenu } from "../config";
@@ -52,6 +53,15 @@ const action = {
         // 关闭弹窗
         await userStore.logout();
         router.replace("/login");
+      },
+    });
+  },
+  about: () => {
+    dialog.info({
+      showIcon: false,
+      title: i18n.global.t("about"),
+      content() {
+        return h(about);
       },
     });
   },

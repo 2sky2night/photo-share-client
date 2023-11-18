@@ -281,6 +281,14 @@ export const userRoutes: RouteRecordRaw[] = [
         },
       },
       {
+        path: "/discover",
+        name: "Discover",
+        component: () => import("@User/views/discover/index.vue"),
+        meta: {
+          title: "discover",
+        },
+      },
+      {
         path: "/photo/detail/:pid",
         name: "UserPhotoDetail",
         component: () => import("@User/views/photo-detail/index.vue"),

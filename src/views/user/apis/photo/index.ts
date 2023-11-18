@@ -11,8 +11,11 @@ import {
   PostPhotoResponse,
   SubscribeAuditResponse,
   UnSubscribeAuditResponse,
+  PhotoTagsListResponse,
+  GetPhotosByTagsParmas,
 } from "./types";
 import { PhotoListResponse } from "@/apis/photo/types";
+import { PageParams } from "@/apis/public/types";
 
 /**
  * 用户点赞照片
@@ -127,4 +130,28 @@ export const subscribeAuditAPI = () => {
  */
 export const unsubscribeAuditAPI = () => {
   return request.get<UnSubscribeAuditResponse>("/photo/events/unsubscribe");
+};
+
+/**
+ * 获取照片标签列表
+ * @param params
+ * @returns
+ */
+export const getPhotoTagsListAPI = (params: PageParams) => {
+  const query: Record<string, any> = {
+    limit: params.pageSize,
+    offset: (params.pageNum - 1) * params.pageSize,
+    desc: params.desc,
+  };
+  return request.get<PhotoTagsListResponse>("/photo/tags/all", query);
+};
+
+export const getPhotosByTagsAPI = (params: GetPhotosByTagsParmas) => {
+  const query: Record<string, any> = {
+    limit: params.pageSize,
+    offset: (params.pageNum - 1) * params.pageSize,
+    desc: params.desc,
+    tid: params.tid,
+  };
+  return request.get<PhotoListResponse>("/photo/byTags/list", query);
 };

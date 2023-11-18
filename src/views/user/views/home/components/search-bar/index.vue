@@ -9,23 +9,16 @@
       <n-button
         type="primary"
         @click="onHandleSearch"
-        :disabled="!keywords.length"
-        >{{ $t("search") }}</n-button
-      >
-    </div>
-    <div class="tags-container mt-10">
-      <tag-item
-        v-for="item in tags"
-        :title="item"></tag-item>
+        :disabled="!keywords.length">
+        {{ $t("search") }}
+      </n-button>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useNavigator } from "@/hooks";
-import tagItem from "./components/tag-item.vue";
-import { i18n } from "@/config";
 
 // 输入的内容
 const keywords = ref("");
@@ -33,15 +26,6 @@ const keywords = ref("");
 const {
   user: { goSearch },
 } = useNavigator();
-// 照片分类标签
-const tags = computed(() => [
-  i18n.global.t("life"),
-  i18n.global.t("game"),
-  i18n.global.t("sport"),
-  i18n.global.t("food"),
-  i18n.global.t("love"),
-  i18n.global.t("workplace"),
-]);
 
 // 搜索的回调
 const onHandleSearch = () => {

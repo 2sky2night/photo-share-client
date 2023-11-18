@@ -63,6 +63,10 @@ export interface Photo extends PhotoBase {
    * 发布人信息
    */
   user: UserInfo;
+  /**
+   * 照片的标签
+   */
+  tags: TagsBase[];
 }
 
 /**

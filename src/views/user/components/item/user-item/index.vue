@@ -13,7 +13,8 @@
         </span>
         <n-button
           type="primary"
-          size="small">
+          size="small"
+          @click="onHandleFollow">
           {{ $t("follow") }}
         </n-button>
       </div>
@@ -26,10 +27,14 @@
 
 <script lang="ts" setup>
 import { useNavigator } from "@/hooks";
+import { useMessage } from "naive-ui";
 import type { UserInfo } from "@User/apis/user/types";
+import { i18n } from "@/config";
 
 // props
 const props = defineProps<{ user: UserInfo }>();
+// message
+const message = useMessage();
 // 导航钩子
 const {
   user: { goUser },
@@ -38,16 +43,22 @@ const {
 // 点击进入用户页
 const onHandleClick = () => goUser(props.user.uid);
 
+// 点击关注的回调
+const onHandleFollow = () => {
+  message.info(i18n.global.t("willBe"));
+};
 </script>
 
 <style scoped lang="scss">
 .user-item {
   padding: 5px 10px;
   display: flex;
-  i,.n-avatar,span {
+  i,
+  .n-avatar,
+  span {
     cursor: pointer;
   }
-  .n-avatar{
+  .n-avatar {
     min-width: 34px;
   }
 
@@ -61,7 +72,7 @@ const onHandleClick = () => goUser(props.user.uid);
       align-items: center;
       justify-content: space-between;
     }
-    .n-ellipsis{
+    .n-ellipsis {
       word-break: break-all;
     }
   }

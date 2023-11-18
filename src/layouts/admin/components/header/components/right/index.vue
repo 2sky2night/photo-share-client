@@ -24,6 +24,7 @@
 </template>
 
 <script lang="ts" setup>
+import { h } from "vue";
 import { useUserStore } from "@/store";
 import { useSettingStore } from "@Admin/store";
 import { useNavigator } from "@/hooks";
@@ -32,6 +33,7 @@ import {
   FullScreenMaximize24Filled as FullScreenIcon,
   FullScreenMinimize24Filled as NufullScreenIcon,
 } from "@vicons/fluent";
+import About from "@/components/public/about/index.vue";
 import Setting from "@/components/public/setting/index.vue";
 import { options } from "./configs";
 import { i18n } from "@/config";
@@ -56,6 +58,15 @@ const tabs = {
         // 关闭弹窗
         await userStore.logout();
         router.replace("/login");
+      },
+    });
+  },
+  about: () => {
+    dialog.info({
+      showIcon:false,
+      title: i18n.global.t("about"),
+      content() {
+        return h(About);
       },
     });
   },

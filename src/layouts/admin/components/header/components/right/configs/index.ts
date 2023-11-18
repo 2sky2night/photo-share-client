@@ -2,13 +2,14 @@ import { computed, h } from "vue";
 import { useUserStore } from "@/store";
 import Avatar from "@/components/public/avatar/index.vue";
 import { NIcon } from "naive-ui";
-import { LogInOutline } from "@vicons/ionicons5";
-import { ApprovalsApp32Filled } from "@vicons/fluent";
-import { UserEdit } from "@vicons/fa";
+import { LogInOutline as LogoutIcon } from "@vicons/ionicons5";
+import { ApprovalsApp32Filled as AuditIcon } from "@vicons/fluent";
+import { UserEdit as EditIcon } from "@vicons/fa";
 import { i18n } from "@/config";
 import {
   Comment28Filled as CommentIcon,
   TagMultiple24Filled as TagsIcon,
+  Info28Filled as InfoIcon
 } from "@vicons/fluent";
 import { getWelcome } from "@/utils";
 import type { Component, StyleValue } from "vue";
@@ -59,7 +60,7 @@ function renderHeader() {
             fontSize: "13px",
           } as StyleValue,
         },
-        `${getWelcome()}好,${userInfo.role} 🙂!`
+        `${getWelcome()},${userInfo.role} 🙂!`
       ),
     ]
   );
@@ -81,7 +82,7 @@ export const options = computed<DropdownOption[]>(() => [
   {
     label: i18n.global.t("audit"),
     key: "/audit",
-    icon: renderIcon(ApprovalsApp32Filled),
+    icon: renderIcon(AuditIcon),
   },
   {
     label: i18n.global.t("comment"),
@@ -96,7 +97,7 @@ export const options = computed<DropdownOption[]>(() => [
   {
     label: i18n.global.t("editPofile"),
     key: "/edit",
-    icon: renderIcon(UserEdit),
+    icon: renderIcon(EditIcon),
   },
   {
     key: "route-divider",
@@ -105,6 +106,11 @@ export const options = computed<DropdownOption[]>(() => [
   {
     label: i18n.global.t("logout"),
     key: "logout",
-    icon: renderIcon(LogInOutline),
+    icon: renderIcon(LogoutIcon),
+  },
+  {
+    label: i18n.global.t("about"),
+    key: "about",
+    icon: renderIcon(InfoIcon),
   },
 ]);

@@ -7,14 +7,14 @@ import Avatar from "@/components/public/avatar/index.vue";
 import { MdPhotos, IosShareAlt } from "@vicons/ionicons4";
 import { UserOutlined, HeartFilled, HistoryOutlined } from "@vicons/antd";
 import {
+  Search,
   Sunny,
   Moon,
   LogInOutline,
   Language,
   LogOutOutline,
 } from "@vicons/ionicons5";
-import { config } from "@/config";
-
+import { Info28Filled } from "@vicons/fluent";
 /**
  * 渲染图片
  */
@@ -42,8 +42,8 @@ export const UserNav = computed(() => [
     title: i18n.global.t("home"),
   },
   {
-    path: "/search",
-    title: i18n.global.t("search"),
+    path: "/discover",
+    title: i18n.global.t("discover"),
   },
   {
     path: "/my",
@@ -59,8 +59,8 @@ export const VisitorNav = computed(() => [
     title: i18n.global.t("home"),
   },
   {
-    path: "/search",
-    title: i18n.global.t("search"),
+    path: "/discover",
+    title: i18n.global.t("discover"),
   },
   {
     path: "/login",
@@ -123,6 +123,15 @@ export const UserMenu = computed<DropdownOption[]>(() => [
     icon: renderIcon(IosShareAlt),
   },
   {
+    label: i18n.global.t("search"),
+    key: "/search",
+    icon: renderIcon(Search),
+  },
+  {
+    type: "divider",
+    key: "d1",
+  },
+  {
     label: i18n.global.t("language"),
     key: "language",
     icon: renderIcon(Language),
@@ -164,6 +173,11 @@ export const UserMenu = computed<DropdownOption[]>(() => [
     key: "logout",
     icon: renderIcon(LogOutOutline),
   },
+  {
+    label: i18n.global.t("about"),
+    key: "about",
+    icon: renderIcon(Info28Filled),
+  },
 ]);
 /**
  * 游客菜单
@@ -178,6 +192,15 @@ export const VisitorMenu = computed<DropdownOption[]>(() => [
     label: i18n.global.t("history"),
     key: "/history",
     icon: renderIcon(HistoryOutlined),
+  },
+  {
+    label: i18n.global.t("search"),
+    key: "/search",
+    icon: renderIcon(Search),
+  },
+  {
+    type: "divider",
+    key: "d1",
   },
   {
     label: i18n.global.t("language"),
@@ -215,5 +238,10 @@ export const VisitorMenu = computed<DropdownOption[]>(() => [
             ]
       );
     },
+  },
+  {
+    label: i18n.global.t("about"),
+    key: "about",
+    icon: renderIcon(Info28Filled),
   },
 ]);

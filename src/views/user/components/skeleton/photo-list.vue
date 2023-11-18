@@ -23,7 +23,7 @@ withDefaults(defineProps<{ length?: number }>(), { length: 15 })
   gap: 10px;
 
   .photo-skeleton {
-    height: 50vh;
+    height: 45vh;
 
     .img {
       border-radius: 10px;
