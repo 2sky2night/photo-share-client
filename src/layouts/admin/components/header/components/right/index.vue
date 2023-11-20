@@ -1,16 +1,7 @@
 <template>
   <div class="right-container">
-    <n-icon
-      class="mr-10"
-      size="25"
-      @click="onHandleFullScreen">
-      <component
-        :is="
-          settingStore.settingData.isFullScreen
-            ? NufullScreenIcon
-            : FullScreenIcon
-        " />
-    </n-icon>
+    <fullscreen-btn class="mr-10" />
+    <refresh-btn class="mr-10" />
     <setting />
     <n-dropdown
       :options="options"
@@ -26,13 +17,10 @@
 <script lang="ts" setup>
 import { h } from "vue";
 import { useUserStore } from "@/store";
-import { useSettingStore } from "@Admin/store";
 import { useNavigator } from "@/hooks";
 import { useDialog } from "naive-ui";
-import {
-  FullScreenMaximize24Filled as FullScreenIcon,
-  FullScreenMinimize24Filled as NufullScreenIcon,
-} from "@vicons/fluent";
+import FullscreenBtn from "./components/fullscreen-btn.vue";
+import RefreshBtn from "./components/refresh-btn.vue";
 import About from "@/components/public/about/index.vue";
 import Setting from "@/components/public/setting/index.vue";
 import { options } from "./configs";
@@ -40,8 +28,6 @@ import { i18n } from "@/config";
 
 // 用户仓库
 const userStore = useUserStore();
-// 设置仓库
-const settingStore = useSettingStore();
 // 导航
 const { router } = useNavigator();
 // dialog
@@ -63,7 +49,7 @@ const tabs = {
   },
   about: () => {
     dialog.info({
-      showIcon:false,
+      showIcon: false,
       title: i18n.global.t("about"),
       content() {
         return h(About);
@@ -82,11 +68,6 @@ const onHandleSelect = (value: string) => {
     const handle = Reflect.get(tabs, value);
     handle && handle();
   }
-};
-
-// 点击切换全屏的回调
-const onHandleFullScreen = () => {
-  settingStore.toggleFullScreen();
 };
 
 defineOptions({

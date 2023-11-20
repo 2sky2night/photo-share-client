@@ -13,6 +13,7 @@
     "@styils/vue": "^1.1.6",
     "axios": "^1.5.0",
     "dayjs": "^1.11.9",
+    "echarts": "^5.4.3",
     "nprogress": "^0.2.0",
     "pinia": "^2.1.6",
     "pinia-plugin-persistedstate": "^3.2.0",

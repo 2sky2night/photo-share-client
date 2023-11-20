@@ -2,6 +2,25 @@ import dayjs from "dayjs";
 import { i18n } from "@/config";
 
 /**
+ * 节流
+ * @param cb 回调
+ * @param delay 延迟
+ * @param context 上下文
+ * @returns
+ */
+export function throttle(cb: Function, delay = 500, context = window) {
+  let timer: number | null = null;
+  return function (...args: any[]) {
+    if (timer === null) {
+      cb.apply(context, args);
+      timer = setTimeout(() => {
+        timer = null;
+      }, delay);
+    }
+  };
+}
+
+/**
  * 防抖
  * @param cb 回调
  * @param delay  延时多少毫秒

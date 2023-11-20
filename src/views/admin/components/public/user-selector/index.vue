@@ -15,17 +15,16 @@
 
 <script setup lang="tsx">
 import { ref, computed, onBeforeMount } from "vue";
-import { getAccountsAPI } from "@Admin/apis/user";
+import { getUsersAPI } from "@Admin/apis/user";
 import { i18n } from "@/config";
 import { styled } from "@styils/vue";
 import Avatar from "@/components/public/avatar/index.vue";
 import type { UserBase } from "@/apis/user/types";
 import type { UserSelectorEmits, UserSelectorProps } from "./types";
 import type { SelectRenderLabel, SelectRenderTag } from "naive-ui";
-import { Roles } from "@/types/auth";
 
 // props
-const props = withDefaults(defineProps<UserSelectorProps>(), { role: Roles.User });
+defineProps<UserSelectorProps>();
 // emits
 const emit = defineEmits<UserSelectorEmits>();
 // 用户列表
@@ -68,11 +67,10 @@ const onHandleUidUpdate = (value: number | null) => {
 // 加载User列表
 const onHandleGetData = async () => {
   isLoading.value = true;
-  const { data } = await getAccountsAPI({
+  const { data } = await getUsersAPI({
     pageNum: pagination.value.pageNum,
     pageSize: pagination.value.pageSize,
     desc: false,
-    role: props.role,
   });
   hasMore = data.has_more;
   data.list.forEach((item) => list.value.push(item));

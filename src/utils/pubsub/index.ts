@@ -131,4 +131,8 @@ type Token =
   /**
    * 后台项目：页面需要滚动到顶部
    */
-  | "admin:to-top";
+  | "admin:to-top"
+  /**
+   * 后台项目:刷新主视图
+   */
+  | "admin:refresh-page";

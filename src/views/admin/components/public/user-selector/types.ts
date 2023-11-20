@@ -1,12 +1,15 @@
-import { Roles } from "@/types/auth";
+/**
+ * User选择器组件的props
+ */
 export interface UserSelectorProps {
-  uid: number | null;
   /**
-   * 筛选哪种角色的账户
+   * 筛选了哪个user用户?
    */
-  role?: Roles | null;
+  uid: number | null;
 }
-
+/**
+ * User选择器组件的emits
+ */
 export interface UserSelectorEmits {
   (e: "update:uid", value: number | null): void;
 }
