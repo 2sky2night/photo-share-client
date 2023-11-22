@@ -1,5 +1,5 @@
 <p align="center">
-    <img width="180" src="https://github.com/2sky2night/photo-share-client/blob/master/docs/img/icon.png?raw=true" alt="Photo Share logo">
+    <img width="180" src="https://raw.githubusercontent.com/2sky2night/photo-share-client/main/docs/img/icon.png" alt="Photo Share logo">
     <h1 style="text-align:center">Photo Share</h1>
 </p>
 
@@ -45,61 +45,61 @@ Photo Share 是一个在线分享照片的平台，用户可以随时随地分�
 
 ## 入口
 
-![01](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/01.png?raw=true)
+![01](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/01.png?raw=true)
 
 ## 前台
 
 ### 首页
 
-![02](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/02.png?raw=true)
+![02](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/02.png?raw=true)
 
 ### 详情
 
-![03](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/03.png?raw=true)
+![03](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/03.png?raw=true)
 
-![04](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/04.png?raw=true)
+![04](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/04.png?raw=true)
 
 ### 我的
 
-![05](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/05.png?raw=true)
+![05](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/05.png?raw=true)
 
 ### 编辑
 
-![06](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/06.png?raw=true)
+![06](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/06.png?raw=true)
 
 ### 搜索
 
-![07](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/07.png?raw=true)
+![07](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/07.png?raw=true)
 
 ### 发现
 
-![08](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/08.png?raw=true)
+![08](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/08.png?raw=true)
 
 ## 后台
 
 ### 首页
 
-![09](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/09.png?raw=true)
+![09](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/09.png?raw=true)
 
 ### 审核
 
-![10](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/10.png?raw=true)
+![10](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/10.png?raw=true)
 
 ### 管理评论
 
-![11](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/11.png?raw=true)
+![11](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/11.png?raw=true)
 
 ### 管理标签
 
-![12](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/12.png?raw=true)
+![12](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/12.png?raw=true)
 
 ### 账户
 
-![13](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/13.png?raw=true)
+![13](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/13.png?raw=true)
 
 ### 编辑
 
-![14](https://github.com/2sky2night/photo-share-client/blob/master/docs/img/screenshot/14.png?raw=true)
+![14](https://github.com/2sky2night/photo-share-client/blob/main/docs/img/screenshot/14.png?raw=true)
 
 # 仓库
 
