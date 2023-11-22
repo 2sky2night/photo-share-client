@@ -8,7 +8,7 @@ import 'vfonts/FiraCode.css'
 import 'nprogress/nprogress.css'
 
 const CssFilePlugin: Plugin = {
-  install(app) {}
+  install() {}
 }
 
 export default CssFilePlugin

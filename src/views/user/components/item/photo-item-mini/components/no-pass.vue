@@ -28,6 +28,7 @@ const props = defineProps<{ photo: Photo }>();
 
 // 打开模态框
 const onHandleShowModal = (e: MouseEvent) => {
+  // @ts-ignore
   renderModal(MoreInfo, { photo: props.photo }, { x: e.clientX, y: e.clientY });
 };
 

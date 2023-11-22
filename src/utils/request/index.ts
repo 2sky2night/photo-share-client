@@ -4,7 +4,7 @@ import { useUserStore } from "@/store";
 import type { BaseResponse, Response } from "./types";
 import { i18n } from "@/config";
 import { handle401, handle500, handle404 } from "./error-actions";
-import { AxiosConfig } from "./config";
+import { AxiosConfig, Path404 } from "./config";
 
 // 基础axios实例
 export const http = axios.create(AxiosConfig);
@@ -46,10 +46,10 @@ http.interceptors.response.use(
         // 处理401错误
         return handle401(error.config);
       } else if (status === 500) {
-        handle500();
+        handle500(error);
         return Promise.reject(error);
       } else if (status === 404) {
-        handle404();
+        handle404(error);
         return Promise.reject(error);
       }
       // 业务错误

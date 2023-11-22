@@ -26,12 +26,12 @@ import { useMobile } from "@/hooks";
 
 // props
 const props = defineProps<{
-  tabList: { name: string | number; label: string }[];
+  tabList: { name: string; label: string }[];
   activeName: string | number;
 }>();
 // emits
 const emit = defineEmits<{
-  "update:activeName": [value: string | number];
+  "update:activeName": [value: string];
 }>();
 // 移动端检测
 const { isMoblie } = useMobile();
@@ -40,8 +40,7 @@ const { isMoblie } = useMobile();
 const _activeName = ref(props.activeName);
 
 // _activename更新的回调(组件内部更新)
-const onHandleChangeValue = (value: string | number) =>
-  emit("update:activeName", value);
+const onHandleChangeValue = (value: string) => emit("update:activeName", value);
 // activename更新的回调(外部更新)
 watch(
   () => props.activeName,

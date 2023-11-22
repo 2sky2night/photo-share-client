@@ -4,7 +4,7 @@
     @update:value="onHandleValueChange"
     name="radiogroup">
     <n-space>
-      <n-radio :value="null">
+      <n-radio :value="(null as any)">
         {{ $t("all") }}
       </n-radio>
       <n-radio :value="true">
@@ -18,8 +18,6 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { i18n } from "@/config";
 import type { DeleteSelectorProps, DeleteSelectorEmits } from "./types";
 
 // props

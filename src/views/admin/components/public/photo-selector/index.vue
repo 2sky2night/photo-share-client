@@ -5,7 +5,7 @@
       clearable
       style="width: 150px"
       :value="pid"
-      :options="options"
+      :options="(options as any)"
       @update:value="onHandleUpdate"
       @scroll="onHandleScroll">
     </n-select>

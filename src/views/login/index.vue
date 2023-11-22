@@ -169,11 +169,6 @@ const onHandleReset = () => {
   }
 };
 
-onMounted(() => {
-  formData.password = "123456";
-  formData.username = "Jack";
-});
-
 defineOptions({
   name: "Login",
 });

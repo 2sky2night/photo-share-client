@@ -61,7 +61,6 @@ const cidColumn: Record<string, any> = {
       <UserSelector
         uid={cidColumRef.value.filterOptionValue}
         style="padding:10px"
-        role={null}
         onUpdate:uid={handler}
       />
     );

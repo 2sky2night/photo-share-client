@@ -3,8 +3,10 @@ import { i18n } from "@/config";
 import router from "@/router";
 import { useUserStore } from "@/store";
 import { refreshTokenAPI } from "@/apis/jwt";
-import { InternalAxiosRequestConfig } from "axios";
+import { AxiosError, InternalAxiosRequestConfig } from "axios";
 import { http } from "./";
+import { Path404 } from "./config";
+import type { BaseResponse } from "./types";
 
 /**
  * 处理401错误
@@ -38,13 +40,20 @@ export const handle401 = async (config?: InternalAxiosRequestConfig) => {
 /**
  * 处理404错误
  */
-export const handle404 = () => {
-  router.replace("/404");
+export const handle404 = (error: AxiosError<BaseResponse>) => {
+  if (error?.response?.data) window.$message.error(error.response.data.msg);
+  if (error.config?.url && Path404.includes(error.config.url)) {
+    // 白名单不跳转404
+  } else {
+    // 非白名单的请求路径需要跳转到404
+    router.replace("/404");
+  }
 };
 
 /**
  * 处理500错误
  */
-export const handle500 = () => {
+export const handle500 = (error: AxiosError<BaseResponse>) => {
+  if (error?.response?.data) window.$message.error(error.response.data.msg);
   router.replace("/500");
 };

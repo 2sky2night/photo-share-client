@@ -28,7 +28,6 @@ export default defineConfig({
       resolvers: [NaiveUiResolver()],
     }),
   ],
-  base: "./",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),

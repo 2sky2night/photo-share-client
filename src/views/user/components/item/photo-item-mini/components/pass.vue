@@ -57,6 +57,7 @@ const userStore = useUserStore();
 
 // 查看照片审核详情信息
 const onHandleCheckMore = (e: MouseEvent) => {
+  // @ts-ignore
   renderModal(MoreInfo, { photo: props.photo }, { x: e.clientX, y: e.clientY });
 };
 
